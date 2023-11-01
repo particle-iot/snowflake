@@ -1,56 +1,254 @@
 #include "RgbStrip.h"
+#include "LEDEffect.h"
 
 #define PIXEL_PIN SPI
 #define PIXEL_COUNT 36
 #define PIXEL_TYPE WS2812B
 
-RgbStrip::RgbStrip() {
+#define MAX_FRAMERATE 30
+
+//colors
+const uint32_t hanukkah_blue = LEDEffect::MakeColor(0, 0, 32);
+const uint32_t hanukkah_blue_highlight = LEDEffect::MakeColor(3, 3, 105);
+
+const uint32_t purple = LEDEffect::MakeColor(0xCC, 0x0, 0xCC);
+
+const uint32_t snowflake_white = LEDEffect::ScaleColor( LEDEffect::MakeColor(192, 205, 207), 40 );
+const uint32_t snowflake_white_highlight = LEDEffect::MakeColor(230, 230, 230);
+
+const uint32_t chase_red = LEDEffect::MakeColor(245, 58, 12);
+const uint32_t chase_red_highlight = LEDEffect::MakeColor(255, 0, 0);
+
+const uint32_t green_base = LEDEffect::MakeColor(0, 92, 0);
+const uint32_t green_highlight = LEDEffect::MakeColor(0, 196, 0);
+
+const uint32_t black_base = LEDEffect::MakeColor(0, 0, 0);
+
+//Shared pixel providers
+InnerCirclePixelProvider innerCirclePixelProvider = InnerCirclePixelProvider();
+AllPixelsProvider allPixelsProvider = AllPixelsProvider();
+EveryNPixelProvider everyNPixelProvider = EveryNPixelProvider( 3, 1 );
+EveryNPixelProvider everyNPixelProviderOffset1 = EveryNPixelProvider( 3, 2 );
+EveryNPixelProvider everyNPixelProviderOffset2 = EveryNPixelProvider( 3, 3 );
+PetalPixelProvider petalPixelProvider = PetalPixelProvider( PetalPixelProvider::PETAL_STEM, PetalPixelProvider::PETAL_MOVEMENT_ROTATE, 2500 );
+OuterCirclePixelProvider outerCirclePixelProvider = OuterCirclePixelProvider();
+
+//Shared colour providers
+RainbowColorProvider rainbowColorProvider = RainbowColorProvider();
+SparkleColorProvider sparkleColorProvider = SparkleColorProvider( LEDEffect::MakeColor(255, 255, 255), 14, 1800, 10000 );
+SparkleColorProvider sparkleColorProviderBlue = SparkleColorProvider( hanukkah_blue, 14, 1800, 10000 );
+
+FixedColorProvider fixedColorProviderBlue = FixedColorProvider( hanukkah_blue );
+GlowColorProvider glowColorProviderBlue = GlowColorProvider( hanukkah_blue, hanukkah_blue_highlight, 2500 );
+
+
+RgbStrip::RgbStrip()
+: mode_(MODES_T::MODE_OFF) {
     strip_ = new Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
+
     thread_ = new Thread("rgbThread", [this]()->os_thread_return_t{
-        strip_->begin();
-        strip_->setBrightness(50);
-        strip_->show();
-        while (1) {
-            rainbow(20);
-            Log.info("rainbow~");
+
+        //Composed effects.
+        // These are layered on top of each other in the order they are defined.
+        // The first effect is the bottom layer, the last effect is the top layer.
+
+        //MODE - MODE_SNOWFLAKE
+            FixedColorProvider fixedColorProviderWhite = FixedColorProvider( snowflake_white );
+            GlowColorProvider glowColorProviderWhite = GlowColorProvider( snowflake_white, black_base, 2500 );
+
+            LEDEffectPixelAndColor snowFlakeEffects[] = {
+                LEDEffectPixelAndColor( everyNPixelProvider, fixedColorProviderWhite ),
+                LEDEffectPixelAndColor( everyNPixelProviderOffset1, fixedColorProviderBlue ),
+                LEDEffectPixelAndColor( everyNPixelProviderOffset2, rainbowColorProvider ),
+                //LEDEffectPixelAndColor( allPixelsProvider, sparkleColorProvider ),
+                //LEDEffectPixelAndColor( petalPixelProvider, glowColorProviderWhite ),
+            };
+
+        //MODE - MODE_HANUKKAH
+
+            LEDEffectPixelAndColor hanukkaEffects[] = {
+                LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderBlue ),
+                LEDEffectPixelAndColor( allPixelsProvider, sparkleColorProvider ),
+                LEDEffectPixelAndColor( petalPixelProvider, glowColorProviderBlue ),
+            };
+
+        //MODE - MODE_RAINBOW
+            LEDEffectPixelAndColor rainbowEffects[] = {
+                LEDEffectPixelAndColor( allPixelsProvider, rainbowColorProvider ),
+                LEDEffectPixelAndColor( allPixelsProvider, sparkleColorProvider )
+            };
+
+        //MODE - MODE_CHASE_HOLIDAY
+            FixedColorProvider fixedColorProviderChase = FixedColorProvider( green_base );
+            GlowColorProvider glowColorProviderChase = GlowColorProvider( green_base, green_highlight, 2500 );
+            ChaseColorProvider chaseColorProvider = ChaseColorProvider( snowflake_white_highlight, 3, 0, true );
+            ChaseColorProvider chaseColorProvider2 = ChaseColorProvider( chase_red_highlight, 8, 0, false );
+            ChaseColorProvider chaseColorProvider3 = ChaseColorProvider( chase_red_highlight, 8, 36/2, false );
+
+            LEDEffectPixelAndColor chaseRedEffects[] = {
+                LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderChase ),
+                LEDEffectPixelAndColor( petalPixelProvider, glowColorProviderChase ),
+                LEDEffectPixelAndColor( innerCirclePixelProvider, chaseColorProvider ),
+                LEDEffectPixelAndColor( allPixelsProvider, chaseColorProvider2 ),
+                LEDEffectPixelAndColor( allPixelsProvider, chaseColorProvider3 )
+            };
+
+        //MODE - MODE_CIRCLES_ROTATE
+            ChaseColorProvider chaseColorProviderCircles1 = ChaseColorProvider( snowflake_white, 3, 0, true );
+            ChaseColorProvider chaseColorProviderCircles2 = ChaseColorProvider( snowflake_white, 8, 0, false );
+            PetalPixelProvider petalPixelProviderTips = PetalPixelProvider( PetalPixelProvider::PETAL_JUST_TIP, PetalPixelProvider::PETAL_MOVEMENT_ALL_ON, 0 );
+            GlowColorProvider glowColorProviderWhiteCircles = GlowColorProvider( snowflake_white, snowflake_white_highlight, 5000 );
+            FixedColorProvider fixedColorProviderPurple = FixedColorProvider( purple );
+
+            LEDEffectPixelAndColor circlesRotateEffects[] = {
+                LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderPurple ),
+                LEDEffectPixelAndColor( innerCirclePixelProvider, chaseColorProviderCircles1 ),
+                LEDEffectPixelAndColor( outerCirclePixelProvider, chaseColorProviderCircles2 ),
+                LEDEffectPixelAndColor( petalPixelProviderTips, glowColorProviderWhiteCircles ),
+            };
+
+        //MODE - MODE_WAVE_SPINNER
+            WavePixelProvider wavePixelProvider0 = WavePixelProvider(0);
+            WavePixelProvider wavePixelProvider1 = WavePixelProvider(1);
+            WavePixelProvider wavePixelProvider2 = WavePixelProvider(2);
+            WavePixelProvider wavePixelProvider3 = WavePixelProvider(3);
+            WavePixelProvider wavePixelProvider4 = WavePixelProvider(4);
+            WavePixelProvider wavePixelProvider5 = WavePixelProvider(5);
+
+            FixedColorProvider fixedColorProviderRed = FixedColorProvider( chase_red_highlight );
+
+            LEDEffectPixelAndColor waveSpinnerEffects[] = {
+                LEDEffectPixelAndColor( wavePixelProvider0, fixedColorProviderChase ),
+                LEDEffectPixelAndColor( wavePixelProvider1, fixedColorProviderWhite ),
+                LEDEffectPixelAndColor( wavePixelProvider2, fixedColorProviderRed ),
+                LEDEffectPixelAndColor( wavePixelProvider3, fixedColorProviderChase ),
+                LEDEffectPixelAndColor( wavePixelProvider4, fixedColorProviderWhite ),
+                LEDEffectPixelAndColor( wavePixelProvider5, fixedColorProviderRed )
+            };
+
+        //Global effect providers
+        BlurSpecialEffectProvider blurSpecialEffectProvider = BlurSpecialEffectProvider( 25 );
+        LEDSpecialEffect blurEffectNormal = LEDSpecialEffect( blurSpecialEffectProvider );
+
+        BlurSpecialEffectProvider blurSpecialEffectProviderSlow = BlurSpecialEffectProvider( 6 );
+        LEDSpecialEffect blurEffectSlow = LEDSpecialEffect( blurSpecialEffectProviderSlow );
+
+        BlurSpecialEffectProvider blurSpecialEffectProviderFast = BlurSpecialEffectProvider( 35 );
+        LEDSpecialEffect blurEffectFast = LEDSpecialEffect( blurSpecialEffectProviderFast );
+
+        //calculate the framerate
+        uint32_t frameCount = 0;
+        uint32_t lastFrameTime = millis();
+
+        while( true )
+        {
+            strip_->begin();
+            strip_->setBrightness(25);
+
+            uint32_t leds[36] = {0};
+
+            uint32_t timeNow = millis();
+
+            //process whichever mode is activated
+            switch( mode_ )
+            {
+                case MODE_SNOWFLAKE:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(snowFlakeEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        snowFlakeEffects[i].process( leds, 36, timeNow );
+                    }
+
+                    blurEffectSlow.process( leds, 36, timeNow );
+                break;
+
+                case MODE_HANUKKAH:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(hanukkaEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        hanukkaEffects[i].process( leds, 36, timeNow );
+                    }
+                break;
+
+                case MODE_RAINBOW:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(rainbowEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        rainbowEffects[i].process( leds, 36, timeNow );
+                    }
+                break;
+
+                case MODE_CHASE_HOLIDAY:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(chaseRedEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        chaseRedEffects[i].process( leds, 36, timeNow );
+                    }
+
+                    blurEffectNormal.process( leds, 36, timeNow );
+                break;
+
+                case MODE_CIRCLES_ROTATE:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(circlesRotateEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        circlesRotateEffects[i].process( leds, 36, timeNow );
+                    }
+
+                    blurEffectNormal.process( leds, 36, timeNow );
+                break;
+
+                case MODE_WAVE_SPINNER:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(waveSpinnerEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        waveSpinnerEffects[i].process( leds, 36, timeNow );
+                    }
+
+                    blurEffectFast.process( leds, 36, timeNow );
+                break;
+
+                case MODE_SPARKLE:
+                    //emulate a super star effect
+                    for (size_t i = 0; i < (sizeof(rainbowEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        rainbowEffects[i].process( leds, 36, timeNow * 8 );
+                    }
+                break;
+
+                default:
+                break;
+            }
+
+            //copy the results to the strip
+            for (int i = 0; i < strip_->numPixels(); i++) {
+                strip_->setPixelColor(i, leds[i]);
+            }
+
+            strip_->show();
+
+            frameCount++;
+
+            //if the last frametime is over 10 seconds, calculate the FPS since
+            if( (timeNow - lastFrameTime) > 10000 )
+            {
+                LOG(INFO, "FPS: %d, free mem: %d", frameCount / 10, System.freeMemory());
+
+                frameCount = 0;
+                lastFrameTime = timeNow;
+            }
+
+            //delay enough to round timeNow up to the next frame
+            int32_t delayTime = (1000 / MAX_FRAMERATE) - (millis() - timeNow);
+            if( delayTime > 0 )
+            {
+                delay( delayTime );
+            }
         }
-    });
+    }, OS_THREAD_PRIORITY_NETWORK, OS_THREAD_STACK_SIZE_DEFAULT_NETWORK);
 }
 
 RgbStrip::~RgbStrip() {
     delete strip_;
     delete thread_;
-}
-
-void RgbStrip::showColor(uint8_t r, uint8_t g, uint8_t b) {
-    strip_->setBrightness(128);
-    strip_->begin();
-    for (int i = 0; i < strip_->numPixels(); i++) {
-        strip_->setPixelColor(i, 255, 255, 255);
-    }
-    strip_->show();
-}
-
-void RgbStrip::rainbow(uint8_t wait) {
-    for (uint16_t j = 0; j < 256; j++) {
-        for (uint16_t i = 0; i < strip_->numPixels(); i++) {
-            strip_->setPixelColor(i, wheel((i + j) & 255));
-        }
-        strip_->show();
-        delay(wait);
-    }
-}
-
-// Input a value 0 to 255 to get a color value.
-// The colours are a transition r - g - b - back to r.
-uint32_t RgbStrip::wheel(byte wheelPos) {
-    if (wheelPos < 85) {
-        return strip_->Color(wheelPos * 3, 255 - wheelPos * 3, 0);
-    } else if (wheelPos < 170) {
-        wheelPos -= 85;
-        return strip_->Color(255 - wheelPos * 3, 0, wheelPos * 3);
-    } else {
-        wheelPos -= 170;
-        return strip_->Color(0, wheelPos * 3, 255 - wheelPos * 3);
-    }
 }
