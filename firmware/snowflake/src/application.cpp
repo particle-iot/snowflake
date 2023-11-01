@@ -18,7 +18,7 @@ void Demo_00_MusicFileReceiver() {
     removeAllFiles("/");
     dumpFilesAndDirs("/");
 
-
+    fileReceiver();
 }
 
 void Demo_01_MusicPlayer() {
