@@ -12,7 +12,6 @@ RgbStrip::RgbStrip() {
         strip_->show();
         while (1) {
             rainbow(20);
-            Log.info("rainbow~");
         }
     });
 }

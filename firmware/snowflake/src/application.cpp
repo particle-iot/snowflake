@@ -15,10 +15,31 @@ Serial1LogHandler logHandler(115200, LOG_LEVEL_WARN, {
 });
 
 void Demo_00_MusicFileReceiver() {
-    removeAllFiles("/");
+    // removeAllFiles("/");
     dumpFilesAndDirs("/");
 
-    fileReceiver();
+    RGB.control(true);
+    RGB.color(255, 255, 255); // state idle : white
+
+    static volatile bool buttonClicked = false;
+    System.on(button_click, [](system_event_t ev, int button_data){
+        buttonClicked = true;
+    });
+
+    while (1) {
+        if (buttonClicked) {
+            buttonClicked = false;
+            RGB.color(0, 255, 0); // state transter on-going : green
+            int ret = fileReceiver();
+            if (ret) {
+                Log.error("fileReceiver failed, ret: %d", ret);
+                RGB.color(255, 0, 0); // state error: red
+            } else {
+                Log.info("fileReceiver success");
+                RGB.color(0, 255, 255); // state success: cyan
+            }
+        }
+    }
 }
 
 void Demo_01_MusicPlayer() {
@@ -87,3 +108,4 @@ void setup() {
 void loop() {
 
 }
+
