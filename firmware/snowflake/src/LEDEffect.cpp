@@ -202,7 +202,6 @@ std::unique_ptr<uint32_t[]> SparkleColorProvider::getColours( const uint32_t num
 
 
 
-
 void LEDEffectPixelAndColor::process( uint32_t *leds, const uint32_t ledCount, const uint32_t timeInMS )
 {
     //get the pixels from the pixel provider

@@ -3,6 +3,7 @@
 #include "RgbStrip.h"
 #include "NtcThermistor.h"
 #include "clickButton.h"
+#include "Settings.h"
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
@@ -20,9 +21,27 @@ ClickButton particleButton(TOUCH_PIN, LOW, CLICKBTN_PULLUP);
 RgbStrip *rgbStrip = NULL;
 static RgbStrip::MODES_T mode = RgbStrip::MODE_SNOWFLAKE;
 
+//our settings controller
+Settings settings = Settings();
+
 void setup()
 {
+    //wait for usb  to connect
+    waitFor(Serial.isConnected, 10000);
+
+    delay(10000);
+
     rgbStrip = new RgbStrip();
+
+    //load our settings file
+    settings.init();
+
+    //get the led mode and set the mode variable
+    String ledMode = settings.get("ledMode");
+    if (ledMode.length() > 0) {
+        mode = (RgbStrip::MODES_T)ledMode.toInt();
+        rgbStrip->setMode(mode);
+    }
 
     //configure the touch button
     pinMode(TOUCH_PIN, INPUT_PULLUP);
@@ -48,6 +67,10 @@ void loop()
             //inc mode
             mode = (RgbStrip::MODES_T)((mode + 1) % RgbStrip::MODE_MAX);
             rgbStrip->setMode(mode);
+
+            //store the updated setting
+            settings.set("ledMode", String(mode));
+            settings.store();
         break;
 
         case 2:
