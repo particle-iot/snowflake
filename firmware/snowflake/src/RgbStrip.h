@@ -19,6 +19,7 @@ public:
         MODE_SNOWFLAKE = 0,
         MODE_HANUKKA,
         MODE_RAINBOW,
+        MODE_CHASE_RED,
 
         MODE_MAX
     };

@@ -9,6 +9,12 @@ std::unique_ptr<uint32_t[]> ChaseColorProvider::getColours( const uint32_t numbe
     //create a chase around the list of pixels. The chase is n leds long
     const uint8_t chaseStart = ((timeInMS / 125) % numberPixels);
 
+    //fill in all the pixels to transparent
+    for (uint16_t i = 0; i < numberPixels; i++ )
+    {
+        colours[i] = LEDEffect::TRANSPARENT_COLOR;
+    }
+
     //we want to write chaseSize_ number of pixels in a trail
     //the last pixel is at full brightness, the first is at 10%
     for (size_t i = 0; i < chaseSize_; i++)
@@ -209,6 +215,9 @@ void LEDEffectPixelAndColor::process( uint32_t *leds, const uint32_t ledCount, c
     //apply the colours to the pixels
     for (uint16_t i = 0; i < pixelCount; i++ )
     {
-        leds[pixels[i]] = colours[i];
+        //if its not transparent, then set the colour
+        if( colours[i] != LEDEffect::TRANSPARENT_COLOR ) {
+            leds[pixels[i]] = colours[i];
+        }
     }
 };

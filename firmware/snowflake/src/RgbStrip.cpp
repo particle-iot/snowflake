@@ -14,6 +14,12 @@ const uint32_t hanukka_blue_highlight = LEDEffect::MakeColor(3, 3, 105);
 const uint32_t snowflake_white = LEDEffect::MakeColor(169, 169, 204);
 const uint32_t snowflake_white_highlight = LEDEffect::MakeColor(255, 255, 255);
 
+const uint32_t chase_red = LEDEffect::MakeColor(245, 58, 12);
+const uint32_t chase_red_highlight = LEDEffect::MakeColor(255, 0, 0);
+
+const uint32_t green_base = LEDEffect::MakeColor(0, 92, 0);
+const uint32_t green_highlight = LEDEffect::MakeColor(0, 196, 0);
+
 
 RgbStrip::RgbStrip() 
 : mode_(MODES_T::MODE_SNOWFLAKE) {
@@ -24,12 +30,11 @@ RgbStrip::RgbStrip()
         //Shared pixel providers
         InnerCirclePixelProvider innerCirclePixelProvider = InnerCirclePixelProvider();
         AllPixelsProvider allPixelsProvider = AllPixelsProvider();
-        EveryNPixelProvider everyNPixelProvider = EveryNPixelProvider( 3 );
+        EveryNPixelProvider everyNPixelProvider = EveryNPixelProvider( 5 );
         PetalPixelProvider petalPixelProvider = PetalPixelProvider( true, false, 2500 );
 
         //Shared colour providers
         RainbowColorProvider rainbowColorProvider = RainbowColorProvider();
-        ChaseColorProvider chaseColorProvider = ChaseColorProvider( LEDEffect::MakeColor(255, 0, 0), 3 );
         SparkleColorProvider sparkleColorProvider = SparkleColorProvider( LEDEffect::MakeColor(255, 255, 255), 14, 1800, 10000 );
 
         //MODE - MODE_SNOWFLAKE
@@ -56,6 +61,17 @@ RgbStrip::RgbStrip()
             LEDEffectPixelAndColor rainbowEffects[] = {
                 LEDEffectPixelAndColor( allPixelsProvider, rainbowColorProvider ),
                 LEDEffectPixelAndColor( allPixelsProvider, sparkleColorProvider )
+            };
+
+        //MODE - MODE_CHASE_RED
+            FixedColorProvider fixedColorProviderChase = FixedColorProvider( green_base );
+            GlowColorProvider glowColorProviderChase = GlowColorProvider( green_base, green_highlight, 2500 );
+            ChaseColorProvider chaseColorProvider = ChaseColorProvider( snowflake_white_highlight, 3 );
+
+            LEDEffectPixelAndColor chaseRedEffects[] = {
+                LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderChase ),
+                LEDEffectPixelAndColor( petalPixelProvider, glowColorProviderChase ),
+                LEDEffectPixelAndColor( innerCirclePixelProvider, chaseColorProvider ),
             };
 
         //calculate the framerate
@@ -95,6 +111,14 @@ RgbStrip::RgbStrip()
                     for (size_t i = 0; i < (sizeof(rainbowEffects) / sizeof(LEDEffectPixelAndColor)); i++)
                     {
                         rainbowEffects[i].process( leds, 36, timeNow );
+                    }
+                break;
+
+                case MODE_CHASE_RED:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(chaseRedEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        chaseRedEffects[i].process( leds, 36, timeNow );
                     }
                 break;
 

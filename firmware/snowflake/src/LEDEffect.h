@@ -13,6 +13,8 @@
 class LEDEffect {
 public:
     virtual void process( uint32_t *leds, const uint32_t ledCount, const uint32_t time );
+
+    static const uint32_t TRANSPARENT_COLOR = 0xFF000000;
     
     //static helper that scales a colour by a brightness value
     static uint32_t ScaleColor( uint32_t color, uint8_t brightnessAsPercentage ) {
