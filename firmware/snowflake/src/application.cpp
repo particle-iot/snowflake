@@ -1,111 +1,261 @@
 #include "Particle.h"
-#include "FileReceiver.h"
-#include "MusicPlayer.h"
-#include "Recorder.h"
-#include "FileSystemWrapper.h"
+
 #include "RgbStrip.h"
 #include "NtcThermistor.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <dirent.h>
+#include "clickButton.h"
 
-SYSTEM_MODE(MANUAL);
+// Let Device OS manage the connection to the Particle Cloud
+SYSTEM_MODE(SEMI_AUTOMATIC);
 
-Serial1LogHandler logHandler(115200, LOG_LEVEL_WARN, {
-    {"app", LOG_LEVEL_ALL}
-});
+// Run the application and system concurrently in separate threads
+SYSTEM_THREAD(ENABLED);
 
-void Demo_00_MusicFileReceiver() {
-    // removeAllFiles("/");
-    dumpFilesAndDirs("/");
+SerialLogHandler logHandler(LOG_LEVEL_INFO);
 
-    RGB.control(true);
-    RGB.color(255, 255, 255); // state idle : white
+//The particle logo on the front is a button - this is the controller for it
+static constexpr int TOUCH_PIN = D10;
+ClickButton particleButton(TOUCH_PIN, LOW, CLICKBTN_PULLUP);
 
-    static volatile bool buttonClicked = false;
-    System.on(button_click, [](system_event_t ev, int button_data){
-        buttonClicked = true;
-    });
+//The controller for the LEDs and the mode
+RgbStrip *rgbStrip = NULL;
+static RgbStrip::MODES_T mode = RgbStrip::MODE_SNOWFLAKE;
 
-    while (1) {
-        if (buttonClicked) {
-            buttonClicked = false;
-            RGB.color(0, 255, 0); // state transter on-going : green
-            int ret = fileReceiver();
-            if (ret) {
-                Log.error("fileReceiver failed, ret: %d", ret);
-                RGB.color(255, 0, 0); // state error: red
-            } else {
-                Log.info("fileReceiver success");
-                RGB.color(0, 255, 255); // state success: cyan
+void setup()
+{
+    rgbStrip = new RgbStrip();
+
+    //configure the touch button
+    pinMode(TOUCH_PIN, INPUT_PULLUP);
+
+    // Setup button timers (all in milliseconds / ms)
+    // (These are default if not set, but changeable for convenience)
+    particleButton.debounceTime   = 20;   // Debounce timer in ms
+    particleButton.multiclickTime = 250;  // Time limit for multi clicks
+    particleButton.longClickTime  = 1000; // time until "held-down clicks" register
+}
+
+
+void loop()
+{
+    // Update button state
+    particleButton.Update();
+
+    //switch on particleButton.clicks
+    switch( particleButton.clicks ) 
+    {
+        case 1:
+            Serial.println("SINGLE click");
+            //inc mode
+            mode = (RgbStrip::MODES_T)((mode + 1) % RgbStrip::MODE_MAX);
+            rgbStrip->setMode(mode);
+        break;
+
+        case 2:
+            Serial.println("DOUBLE click");
+        break;
+
+        case 3:
+            Serial.println("TRIPLE click");
+        break;
+
+        case -1:
+            Serial.println("SINGLE LONG click");
+        break;
+    }
+}
+
+
+//USB controls
+#if 0
+
+    JSONValue getValue(const JSONValue& obj, const char* name) {
+        JSONObjectIterator it(obj);
+        while (it.next()) {
+
+          // // Debug
+          String name(it.name());
+          String value(it.value().toString());
+          Log.info("%s %s", name.c_str(), value.c_str());
+          // Debug
+
+            if (it.name() == name) {
+                return it.value();
             }
         }
+        return JSONValue();
     }
-}
 
-void Demo_01_MusicPlayer() {
-    MusicPlayer musicPlayer;
-    musicPlayer.init(HAL_AUDIO_MODE_STEREO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
-    musicPlayer.playFile("let_it_snow_20s_16k.wav");
-}
+    uint8_t brightness = 0;
 
-void Demo_02_Recorder() {
-    Recorder recorder;
-    recorder.init(HAL_AUDIO_MODE_STEREO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
+    uint32_t pixels[36] = {0};
 
-    static volatile bool buttonClicked = false;
-    System.on(button_click, [](system_event_t ev, int button_data){
-        buttonClicked = true;
-    });
+    uint8_t glowSequenceLED = 0;
+    uint8_t glowSequenceDelay = 0;
 
-    RGB.control(true);
-    RGB.color(0, 255, 0); // Green means idle state
+    void ctrl_request_custom_handler(ctrl_request* req) {
 
-    size_t voiceDataSize = 16 * 1024 * 15; // 15 seconds with 16K sample rate
-    void* voiceData = malloc(voiceDataSize);
+        // uint16_t size; // Size of this structure
+        // uint16_t type; // Request type
+        // char* request_data; // Request data
+        // size_t request_size; // Size of the request data
+        // char* repvvly_data; // Reply data
+        // size_t reply_size; // Size of the reply data
+        // void* channel; // Request channel (used internally)
 
-    while (1) {
-        if (buttonClicked) {
-            buttonClicked = false;
+        LOG(INFO, "request_data: %.*s", req->request_size, req->request_data );
 
-            RGB.color(255, 0, 0); // red
-            hal_audio_read_dmic(voiceData, voiceDataSize);
-            RGB.color(0, 0, 255); // blue
-            delay(3000);
-            hal_audio_write_lineout(voiceData, voiceDataSize);
+        auto d = JSONValue::parse(req->request_data, req->request_size);
+        SPARK_ASSERT(d.isObject());
+        JSONValue data_ = std::move(d);
 
-            RGB.color(0, 255, 0); // green
+        JSONObjectIterator iter(data_);
+        while(iter.next()) {
+            Log.info("key=%s value=%s", 
+              (const char *) iter.name(), 
+              (const char *) iter.value().toString());
+
+            if (iter.name() == "setBrightness") {
+                brightness = iter.value().toInt();
+
+                LOG(INFO, "brightness: %d", brightness);
+            }
+            else if (iter.name() == "setLeds") {
+                //print out jstr as a cstr
+                const char * const s = iter.value().toString().data();
+
+                String leds(s);
+
+                //leds is a string that is 36 sets of RGB HEX strings that are 6 ASCII tightly packed
+
+                //Parse these into a 1D array of UINT32s
+                //Then pass that array to the RgbStrip class to display the colors
+
+                for (int i = 0; i < 36; i++) {
+                    String hex = leds.substring(i * 6, i * 6 + 6);
+                    uint32_t color = strtol(hex.c_str(), NULL, 16);
+                    pixels[i] = color;
+                }
+
+                //print out the first pixel as RGB
+                uint32_t color = pixels[0];
+                uint8_t r = (color >> 16) & 0xFF;
+                uint8_t g = (color >> 8) & 0xFF;
+                uint8_t b = color & 0xFF;
+
+                LOG(INFO, "r=%d g=%d b=%d", r, g, b);
+
+                rgbStrip->set_pixels(pixels, brightness, 36);
+            }
+            else if (iter.name() == "setLed") {
+                //print out jstr as a cstr
+                const char * const s = iter.value().toString().data();
+
+                String led(s);
+
+                //split the string by :
+                int pos = led.indexOf(':');
+
+                String index = led.substring(0, pos);
+                String hex = led.substring(pos + 1);
+
+                uint32_t indexInt = strtol(index.c_str(), NULL, 16);
+                uint32_t color = strtol(hex.c_str(), NULL, 16);
+
+                //log this
+                LOG(INFO, "index=%s hex=%s", index.c_str(), hex.c_str());
+                
+                pixels[indexInt] = color;
+
+                rgbStrip->set_pixels(pixels, brightness, 36);
+            }
+            //support this command
+            // {setGlowSequenceLED: 0, setGlowSequenceDelay: 5, setGlowSequence: ledstring}
+            // in this the ledstring is N pixels long and each pixel is 6 hex chars
+            // the led is the LED to glow (0 to 35)
+            // the delay is the time between pixels in ms
+            else if (iter.name() == "setGlowSequenceLED") {
+                glowSequenceLED = iter.value().toInt();
+            }
+            else if (iter.name() == "setGlowSequenceDelay") {
+                glowSequenceDelay = iter.value().toInt();
+            }
+            else if (iter.name() == "setGlowSequence") {
+                //print out jstr as a cstr
+                const char * const s = iter.value().toString().data();
+
+                String glowString(s);
+
+                //calculate the length of the sequence - its the string length / 6 (6 chars per pixel)
+                const uint32_t sequenceLength = glowString.length() / 6;
+
+                uint32_t *sequence = (uint32_t *)malloc(sequenceLength * sizeof(uint32_t));
+
+                for (int i = 0; i < sequenceLength; i++) {
+                    String hex = glowString.substring(i * 6, i * 6 + 6);
+                    uint32_t color = strtol(hex.c_str(), NULL, 16);
+                    sequence[i] = color;
+                }
+
+                //set each pixel in the sequence with teh delay between them using the led number
+                for (int i = 0; i < sequenceLength; i++) {
+                    pixels[glowSequenceLED] = sequence[i];
+                    rgbStrip->set_pixels(pixels, brightness, 36);
+                    delay(glowSequenceDelay);
+                }
+
+                free( sequence );
+            }
         }
+
+        data_ = JSONValue();
+
+        // auto d = JSONValue::parse(req->request_data, req->request_size);
+        // SPARK_ASSERT(d.isObject());
+        // JSONValue data_ = std::move(d);
+
+        // //is the key "setBrightness" in the JSON object?
+
+        // JSONString jstr = getValue(data_, "cmd").toString();
+
+        // //if the cmd is "setBrightness" then get the brightness value
+        // if (jstr == "setBrightness") {
+
+        //     JSONObjectIterator iter(d);
+        //     while (iter.next()) {
+        //         if (iter.name() == "brightness") {
+        //             brightness = iter.value().toInt();
+        //         }
+        //     }
+        // }
+        // //else if the string is setLeds then get the leds value
+        // else if (jstr == "setLeds") {
+        //     jstr = getValue(data_, "leds").toString();
+
+        //     //print out jstr as a cstr
+        //     const char * const s = jstr.data();
+
+        //     String leds(s);
+
+        //     //leds is a string that is 36 sets of RGB HEX strings that are 6 ASCII tightly packed
+
+        //     //Parse these into a 1D array of UINT32s
+        //     //Then pass that array to the RgbStrip class to display the colors
+
+        //     uint32_t pixels[36];
+
+        //     for (int i = 0; i < 36; i++) {
+        //         String hex = leds.substring(i * 6, i * 6 + 6);
+        //         uint32_t color = strtol(hex.c_str(), NULL, 16);
+        //         pixels[i] = color;
+        //     }
+
+        //     rgbStrip->set_pixels(pixels, brightness, 36);
+        // }
+
+        const bool ok = true;
+
+        system_ctrl_set_result(req, ok ? SYSTEM_ERROR_NONE : SYSTEM_ERROR_NOT_SUPPORTED, nullptr, nullptr, nullptr);
     }
-}
 
-void Demo_03_TouchToGetTemperature() {
-    static constexpr int TOUCH_PIN = D10;
-    static volatile bool buttonClicked = false;
 
-    attachInterrupt(TOUCH_PIN, +[](){
-        buttonClicked = true;
-    }, FALLING);
-
-    while (1) {
-        if (buttonClicked) {
-            buttonClicked = false;
-            float temperature = ntcGetTemperature();
-            Log.info("Temperature: %.1f", temperature);
-        }
-    }
-}
-
-void setup() {
-    RgbStrip rgbStrip;
-
-    // Demo_00_MusicFileReceiver();
-    Demo_01_MusicPlayer();
-    // Demo_02_Recorder();
-    // Demo_03_TouchToGetTemperature();
-}
-
-void loop() {
-
-}
-
+#endif
