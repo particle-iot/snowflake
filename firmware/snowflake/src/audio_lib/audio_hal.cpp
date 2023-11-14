@@ -37,10 +37,10 @@ SRAM_NOCACHE_DATA_SECTION static u8 sp_rx_buf[SP_DMA_PAGE_SIZE*SP_DMA_PAGE_NUM]_
 2. tx rx buffer 需要调用 DCache API
 */
 
-#define SP_DMA_PAGE_SIZE        512ul   // 2 ~ 4096
-#define SP_DMA_PAGE_NUM         4
-#define SP_ZERO_BUF_SIZE        128
-#define SP_FULL_BUF_SIZE        128
+#define SP_DMA_PAGE_SIZE        1024ul   // 2 ~ 4096
+#define SP_DMA_PAGE_NUM         8
+#define SP_ZERO_BUF_SIZE        256
+#define SP_FULL_BUF_SIZE        256
 
 typedef struct {
 	u8 tx_gdma_own;
@@ -105,7 +105,7 @@ public:
         wordLen_ = wordLen;
         monoStereo_ = monoStereo;
         appMode_ = mode;
-        // LOG(INFO, "AudioSerialPort init, %d, %d, %d", sampleRate_, wordLen_, monoStereo_);
+        //LOG(INFO, "AudioSerialPort init, %d, %d, %d", sampleRate_, wordLen_, monoStereo_);
 
         // Enable 98.304MHz PLL. needed if fs=8k/16k/32k/48k/96k
         PLL_I2S_Set(ENABLE);
@@ -138,7 +138,7 @@ public:
             PAD_CMD(_PB_31, DISABLE);
         }
 
-	    // Codec init
+	      // Codec init
         CODEC_Init(sampleRate_, wordLen_, monoStereo_, appMode_);
         CODEC_SetVolume(0xAF, 0xAF);
         u16 volume = 0;
@@ -152,8 +152,8 @@ public:
         AUDIO_SP_StructInit(&spInitStruct_);
         spInitStruct_.SP_MonoStereo= monoStereo_;
         spInitStruct_.SP_WordLen = wordLen_;
-	    AUDIO_SP_Init(AUDIO_SPORT_DEV, &spInitStruct_);
 
+	      AUDIO_SP_Init(AUDIO_SPORT_DEV, &spInitStruct_);
         AUDIO_SP_TdmaCmd(AUDIO_SPORT_DEV, ENABLE);
         AUDIO_SP_TxStart(AUDIO_SPORT_DEV, ENABLE);
         AUDIO_SP_RdmaCmd(AUDIO_SPORT_DEV, ENABLE);

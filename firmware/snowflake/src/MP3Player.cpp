@@ -20,7 +20,7 @@ MP3Player::MP3Player( AudioPlayer* audioPlayer )
                 delete songPtr;
             }
         }
-    });   
+    }, OS_THREAD_PRIORITY_NETWORK_HIGH, OS_THREAD_STACK_SIZE_DEFAULT_NETWORK );   
 }
 
 
@@ -38,11 +38,11 @@ void MP3Player::internalPlaySong( const String filename )
 
     if( readMP3File( filename, &mp3Data, &mp3Size ) )
     {
-        mp3dec_t mp3d;
+        static mp3dec_t mp3d;
         mp3dec_init(&mp3d);
 
         mp3dec_frame_info_t info;
-        mp3d_sample_t pcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
+        static mp3d_sample_t pcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
 
         //log we init the decoder
         Log.info("MP3Player::internalPlaySong(%s) init decoder", filename.c_str());
@@ -50,10 +50,14 @@ void MP3Player::internalPlaySong( const String filename )
         int mp3len = 0;
         int samples = 0;
 
-        do {
+        do
+        {
             samples = mp3dec_decode_frame(&mp3d, mp3Data + mp3len, mp3Size - mp3len, pcm, &info);
             if (samples > 0)
             {
+                //log we are playing
+                //Log.info("MP3Player::internalPlaySong(%s) playing %d samples", filename.c_str(), samples);
+
                 audioPlayer_->playBuffer((const uint16_t *)pcm, samples);
                 mp3len += info.frame_bytes;
             }

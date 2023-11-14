@@ -20,7 +20,7 @@ class AudioPlayer
               pinMode(SPEAKER_EN_PIN, OUTPUT);
               digitalWrite(SPEAKER_EN_PIN, 1);
           }
-          
+
           return ret;
       }
 
@@ -31,7 +31,12 @@ class AudioPlayer
       }
 
       void setOutput( hal_audio_mode_t mode, hal_audio_sample_rate_t sampleRate, hal_audio_word_len_t wordLen ) {
-          hal_audio_init(HAL_AUDIO_OUT_DEVICE_LINEOUT, mode, sampleRate, wordLen);
+          static bool init = false;
+          if (!init)
+          {
+              hal_audio_init(HAL_AUDIO_OUT_DEVICE_LINEOUT, mode, sampleRate, wordLen);
+              init = true;
+          }
 
           pinMode(SPEAKER_EN_PIN, OUTPUT);
           digitalWrite(SPEAKER_EN_PIN, 1);

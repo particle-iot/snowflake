@@ -8,8 +8,8 @@
 #include "MP3Player.h"
 #include "TonePlayer.h"
 
-//#define FIXED_AUDIO_TONE
-//#define FIXED_MP3_PLAYBACK
+#define FIXED_AUDIO_TONE
+#define FIXED_MP3_PLAYBACK
 
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3/minimp3.h"
@@ -88,6 +88,11 @@ void setup()
     //hardware watchdog
     Watchdog.init(WatchdogConfiguration().timeout(10s));
     Watchdog.start();
+
+  #ifdef FIXED_AUDIO_TONE
+      //play a two-tone beep boop when booting up
+      tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_BOOT );
+  #endif
 }
 
 
@@ -118,7 +123,7 @@ void loop()
             #ifdef FIXED_AUDIO_TONE
                 //play a two-tone beep boop when switching the display mode
                 //this will fail if already playing a song
-                tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_TWO_TONE );
+                tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_BOOT );
             #endif
         break;
 

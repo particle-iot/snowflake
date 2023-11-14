@@ -12,6 +12,9 @@ class TonePlayer
 
       typedef enum {
         TONE_SEQUENCE_TWO_TONE,
+        TONE_SEQUENCE_BOOT,
+
+        TONE_SEQUENCE_MAX
         
       } TONE_SEQUENCE_T;
 
