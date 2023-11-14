@@ -64,7 +64,7 @@ void Settings::init( void ) {
         Log.info("Failed to open settings file");
 
         //add in the defaults
-        settings_.push_back(std::make_pair("ledMode", "0"));
+        settings_.push_back(std::make_pair("ledMode", "1"));
     }
 }
 

@@ -106,6 +106,9 @@ void loop()
             Serial.println("SINGLE click");
             //inc mode
             mode = (RgbStrip::MODES_T)((mode + 1) % RgbStrip::MODE_MAX);
+            if( mode == RgbStrip::MODE_OFF ) { // don't allow off to be selected by default
+                mode == RgbStrip::MODE_SNOWFLAKE;
+            }
             rgbStrip->setMode(mode);
 
             //store the updated setting
