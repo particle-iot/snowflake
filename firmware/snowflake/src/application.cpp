@@ -8,6 +8,9 @@
 #include "MP3Player.h"
 #include "TonePlayer.h"
 
+//#define FIXED_AUDIO_TONE
+//#define FIXED_MP3_PLAYBACK
+
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3/minimp3.h"
 
@@ -45,10 +48,10 @@ uint32_t songIndex = 0;
 
 void setup()
 {
-    //wait for usb  to connect
-    waitFor(Serial.isConnected, 10000);
+    // //wait for usb  to connect
+    // waitFor(Serial.isConnected, 10000);
 
-    delay(10000);
+    // delay(10000);
 
     rgbStrip = new RgbStrip();
 
@@ -109,8 +112,9 @@ void loop()
             settings.set("ledMode", String(mode));
             settings.store();
 
-            //play a 0.2 second tone
-            #ifdef FIX
+            #ifdef FIXED_AUDIO_TONE
+                //play a two-tone beep boop when switching the display mode
+                //this will fail if already playing a song
                 tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_TWO_TONE );
             #endif
         break;
@@ -126,9 +130,12 @@ void loop()
         case -1:
             Serial.println("SINGLE LONG click");
 
-            //play the next song in the list
-            mp3Player.play(songs[songIndex]);
-            songIndex = (songIndex + 1) % songs.size();
+            #ifdef FIXED_MP3_PLAYBACK
+                //play the next song in the list
+                //it allows max of 1 item to be queued
+                mp3Player.play(songs[songIndex]);
+                songIndex = (songIndex + 1) % songs.size();
+            #endif
         break;
     }
 }

@@ -5,7 +5,7 @@
 MP3Player::MP3Player( AudioPlayer* audioPlayer )
   : audioPlayer_(audioPlayer)
 {
-    os_queue_create(&queue_, sizeof(String*), 2, NULL);
+    os_queue_create(&queue_, sizeof(String*), 1, NULL);
 
     thread_ = new Thread("mp3Player", [this]()->os_thread_return_t{
 

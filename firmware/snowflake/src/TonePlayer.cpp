@@ -18,54 +18,59 @@ static const TONE_T two_tone_tones[] = {
 
 void TonePlayer::tone( const uint32_t freq, const uint32_t duractionInMS ) {
     //what are we playing?
-    Log.info("Playing tone: %dHz for %dms", freq, duractionInMS);
+    Log.info("Playing tone: %ldHz for %ldms", freq, duractionInMS);
 
-    audioPlayer->aquireLock();
+    if( 0 == audioPlayer->aquireLock() )
+    {
+        audioPlayer->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
 
-    audioPlayer->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
+        //generate a constant wave form that is split into buckets of 1024 samples based on the given freq
+        //the generated waveform should be a sine wave below max volume
+      
+        const uint16_t samplesPerBucket = 1024;
+        const uint16_t sampleRate = 16000;
+        const uint16_t maxVolume = (32767 / 100) * 80; //80% of max volume
 
-    //generate a constant wave form that is split into buckets of 1024 samples based on the given freq
-    //the generated waveform should be a sine wave below max volume
-  
-    const uint16_t samplesPerBucket = 1024;
-    const uint16_t sampleRate = 16000;
-    const uint16_t maxVolume = (32767 / 100) * 80; //80% of max volume
+        //calculate how many samples in total are needed for the duraction in ms we want to play for
+        const uint32_t totalSamples = (sampleRate * duractionInMS) / 1000;
 
-    //calculate how many samples in total are needed for the duraction in ms we want to play for
-    const uint32_t totalSamples = (sampleRate * duractionInMS) / 1000;
+        //allocate a bucket for the samples
+        int16_t* bucket = (int16_t*)malloc(samplesPerBucket * sizeof(int16_t));
 
-    //allocate a bucket for the samples
-    int16_t* bucket = (int16_t*)malloc(samplesPerBucket * sizeof(int16_t));
+        //loop over the total samples, filling in the bucket as we go. when its full or we have no samples left, write the audio output
+        uint32_t samplesWritten = 0;
 
-    //loop over the total samples, filling in the bucket as we go. when its full or we have no samples left, write the audio output
-    uint32_t samplesWritten = 0;
+        while (samplesWritten < totalSamples) {
 
-    while (samplesWritten < totalSamples) {
+            //limit the max size of the bucket to fill. either the bucket or the remainined total samples
+            const uint16_t bucketSize = min(samplesPerBucket, totalSamples - samplesWritten);
 
-        //limit the max size of the bucket to fill. either the bucket or the remainined total samples
-        const uint16_t bucketSize = min(samplesPerBucket, totalSamples - samplesWritten);
+            //fill the bucket
+            for (uint16_t i = 0; i < bucketSize; i++) {
+                //calculate the sample value
+                const float sampleValue = sin(2 * M_PI * freq * (samplesWritten + i) / sampleRate);
 
-        //fill the bucket
-        for (uint16_t i = 0; i < bucketSize; i++) {
-            //calculate the sample value
-            const float sampleValue = sin(2 * M_PI * freq * (samplesWritten + i) / sampleRate);
+                //convert the sample value to a 16bit signed int
+                bucket[i] = (int16_t)(sampleValue * maxVolume);
+            }
 
-            //convert the sample value to a 16bit signed int
-            bucket[i] = (int16_t)(sampleValue * maxVolume);
+            //write the bucket to the audio output
+            audioPlayer->playBuffer((const uint16_t*)bucket, bucketSize * sizeof(int16_t));
+
+            //increment the samples written
+            samplesWritten += samplesPerBucket;
         }
 
-        //write the bucket to the audio output
-        audioPlayer->playBuffer((const uint16_t*)bucket, bucketSize * sizeof(int16_t));
+        //free the memory
+        free(bucket);
 
-        //increment the samples written
-        samplesWritten += samplesPerBucket;
+        //terminate the audio output
+        audioPlayer->releaseLock();
     }
-
-    //free the memory
-    free(bucket);
-
-    //terminate the audio output
-    audioPlayer->releaseLock();
+    else
+    {
+        Log.info("Failed to aquire audio lock - skipping tone");
+    }
 }
 
 

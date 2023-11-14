@@ -12,16 +12,22 @@ class AudioPlayer
           os_mutex_create(&mutex_);
       }
 
-      void aquireLock( void ) {
-          //os_mutex_lock(mutex_);
-          pinMode(SPEAKER_EN_PIN, OUTPUT);
-          digitalWrite(SPEAKER_EN_PIN, 1);
+      int aquireLock( void ) {
+          const int ret = os_mutex_trylock(mutex_);
+
+          if( ret == 0)
+          {
+              pinMode(SPEAKER_EN_PIN, OUTPUT);
+              digitalWrite(SPEAKER_EN_PIN, 1);
+          }
+          
+          return ret;
       }
 
       void releaseLock( void ) {
           digitalWrite(SPEAKER_EN_PIN, 0);
           pinMode(SPEAKER_EN_PIN, PIN_MODE_NONE);
-          //os_mutex_unlock(mutex_);
+          os_mutex_unlock(mutex_);
       }
 
       void setOutput( hal_audio_mode_t mode, hal_audio_sample_rate_t sampleRate, hal_audio_word_len_t wordLen ) {
