@@ -37,10 +37,10 @@ SRAM_NOCACHE_DATA_SECTION static u8 sp_rx_buf[SP_DMA_PAGE_SIZE*SP_DMA_PAGE_NUM]_
 2. tx rx buffer 需要调用 DCache API
 */
 
-#define SP_DMA_PAGE_SIZE        1024ul   // 2 ~ 4096
-#define SP_DMA_PAGE_NUM         8
-#define SP_ZERO_BUF_SIZE        256
-#define SP_FULL_BUF_SIZE        256
+#define SP_DMA_PAGE_SIZE        512ul   // 2 ~ 4096
+#define SP_DMA_PAGE_NUM         4
+#define SP_ZERO_BUF_SIZE        128
+#define SP_FULL_BUF_SIZE        128
 
 typedef struct {
 	u8 tx_gdma_own;
