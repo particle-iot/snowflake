@@ -112,7 +112,7 @@ void loop()
             //inc mode
             mode = (RgbStrip::MODES_T)((mode + 1) % RgbStrip::MODE_MAX);
             if( mode == RgbStrip::MODE_OFF ) { // don't allow off to be selected by default
-                mode == RgbStrip::MODE_SNOWFLAKE;
+                mode = RgbStrip::MODE_SNOWFLAKE;
             }
             rgbStrip->setMode(mode);
 

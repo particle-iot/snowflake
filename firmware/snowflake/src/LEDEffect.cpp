@@ -6,8 +6,7 @@
 std::unique_ptr<uint32_t[]> ChaseColorProvider::getColours( const uint32_t numberPixels, const uint32_t timeInMS ) {
     std::unique_ptr<uint32_t[]> colours( new uint32_t[numberPixels] );
 
-    //create a chase around the list of pixels. The chase is n leds long
-    const uint8_t chaseStart = ((timeInMS / 125) % numberPixels);
+    const uint32_t timerBreak = 140;
 
     //fill in all the pixels to transparent
     for (uint16_t i = 0; i < numberPixels; i++ )
@@ -15,11 +14,41 @@ std::unique_ptr<uint32_t[]> ChaseColorProvider::getColours( const uint32_t numbe
         colours[i] = LEDEffect::TRANSPARENT_COLOR;
     }
 
-    //we want to write chaseSize_ number of pixels in a trail
-    //the last pixel is at full brightness, the first is at 10%
-    for (size_t i = 0; i < chaseSize_; i++)
+    //if we are clock wise...
+    if( clockwise_ )
     {
-        colours[(chaseStart + i) % numberPixels] = LEDEffect::ScaleColor(color_, 10 + (i * 65 / chaseSize_));
+        //create a chase around the list of pixels. The chase is n leds long
+        const uint8_t chaseStart = (((timeInMS / timerBreak) + ledOffset_) % numberPixels);
+
+        //we want to write chaseSize_ number of pixels in a trail
+        //the last pixel is at full brightness, the first is at 10%
+        for (size_t i = 0; i < chaseSize_; i++)
+        {
+            colours[(chaseStart + i) % numberPixels] = LEDEffect::ScaleColor(color_, 10 + (i * 65 / chaseSize_));
+        }
+    }
+    else
+    {
+        //create a chase around the list of pixels. The chase is n leds long
+        //chase start goes backwards from the start when in anti-clockwise mode
+        const uint8_t chaseStart = numberPixels - (((timeInMS / timerBreak) + ledOffset_) % numberPixels);
+    
+        //the chase goes backwards from the start when in anti-clockwise mode
+        // - chaseStart is the last pixel... so we need to go backwards
+        // - the last pixel is at full brightness, the first is at 10%
+        for (size_t i = 0; i < chaseSize_; i++)
+        {
+            //calculate the pixel we are writing to
+            int8_t pixel = chaseStart - i;
+
+            //if the pixel is negative, then we need to wrap around
+            if( pixel < 0 ) {
+                pixel = numberPixels + pixel;
+            }
+
+            //set the colour
+            colours[pixel] = LEDEffect::ScaleColor(color_, 10 + (i * 65 / chaseSize_));
+        }
     }
 
     return colours;
@@ -65,6 +94,11 @@ std::unique_ptr<uint32_t[]> GlowColorProvider::getColours( const uint32_t number
     //print out if we are in the pre-roll, main sequence 1st half, main seqnece second half or post roll
     //LOG(INFO, "sequence: %d %d %d", sequence, glowTimeWindow_, glowTimeWindow_/2);
 
+    //log the to and from colours
+    // LOG(INFO, "GlowColorProvider from: %d %d %d to %d %d %d",
+    //       (base_color_ >> 16) & 0xFF, (base_color_ >> 8) & 0xFF, (base_color_ & 0xFF),
+    //       (glow_color_ >> 16) & 0xFF, (glow_color_ >> 8) & 0xFF, (glow_color_ & 0xFF));
+
     //if its in the pre or post roll, its just base colour
     if( ( sequence < (glowTimeWindow_/4) ) || ( sequence > ((glowTimeWindow_/2)+(glowTimeWindow_/4)) ) )
     {
@@ -79,17 +113,11 @@ std::unique_ptr<uint32_t[]> GlowColorProvider::getColours( const uint32_t number
         //calculute the sequence into the glow
         sequence -= (glowTimeWindow_/4);
 
-        //calculate the glow colour for this time period - is scaled from base_color_ to glow_color_ based on the sequence on an individual pixel basis (r, g, b)
-        // this is done for each RGB channel 
-        uint32_t r = 0;
-        uint32_t g = 0;
-        uint32_t b = 0;
-
         //we are in the first half of the glow
         //we need to scale the colour between base_color_ and glow_color_ based on the sequence
-        r = base_color_ >> 16;
-        g = base_color_ >> 8;
-        b = base_color_; 
+        uint32_t r = (base_color_ >> 16) & 0xFF;
+        uint32_t g = (base_color_ >> 8) & 0xFF;
+        uint32_t b = base_color_ & 0xFF; 
 
         const uint32_t red_delta = ((glow_color_ >> 16) & 0xFF) - r;
         const uint32_t green_delta = ((glow_color_ >> 8) & 0xFF) - g;

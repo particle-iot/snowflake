@@ -120,18 +120,20 @@ class InnerCirclePixelProvider : public LEDPixelProvider {
 
 class EveryNPixelProvider : public LEDPixelProvider {
     public:
-        EveryNPixelProvider( const uint8_t n ) : n_(n) {};
+        EveryNPixelProvider( const uint8_t n, const uint32_t offset ) : n_(n), offset_(offset) {};
 
         std::unique_ptr<uint8_t[]> getPixels( const uint32_t timeInMS, uint8_t &pixelCount ) {
 
             //inner loop speed
-            #define ROTATION_SPEED 330
+            #define ROTATION_SPEED 330*2
+
+            const uint32_t timeInMSOffset = timeInMS + ((ROTATION_SPEED/n_) * offset_);
 
             //which led should we start on?
-            const uint8_t startLed = ((timeInMS / ROTATION_SPEED) % n_);
+            const uint8_t startLed = ((timeInMSOffset / ROTATION_SPEED) % n_);
 
             //calculate how many total LEDs will we have
-            pixelCount = (36 - startLed) / n_;
+            pixelCount = (36 / n_);
 
             uint8_t* everyNMem = new uint8_t[pixelCount];
 
@@ -145,6 +147,7 @@ class EveryNPixelProvider : public LEDPixelProvider {
     
     private:
         uint8_t n_;
+        uint32_t offset_;
 };
 
 
@@ -266,13 +269,16 @@ class FixedColorProvider : public LEDColorProvider {
 
 class ChaseColorProvider : public LEDColorProvider {
     public:
-        ChaseColorProvider( const uint32_t color, const uint8_t chaseSize ) : color_(color), chaseSize_(chaseSize) {};
+        ChaseColorProvider( const uint32_t color, const uint8_t chaseSize, const uint8_t ledOffset, const bool clockwise )
+          : color_(color), chaseSize_(chaseSize), ledOffset_(ledOffset), clockwise_(clockwise) {};
 
         std::unique_ptr<uint32_t[]> getColours( const uint32_t numberPixels, const uint32_t timeInMS );
 
     private:
         uint32_t color_;
         uint8_t chaseSize_;
+        bool clockwise_;
+        uint8_t ledOffset_;
 };
 
 
@@ -310,7 +316,7 @@ class SparkleColorProvider : public LEDColorProvider {
             //flashSequence_ = LEDEffect::createEvenlyDistributedLEDFlashSequenceVector(36);
 
             //I hard coded this instead
-            uint8_t ledSequence[] = {28, 12, 21, 20, 19, 35, 23, 7, 10, 3, 17, 1, 18, 13, 6, 33, 15, 32, 0, 26, 11, 16, 27, 24, 34, 30, 9, 4, 14, 8, 5, 31, 25, 29, 22, 2};
+            const uint8_t ledSequence[] = {28, 12, 21, 20, 19, 35, 23, 7, 10, 3, 17, 1, 18, 13, 6, 33, 15, 32, 0, 26, 11, 16, 27, 24, 34, 30, 9, 4, 14, 8, 5, 31, 25, 29, 22, 2};
 
             // Initialize vector in a single line
             flashSequence_ = std::vector<uint8_t>(std::begin(ledSequence), std::end(ledSequence));

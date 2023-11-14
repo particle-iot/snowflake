@@ -18,7 +18,7 @@ public:
     enum MODES_T {
         MODE_OFF,
         MODE_SNOWFLAKE,
-        MODE_HANUKKA,
+        MODE_HANUKKAH,
         MODE_RAINBOW,
         MODE_CHASE_RED,
 
