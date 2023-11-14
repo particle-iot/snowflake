@@ -123,7 +123,7 @@ void loop()
             #ifdef FIXED_AUDIO_TONE
                 //play a two-tone beep boop when switching the display mode
                 //this will fail if already playing a song
-                tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_BOOT );
+                tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_TWO_TONE );
             #endif
         break;
 
