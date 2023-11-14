@@ -22,7 +22,7 @@ const uint32_t green_highlight = LEDEffect::MakeColor(0, 196, 0);
 
 
 RgbStrip::RgbStrip() 
-: mode_(MODES_T::MODE_SNOWFLAKE) {
+: mode_(MODES_T::MODE_OFF) {
     strip_ = new Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
 
     thread_ = new Thread("rgbThread", [this]()->os_thread_return_t{

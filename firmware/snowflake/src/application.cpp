@@ -4,6 +4,12 @@
 #include "NtcThermistor.h"
 #include "clickButton.h"
 #include "Settings.h"
+#include "AudioPlayer.h"
+#include "MP3Player.h"
+#include "TonePlayer.h"
+
+#define MINIMP3_IMPLEMENTATION
+#include "minimp3/minimp3.h"
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
@@ -23,6 +29,19 @@ static RgbStrip::MODES_T mode = RgbStrip::MODE_SNOWFLAKE;
 
 //our settings controller
 Settings settings = Settings();
+
+//audio interface
+AudioPlayer audioPlayer = AudioPlayer();
+
+//mp3 player
+MP3Player mp3Player = MP3Player(&audioPlayer);
+
+//tone player
+TonePlayer tonePlayer = TonePlayer(&audioPlayer);
+
+//list of songs to play and index of the current song
+std::vector<String> songs;
+uint32_t songIndex = 0;
 
 void setup()
 {
@@ -51,6 +70,21 @@ void setup()
     particleButton.debounceTime   = 20;   // Debounce timer in ms
     particleButton.multiclickTime = 250;  // Time limit for multi clicks
     particleButton.longClickTime  = 1000; // time until "held-down clicks" register
+
+    // find the file in the assets
+    auto assets = System.assetsAvailable();
+
+    for (auto& asset: assets)
+    {
+        if (asset.name().endsWith(".mp3"))
+        {
+            songs.push_back(asset.name());
+        }
+    }
+
+    //hardware watchdog
+    Watchdog.init(WatchdogConfiguration().timeout(10s));
+    Watchdog.start();
 }
 
 
@@ -58,6 +92,9 @@ void loop()
 {
     // Update button state
     particleButton.Update();
+
+    //kick the watchdog
+    Watchdog.refresh(); 
 
     //switch on particleButton.clicks
     switch( particleButton.clicks ) 
@@ -71,6 +108,11 @@ void loop()
             //store the updated setting
             settings.set("ledMode", String(mode));
             settings.store();
+
+            //play a 0.2 second tone
+            #ifdef FIX
+                tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_TWO_TONE );
+            #endif
         break;
 
         case 2:
@@ -83,6 +125,10 @@ void loop()
 
         case -1:
             Serial.println("SINGLE LONG click");
+
+            //play the next song in the list
+            mp3Player.play(songs[songIndex]);
+            songIndex = (songIndex + 1) % songs.size();
         break;
     }
 }

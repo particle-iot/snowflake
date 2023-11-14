@@ -16,7 +16,8 @@ public:
     // - chase snowflake
 
     enum MODES_T {
-        MODE_SNOWFLAKE = 0,
+        MODE_OFF,
+        MODE_SNOWFLAKE,
         MODE_HANUKKA,
         MODE_RAINBOW,
         MODE_CHASE_RED,
