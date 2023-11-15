@@ -26,7 +26,14 @@ public:
     };
 
     void setMode( const MODES_T mode ) {
-        mode_ = mode;
+        if( mode < MODE_MAX ) 
+        {
+            mode_ = mode;
+        }
+        else
+        {
+            Log.info( "Invalid mode: %d", mode );
+        }
     }
 
     void showColor(uint8_t r, uint8_t g, uint8_t b);

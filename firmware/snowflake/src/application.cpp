@@ -8,6 +8,7 @@
 #include "MP3Player.h"
 #include "TonePlayer.h"
 
+//#define DEBUG
 #define FIXED_AUDIO_TONE
 #define FIXED_MP3_PLAYBACK
 
@@ -22,6 +23,9 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 
 // Run the application and system concurrently in separate threads
 SYSTEM_THREAD(ENABLED);
+
+//enable the reset reason feature
+STARTUP(System.enableFeature(FEATURE_RESET_INFO));
 
 SerialLogHandler logHandler(LOG_LEVEL_INFO);
 
@@ -52,9 +56,11 @@ uint32_t songIndex = 0;
 void setup()
 {
     // //wait for usb  to connect
-    // waitFor(Serial.isConnected, 10000);
+    #ifdef DEBUG
+        waitFor(Serial.isConnected, 10000);
 
-    // delay(10000);
+       delay(10000);
+    #endif
 
     rgbStrip = new RgbStrip();
 
@@ -77,9 +83,8 @@ void setup()
     particleButton.multiclickTime = 250;  // Time limit for multi clicks
     particleButton.longClickTime  = 1000; // time until "held-down clicks" register
 
-    // find the file in the assets
+    // find all mp3 files in the assets system disk and create a list of them for later
     auto assets = System.assetsAvailable();
-
     for (auto& asset: assets)
     {
         if (asset.name().endsWith(".mp3"))
@@ -93,8 +98,19 @@ void setup()
     Watchdog.start();
 
   #ifdef FIXED_AUDIO_TONE
-      //play a two-tone beep boop when booting up
-      tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_BOOT );
+      Log.info("Reset reason: %d", System.resetReason());
+
+      const auto resetReason = System.resetReason();
+
+      switch( resetReason )
+      {
+          case RESET_REASON_PIN_RESET:
+          case RESET_REASON_USER:
+          case RESET_REASON_POWER_DOWN:
+              //play a two-tone beep boop when booting up only from a cold power on or USB reset
+              tonePlayer.play( TonePlayer::TONE_SEQUENCE_BOOT );
+          break;
+      }
   #endif
 }
 
@@ -126,7 +142,7 @@ void loop()
             #ifdef FIXED_AUDIO_TONE
                 //play a two-tone beep boop when switching the display mode
                 //this will fail if already playing a song
-                tonePlayer.toneSequence( TonePlayer::TONE_SEQUENCE_TWO_TONE );
+                tonePlayer.play( TonePlayer::TONE_SEQUENCE_TWO_TONE );
             #endif
         break;
 

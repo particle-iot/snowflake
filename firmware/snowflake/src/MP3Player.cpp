@@ -28,55 +28,59 @@ void MP3Player::internalPlaySong( const String filename )
 {
     Log.info("MP3Player::internalPlaySong(%s)", filename.c_str());
  
-    audioPlayer_->aquireLock();
-
-    audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
-
-    //load the mp3 from asset OTA into memory
-    uint8_t* mp3Data = NULL;
-    uint32_t mp3Size = 0;
-
-    if( readMP3File( filename, &mp3Data, &mp3Size ) )
+    if( 0 == audioPlayer_->aquireLock() )
     {
-        static mp3dec_t mp3d;
-        mp3dec_init(&mp3d);
+        audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
 
-        mp3dec_frame_info_t info;
-        static mp3d_sample_t pcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
+        //load the mp3 from asset OTA into memory
+        uint8_t* mp3Data = NULL;
+        uint32_t mp3Size = 0;
 
-        //log we init the decoder
-        Log.info("MP3Player::internalPlaySong(%s) init decoder", filename.c_str());
-
-        int mp3len = 0;
-        int samples = 0;
-
-        do
+        if( readMP3File( filename, &mp3Data, &mp3Size ) )
         {
-            samples = mp3dec_decode_frame(&mp3d, mp3Data + mp3len, mp3Size - mp3len, pcm, &info);
-            if (samples > 0)
+            static mp3dec_t mp3d;
+            mp3dec_init(&mp3d);
+
+            mp3dec_frame_info_t info;
+            static mp3d_sample_t pcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
+
+            //log we init the decoder
+            Log.info("MP3Player::internalPlaySong(%s) init decoder", filename.c_str());
+
+            int mp3len = 0;
+            int samples = 0;
+
+            do
             {
-                //log we are playing
-                //Log.info("MP3Player::internalPlaySong(%s) playing %d samples", filename.c_str(), samples);
+                samples = mp3dec_decode_frame(&mp3d, mp3Data + mp3len, mp3Size - mp3len, pcm, &info);
+                if (samples > 0)
+                {
+                    //log we are playing
+                    //Log.info("MP3Player::internalPlaySong(%s) playing %d samples", filename.c_str(), samples);
 
-                audioPlayer_->playBuffer((const uint16_t *)pcm, samples);
-                mp3len += info.frame_bytes;
-            }
-        } while (samples > 0);
+                    audioPlayer_->playBuffer((const uint16_t *)pcm, samples);
+                    mp3len += info.frame_bytes;
+                }
+            } while (samples > 0);
 
-        //log that we finished
-        Log.info("MP3Player::internalPlaySong(%s) finished", filename.c_str());
+            //log that we finished
+            Log.info("MP3Player::internalPlaySong(%s) finished", filename.c_str());
 
-        //free the mp3 data
-        free(mp3Data);
+            //free the mp3 data
+            free(mp3Data);
+        }
+        else
+        {
+            Log.error("MP3Player::internalPlaySong(%s) failed to read mp3 file", filename.c_str());
+        }
+
+        //terminate the audio output
+        audioPlayer_->releaseLock();
     }
     else
     {
-        Log.error("MP3Player::internalPlaySong(%s) failed to read mp3 file", filename.c_str());
+        Log.error("MP3Player::internalPlaySong(%s) failed to aquire audio lock", filename.c_str());
     }
-
-    //terminate the audio output
-    audioPlayer_->releaseLock();
-
 }
 
 

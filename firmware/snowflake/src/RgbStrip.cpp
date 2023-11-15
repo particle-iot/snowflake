@@ -22,6 +22,19 @@ const uint32_t green_highlight = LEDEffect::MakeColor(0, 196, 0);
 
 const uint32_t black_base = LEDEffect::MakeColor(0, 0, 0);
 
+//Shared pixel providers
+InnerCirclePixelProvider innerCirclePixelProvider = InnerCirclePixelProvider();
+AllPixelsProvider allPixelsProvider = AllPixelsProvider();
+EveryNPixelProvider everyNPixelProvider = EveryNPixelProvider( 3, 1 );
+EveryNPixelProvider everyNPixelProviderOffset1 = EveryNPixelProvider( 3, 2 );
+EveryNPixelProvider everyNPixelProviderOffset2 = EveryNPixelProvider( 3, 3 );
+PetalPixelProvider petalPixelProvider = PetalPixelProvider( true, false, 2500 );
+
+//Shared colour providers
+RainbowColorProvider rainbowColorProvider = RainbowColorProvider();
+SparkleColorProvider sparkleColorProvider = SparkleColorProvider( LEDEffect::MakeColor(255, 255, 255), 14, 1800, 10000 );
+SparkleColorProvider sparkleColorProviderBlue = SparkleColorProvider( hanukkah_blue, 14, 1800, 10000 );
+
 
 RgbStrip::RgbStrip() 
 : mode_(MODES_T::MODE_OFF) {
@@ -29,18 +42,9 @@ RgbStrip::RgbStrip()
 
     thread_ = new Thread("rgbThread", [this]()->os_thread_return_t{
 
-        //Shared pixel providers
-        InnerCirclePixelProvider innerCirclePixelProvider = InnerCirclePixelProvider();
-        AllPixelsProvider allPixelsProvider = AllPixelsProvider();
-        EveryNPixelProvider everyNPixelProvider = EveryNPixelProvider( 3, 1 );
-        EveryNPixelProvider everyNPixelProviderOffset1 = EveryNPixelProvider( 3, 2 );
-        EveryNPixelProvider everyNPixelProviderOffset2 = EveryNPixelProvider( 3, 3 );
-        PetalPixelProvider petalPixelProvider = PetalPixelProvider( true, false, 2500 );
-
-        //Shared colour providers
-        RainbowColorProvider rainbowColorProvider = RainbowColorProvider();
-        SparkleColorProvider sparkleColorProvider = SparkleColorProvider( LEDEffect::MakeColor(255, 255, 255), 14, 1800, 10000 );
-        SparkleColorProvider sparkleColorProviderBlue = SparkleColorProvider( hanukkah_blue, 14, 1800, 10000 );
+        //Composed effects.
+        // These are layered on top of each other in the order they are defined.
+        // The first effect is the bottom layer, the last effect is the top layer.
 
         //MODE - MODE_SNOWFLAKE
             FixedColorProvider fixedColorProviderWhite = FixedColorProvider( snowflake_white );
@@ -134,7 +138,7 @@ RgbStrip::RgbStrip()
                 break;
 
                 default:
-                    break;
+                break;
             }
 
             //copy the results to the strip
@@ -149,7 +153,7 @@ RgbStrip::RgbStrip()
             //if the last frametime is over 10 seconds, calculate the FPS since
             if( (timeNow - lastFrameTime) > 10000 )
             {
-                LOG(INFO, "FPS: %d", frameCount / 10);
+                LOG(INFO, "FPS: %d, free mem: %d", frameCount / 10, System.freeMemory());
 
                 frameCount = 0;
                 lastFrameTime = timeNow;

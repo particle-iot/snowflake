@@ -8,6 +8,8 @@ void Settings::init( void ) {
 
     int fd = open("/settings.txt", O_RDWR);
 
+    bool fileExistsButIsBad = false;
+
     if (fd != -1)
     {
         Log.info("Opened settings file");
@@ -23,6 +25,8 @@ void Settings::init( void ) {
 
             if (len == -1)
             {
+                fileExistsButIsBad = true;
+
                 //error
                 break;
             }
@@ -51,6 +55,17 @@ void Settings::init( void ) {
                         //add to the vector of settings
                         settings_.push_back(std::make_pair(key, value));
                     }
+                    else
+                    {
+                        Log.info("Failed to read: value");
+                        fileExistsButIsBad = true;
+                    }
+                    
+                }
+                else
+                {
+                    Log.info("Failed to read: key");
+                    fileExistsButIsBad = true;
                 }
             }
         }
@@ -65,6 +80,14 @@ void Settings::init( void ) {
 
         //add in the defaults
         settings_.push_back(std::make_pair("ledMode", "1"));
+    }
+
+    //if the file exists but is bad, delete it
+    if (fileExistsButIsBad)
+    {
+        Log.info("Deleting bad settings file");
+
+        unlink("/settings.txt");
     }
 }
 
@@ -121,7 +144,12 @@ void Settings::store( void ) {
         {
             //write out the setting
             String line = setting.first + ":" + setting.second + "\n";
-            write(fd, line.c_str(), line.length());
+            int dataWritten = write(fd, line.c_str(), line.length());
+
+            if( dataWritten != line.length() )
+            {
+                Log.info("Failed to write setting %s", line.c_str());
+            }
 
             Log.info("Storing setting %s", line.c_str());
         }
@@ -133,5 +161,4 @@ void Settings::store( void ) {
     {
         Log.info("Failed to open settings file");
     }
-    
 }
