@@ -38,6 +38,9 @@ RainbowColorProvider rainbowColorProvider = RainbowColorProvider();
 SparkleColorProvider sparkleColorProvider = SparkleColorProvider( LEDEffect::MakeColor(255, 255, 255), 14, 1800, 10000 );
 SparkleColorProvider sparkleColorProviderBlue = SparkleColorProvider( hanukkah_blue, 14, 1800, 10000 );
 
+FixedColorProvider fixedColorProviderBlue = FixedColorProvider( hanukkah_blue );
+GlowColorProvider glowColorProviderBlue = GlowColorProvider( hanukkah_blue, hanukkah_blue_highlight, 2500 );
+
 
 RgbStrip::RgbStrip() 
 : mode_(MODES_T::MODE_OFF) {
@@ -55,15 +58,13 @@ RgbStrip::RgbStrip()
 
             LEDEffectPixelAndColor snowFlakeEffects[] = {
                 LEDEffectPixelAndColor( everyNPixelProvider, fixedColorProviderWhite ),
-                LEDEffectPixelAndColor( everyNPixelProviderOffset1, sparkleColorProviderBlue ),
+                LEDEffectPixelAndColor( everyNPixelProviderOffset1, fixedColorProviderBlue ),
                 LEDEffectPixelAndColor( everyNPixelProviderOffset2, rainbowColorProvider ),
                 //LEDEffectPixelAndColor( allPixelsProvider, sparkleColorProvider ),
                 //LEDEffectPixelAndColor( petalPixelProvider, glowColorProviderWhite ),
             };
 
         //MODE - MODE_HANUKKAH
-            FixedColorProvider fixedColorProviderBlue = FixedColorProvider( hanukkah_blue );
-            GlowColorProvider glowColorProviderBlue = GlowColorProvider( hanukkah_blue, hanukkah_blue_highlight, 2500 );
 
             LEDEffectPixelAndColor hanukkaEffects[] = {
                 LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderBlue ),

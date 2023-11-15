@@ -12,11 +12,13 @@
 #define FIXED_AUDIO_TONE
 #define FIXED_MP3_PLAYBACK
 
+#define WELCOME_VOICE "voice_welcome.mp3"
+
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3/minimp3.h"
 
-//Firmware version 101
-PRODUCT_VERSION(101);
+//Firmware version 102
+PRODUCT_VERSION(102);
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
@@ -88,8 +90,12 @@ void setup()
     for (auto& asset: assets)
     {
         if (asset.name().endsWith(".mp3"))
-        {
-            songs.push_back(asset.name());
+        {  
+            //don't add WELCOME_VOICE
+            if( asset.name() != WELCOME_VOICE ) {
+                songs.push_back(asset.name());
+                //Log.info("Found song: %s", asset.name().c_str());
+            }
         }
     }
 
@@ -108,7 +114,10 @@ void setup()
           case RESET_REASON_USER:
           case RESET_REASON_POWER_DOWN:
               //play a two-tone beep boop when booting up only from a cold power on or USB reset
-              tonePlayer.play( TonePlayer::TONE_SEQUENCE_BOOT );
+              //tonePlayer.play( TonePlayer::TONE_SEQUENCE_BOOT );
+
+              //play the welcome mp3
+              mp3Player.play(WELCOME_VOICE, 100);
           break;
       }
   #endif

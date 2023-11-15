@@ -175,7 +175,7 @@ void TonePlayer::doTone( const uint32_t freq, const uint32_t duractionInMS ) {
   
     const uint16_t samplesPerBucket = 512;
     const uint16_t sampleRate = 16000;
-    const uint16_t maxVolume = (32767 / 100) * 70; //70% of max volume
+    const uint16_t maxVolume = (32767 / 100) * 40; //70% of max volume
 
     //calculate how many samples in total are needed for the duraction in ms we want to play for
     const uint32_t totalSamples = (sampleRate * duractionInMS) / 1000;

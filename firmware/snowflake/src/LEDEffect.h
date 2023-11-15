@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Particle.h"
 #include <stdint.h>
 #include <memory>
 #include <string.h>
@@ -74,6 +75,12 @@ public:
         } else {
             wheelPos -= 170;
             return LEDEffect::MakeColor(0, wheelPos * 3, 255 - wheelPos * 3);
+        }
+    }
+
+    static void writePixelBoundsCheck( const uint8_t bufSize, const uint8_t offset ) {
+        if( offset >= bufSize ) {
+            Log.info("writePixelBoundsCheck: offset %d is out of bounds for bufSize %d", offset, bufSize);
         }
     }
 };
@@ -571,8 +578,6 @@ class SparkleColorProvider : public LEDColorProvider {
 
             //I hard coded this instead
             const uint8_t ledSequence[] = {28, 12, 21, 20, 19, 35, 23, 7, 10, 3, 17, 1, 18, 13, 6, 33, 15, 32, 0, 26, 11, 16, 27, 24, 34, 30, 9, 4, 14, 8, 5, 31, 25, 29, 22, 2};
-
-            // Initialize vector in a single line
             flashSequence_ = std::vector<uint8_t>(std::begin(ledSequence), std::end(ledSequence));
 
             //create 5 sparkle LEDS. Each LED number is from the spread flash sequence and the start time is randomized from now up to 10 seconds later

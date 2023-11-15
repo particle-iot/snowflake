@@ -8,7 +8,7 @@ class MP3Player
   public:
       MP3Player( AudioPlayer* audioPlayer );
 
-      void play( const String filename ) {
+      void play( const String filename, const uint8_t volume = 100 ) {
           String *filenamePtr = new String(filename);
           Log.info("MP3Player::play(%s)", filenamePtr->c_str());
 

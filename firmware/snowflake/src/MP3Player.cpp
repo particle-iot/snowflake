@@ -60,6 +60,13 @@ void MP3Player::internalPlaySong( const String filename )
                     //log we are playing
                     //Log.info("MP3Player::internalPlaySong(%s) playing %d samples", filename.c_str(), samples);
 
+                    //trim the volume to 70% of current volume 
+                    const float volume = 0.70;
+                    for( int i = 0; i < samples; i++ )
+                    {
+                        //pcm[i] = pcm[i] * volume;
+                    }
+
                     mp3len += info.frame_bytes;
 
                     memcpy(&pcmFrames[pcmFramesLength], pcm, samples*2);
@@ -69,6 +76,7 @@ void MP3Player::internalPlaySong( const String filename )
                         pcmFramesLength = 0;
                     }
                 }
+
             } while (samples > 0);
 
             //log that we finished

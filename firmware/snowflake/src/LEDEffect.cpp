@@ -179,6 +179,8 @@ std::unique_ptr<uint32_t[]> GlowColorProvider::getColours( const uint32_t number
 
 
 std::unique_ptr<uint32_t[]> SparkleColorProvider::getColours( const uint32_t numberPixels, const uint32_t timeInMS ) {
+
+    //return memory
     std::unique_ptr<uint32_t[]> colours( new uint32_t[numberPixels] );
 
     //for each sparkleLEDs_, lets calculate the colour based on the time
@@ -220,6 +222,8 @@ std::unique_ptr<uint32_t[]> SparkleColorProvider::getColours( const uint32_t num
                 }
 
                 //set the colour
+                LEDEffect::writePixelBoundsCheck(numberPixels, sparkleLED.led_ );
+                
                 colours[sparkleLED.led_] = LEDEffect::ScaleColor(color_, brightness);
             }
         }
