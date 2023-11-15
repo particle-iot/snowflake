@@ -20,14 +20,14 @@ MP3Player::MP3Player( AudioPlayer* audioPlayer )
                 delete songPtr;
             }
         }
-    }, OS_THREAD_PRIORITY_NETWORK_HIGH, OS_THREAD_STACK_SIZE_DEFAULT_NETWORK );   
+    }, OS_THREAD_PRIORITY_NETWORK_HIGH, OS_THREAD_STACK_SIZE_DEFAULT_NETWORK );
 }
 
 
 void MP3Player::internalPlaySong( const String filename )
 {
     Log.info("MP3Player::internalPlaySong(%s)", filename.c_str());
- 
+
     if( 0 == audioPlayer_->aquireLock() )
     {
         audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
@@ -43,6 +43,8 @@ void MP3Player::internalPlaySong( const String filename )
 
             mp3dec_frame_info_t info;
             static mp3d_sample_t pcm[MINIMP3_MAX_SAMPLES_PER_FRAME];
+            static mp3d_sample_t pcmFrames[MINIMP3_MAX_SAMPLES_PER_FRAME * 3]; // Max 3 frame (1152*2*2) in the worst case, but mp3 format that we used is usually 576 Bytes per frame
+            static int pcmFramesLength = 0;
 
             //log we init the decoder
             Log.info("MP3Player::internalPlaySong(%s) init decoder", filename.c_str());
@@ -58,8 +60,14 @@ void MP3Player::internalPlaySong( const String filename )
                     //log we are playing
                     //Log.info("MP3Player::internalPlaySong(%s) playing %d samples", filename.c_str(), samples);
 
-                    audioPlayer_->playBuffer((const uint16_t *)pcm, samples);
                     mp3len += info.frame_bytes;
+
+                    memcpy(&pcmFrames[pcmFramesLength], pcm, samples*2);
+                    pcmFramesLength += samples;
+                    if (pcmFramesLength > 576 * 3) { // 3 frames
+                        audioPlayer_->playBuffer((const uint16_t *)pcmFrames, pcmFramesLength*2);
+                        pcmFramesLength = 0;
+                    }
                 }
             } while (samples > 0);
 
