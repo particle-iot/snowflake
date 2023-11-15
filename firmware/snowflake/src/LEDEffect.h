@@ -611,7 +611,7 @@ class LEDSpecialEffectProvider {
 
 class BlurSpecialEffectProvider : public LEDSpecialEffectProvider {
     public:
-        BlurSpecialEffectProvider( void ) {
+        BlurSpecialEffectProvider( const uint8_t percentageChange ) : percentageChange_(percentageChange) {
 
         };
 
@@ -640,10 +640,10 @@ class BlurSpecialEffectProvider : public LEDSpecialEffectProvider {
                 uint8_t lastG = (lastLED >>  8) & 0xFF;
                 uint8_t lastB = (lastLED >>  0) & 0xFF;
 
-                //calculate the new R,G and B values
-                uint8_t newR = (inR + lastR) / 2;
-                uint8_t newG = (inG + lastG) / 2;
-                uint8_t newB = (inB + lastB) / 2;
+                //calculate the new R,G and B values based on the percentage change
+                uint8_t newR = (inR * percentageChange_) / 100 + (lastR * (100 - percentageChange_)) / 100;
+                uint8_t newG = (inG * percentageChange_) / 100 + (lastG * (100 - percentageChange_)) / 100;
+                uint8_t newB = (inB * percentageChange_) / 100 + (lastB * (100 - percentageChange_)) / 100;
 
                 //set the new LED
                 lastLEDs_[i] = LEDEffect::MakeColor(newR, newG, newB);
@@ -653,9 +653,15 @@ class BlurSpecialEffectProvider : public LEDSpecialEffectProvider {
         }
 
     private:
+        uint8_t percentageChange_;
         uint32_t lastLEDs_[36];
 };
 
+
+                // //calculate the new R,G and B values
+                // uint8_t newR = (inR + lastR) / 2;
+                // uint8_t newG = (inG + lastG) / 2;
+                // uint8_t newB = (inB + lastB) / 2;
 
 
 
