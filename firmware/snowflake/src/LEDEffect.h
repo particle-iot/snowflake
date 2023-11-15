@@ -600,6 +600,65 @@ class SparkleColorProvider : public LEDColorProvider {
 };
 
 
+
+/// Special Effect Colour Provider ///
+
+class LEDSpecialEffectProvider {
+    public:
+        virtual std::unique_ptr<uint32_t[]> modifyColours( uint32_t *leds, const uint32_t ledCount, const uint32_t timeInMS );
+};
+
+
+class BlurSpecialEffectProvider : public LEDSpecialEffectProvider {
+    public:
+        BlurSpecialEffectProvider( void ) {
+
+        };
+
+        std::unique_ptr<uint32_t[]> modifyColours( uint32_t *leds, const uint32_t ledCount, const uint32_t timeInMS ) {
+
+            //every time we get the colours, in, we look at the lastLEDs_ and we move the LED colour towards the target LED colour by 25% on a per R,G and B basis
+            //we then return the new colour
+
+            //we can modify in-place the leds and then copy over to the last leds and return a copy of them
+
+            //iterate over all the input LED array and process
+            for( uint8_t i = 0; i < ledCount; i++ ) {
+                //get the input LED
+                uint32_t inLED = leds[i];
+
+                //get the last LED
+                uint32_t lastLED = lastLEDs_[i];
+
+                //get the R,G and B values for the input LED
+                uint8_t inR = (inLED >> 16) & 0xFF;
+                uint8_t inG = (inLED >>  8) & 0xFF;
+                uint8_t inB = (inLED >>  0) & 0xFF;
+
+                //get the R,G and B values for the last LED
+                uint8_t lastR = (lastLED >> 16) & 0xFF;
+                uint8_t lastG = (lastLED >>  8) & 0xFF;
+                uint8_t lastB = (lastLED >>  0) & 0xFF;
+
+                //calculate the new R,G and B values
+                uint8_t newR = (inR + lastR) / 2;
+                uint8_t newG = (inG + lastG) / 2;
+                uint8_t newB = (inB + lastB) / 2;
+
+                //set the new LED
+                lastLEDs_[i] = LEDEffect::MakeColor(newR, newG, newB);
+            }
+
+            return std::unique_ptr<uint32_t[]>(lastLEDs_);
+        }
+
+    private:
+        uint32_t lastLEDs_[36];
+};
+
+
+
+
 /// LED effect implementations ///
 
 class LEDEffectPixelAndColor : LEDEffect {
@@ -612,4 +671,16 @@ class LEDEffectPixelAndColor : LEDEffect {
   private:
     LEDPixelProvider &pixelProvider_;
     LEDColorProvider &colorProvider_;
+};
+
+
+class LEDSpecialEffect : LEDEffect {
+  public:
+    LEDSpecialEffect( LEDSpecialEffectProvider &specialEffectProvider )
+      : specialEffectProvider_(specialEffectProvider) {};
+
+    void process( uint32_t *leds, const uint32_t ledCount, const uint32_t time );
+
+  private:
+    LEDSpecialEffectProvider &specialEffectProvider_;
 };

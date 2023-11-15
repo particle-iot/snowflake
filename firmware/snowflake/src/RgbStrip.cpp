@@ -75,20 +75,24 @@ RgbStrip::RgbStrip()
                 LEDEffectPixelAndColor( allPixelsProvider, sparkleColorProvider )
             };
 
-        //MODE - MODE_CHASE_RED
+        //MODE - MODE_CHASE_HOLIDAY
             FixedColorProvider fixedColorProviderChase = FixedColorProvider( green_base );
             GlowColorProvider glowColorProviderChase = GlowColorProvider( green_base, green_highlight, 2500 );
             ChaseColorProvider chaseColorProvider = ChaseColorProvider( snowflake_white_highlight, 3, 0, true );
             ChaseColorProvider chaseColorProvider2 = ChaseColorProvider( chase_red_highlight, 8, 0, false );
             ChaseColorProvider chaseColorProvider3 = ChaseColorProvider( chase_red_highlight, 8, 36/2, false );
 
+            BlurSpecialEffectProvider blurSpecialEffectProvider = BlurSpecialEffectProvider();
+
             LEDEffectPixelAndColor chaseRedEffects[] = {
                 LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderChase ),
                 LEDEffectPixelAndColor( petalPixelProvider, glowColorProviderChase ),
                 LEDEffectPixelAndColor( innerCirclePixelProvider, chaseColorProvider ),
                 LEDEffectPixelAndColor( allPixelsProvider, chaseColorProvider2 ),
-                LEDEffectPixelAndColor( allPixelsProvider, chaseColorProvider3 ),
+                LEDEffectPixelAndColor( allPixelsProvider, chaseColorProvider3 )
             };
+
+            LEDSpecialEffect blurEffect = LEDSpecialEffect( blurSpecialEffectProvider );
 
         //MODE - MODE_CIRCLES_ROTATE
             ChaseColorProvider chaseColorProviderCircles1 = ChaseColorProvider( snowflake_white, 3, 0, true );
@@ -124,6 +128,8 @@ RgbStrip::RgbStrip()
                     {
                         snowFlakeEffects[i].process( leds, 36, timeNow );
                     }
+
+                    blurEffect.process( leds, 36, timeNow );
                 break;
 
                 case MODE_HANUKKAH:
@@ -148,6 +154,8 @@ RgbStrip::RgbStrip()
                     {
                         chaseRedEffects[i].process( leds, 36, timeNow );
                     }
+
+                    blurEffect.process( leds, 36, timeNow );
                 break;
 
                 case MODE_CIRCLES_ROTATE:
@@ -156,6 +164,8 @@ RgbStrip::RgbStrip()
                     {
                         circlesRotateEffects[i].process( leds, 36, timeNow );
                     }
+
+                    blurEffect.process( leds, 36, timeNow );
                 break;
 
                 default:

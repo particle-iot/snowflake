@@ -248,3 +248,15 @@ void LEDEffectPixelAndColor::process( uint32_t *leds, const uint32_t ledCount, c
         }
     }
 };
+
+
+void LEDSpecialEffect::process( uint32_t *leds, const uint32_t ledCount, const uint32_t timeInMS )
+{
+    //process the input pixels and update the leds
+    std::unique_ptr<uint32_t[]> effectLEDs = specialEffectProvider_.modifyColours( leds, ledCount, timeInMS );
+
+    for (uint16_t i = 0; i < ledCount; i++ )
+    {
+        leds[i] = effectLEDs[i];
+    }
+};
