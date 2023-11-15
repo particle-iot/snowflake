@@ -28,7 +28,8 @@ AllPixelsProvider allPixelsProvider = AllPixelsProvider();
 EveryNPixelProvider everyNPixelProvider = EveryNPixelProvider( 3, 1 );
 EveryNPixelProvider everyNPixelProviderOffset1 = EveryNPixelProvider( 3, 2 );
 EveryNPixelProvider everyNPixelProviderOffset2 = EveryNPixelProvider( 3, 3 );
-PetalPixelProvider petalPixelProvider = PetalPixelProvider( true, false, 2500 );
+PetalPixelProvider petalPixelProvider = PetalPixelProvider( PetalPixelProvider::PETAL_STEM, PetalPixelProvider::PETAL_MOVEMENT_ROTATE, 2500 );
+OuterCirclePixelProvider outerCirclePixelProvider = OuterCirclePixelProvider();
 
 //Shared colour providers
 RainbowColorProvider rainbowColorProvider = RainbowColorProvider();
@@ -89,6 +90,18 @@ RgbStrip::RgbStrip()
                 LEDEffectPixelAndColor( allPixelsProvider, chaseColorProvider3 ),
             };
 
+        //MODE - MODE_CIRCLES_ROTATE
+            ChaseColorProvider chaseColorProviderCircles1 = ChaseColorProvider( snowflake_white, 3, 0, true );
+            ChaseColorProvider chaseColorProviderCircles2 = ChaseColorProvider( snowflake_white, 8, 0, false );
+            PetalPixelProvider petalPixelProviderTips = PetalPixelProvider( PetalPixelProvider::PETAL_JUST_TIP, PetalPixelProvider::PETAL_MOVEMENT_ALL_ON, 0 );
+            GlowColorProvider glowColorProviderWhiteCircles = GlowColorProvider( hanukkah_blue, hanukkah_blue_highlight, 5000 );
+
+            LEDEffectPixelAndColor circlesRotateEffects[] = {
+                LEDEffectPixelAndColor( innerCirclePixelProvider, chaseColorProviderCircles1 ),
+                LEDEffectPixelAndColor( outerCirclePixelProvider, chaseColorProviderCircles2 ),
+                LEDEffectPixelAndColor( petalPixelProviderTips, glowColorProviderWhiteCircles ),
+            };
+
         //calculate the framerate
         uint32_t frameCount = 0;
         uint32_t lastFrameTime = millis();
@@ -129,11 +142,19 @@ RgbStrip::RgbStrip()
                     }
                 break;
 
-                case MODE_CHASE_RED:
+                case MODE_CHASE_HOLIDAY:
                     //process all of the effects in snowFlakeEffects 1 at a time
                     for (size_t i = 0; i < (sizeof(chaseRedEffects) / sizeof(LEDEffectPixelAndColor)); i++)
                     {
                         chaseRedEffects[i].process( leds, 36, timeNow );
+                    }
+                break;
+
+                case MODE_CIRCLES_ROTATE:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(circlesRotateEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        circlesRotateEffects[i].process( leds, 36, timeNow );
                     }
                 break;
 

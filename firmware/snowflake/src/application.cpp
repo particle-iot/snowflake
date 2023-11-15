@@ -8,7 +8,7 @@
 #include "MP3Player.h"
 #include "TonePlayer.h"
 
-//#define DEBUG
+//#define DEBUG_STARTUP_DELAY
 #define FIXED_AUDIO_TONE
 #define FIXED_MP3_PLAYBACK
 
@@ -56,7 +56,7 @@ uint32_t songIndex = 0;
 void setup()
 {
     // //wait for usb  to connect
-    #ifdef DEBUG
+    #ifdef DEBUG_STARTUP_DELAY
         waitFor(Serial.isConnected, 10000);
 
        delay(10000);

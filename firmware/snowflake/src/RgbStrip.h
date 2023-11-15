@@ -20,7 +20,8 @@ public:
         MODE_SNOWFLAKE,
         MODE_HANUKKAH,
         MODE_RAINBOW,
-        MODE_CHASE_RED,
+        MODE_CHASE_HOLIDAY,
+        MODE_CIRCLES_ROTATE,
 
         MODE_MAX
     };
