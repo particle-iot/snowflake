@@ -22,6 +22,7 @@ public:
         MODE_RAINBOW,
         MODE_CHASE_HOLIDAY,
         MODE_CIRCLES_ROTATE,
+        MODE_WAVE_SPINNER,
 
         MODE_MAX
     };

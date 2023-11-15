@@ -27,7 +27,7 @@ SYSTEM_THREAD(ENABLED);
 //enable the reset reason feature
 STARTUP(System.enableFeature(FEATURE_RESET_INFO));
 
-SerialLogHandler logHandler(LOG_LEVEL_INFO);
+SerialLogHandler logHandler(LOG_LEVEL_ERROR);
 
 //The particle logo on the front is a button - this is the controller for it
 static constexpr int TOUCH_PIN = D10;

@@ -136,30 +136,36 @@ class OuterCirclePixelProvider : public LEDPixelProvider {
 
 
 //this simulates a clock hand going around the snowflake
-class ClockHandPixelProvider : public LEDPixelProvider {
+class WavePixelProvider : public LEDPixelProvider {
     public:
 
-        typedef struct
-        {
-            uint8_t ledCount;
-            uint8_t leds[];
-        } HAND_POSITION_T;
+        WavePixelProvider( const uint8_t offset ) : offset_(offset) {};
 
         std::unique_ptr<uint8_t[]> getPixels( const uint32_t timeInMS, uint8_t &pixelCount ) {
 
-            // const HAND_POSITION_T handPosition[] = {
-            //     { 4, { 0, 2, 3 } }
-            // };
+            //we provide a different petal every 3 seconds
+            const uint8_t waveIndex = 5 - (((timeInMS / 750) + offset_) % 6);
 
-            //get the circle LEDS and return them. there are 12 in total
-            const uint8_t circleLEDs[] = { 1, 2, 4, 7, 8, 10, 13, 14, 16, 19, 20, 22, 25, 26, 28, 31, 32, 34 };
+            //there are 6 waves in total
+            const uint8_t wave1[] = { 6, 5, 4, 3 };
+            const uint8_t wave2[] = { 12, 11, 10, 9 };
+            const uint8_t wave3[] = { 18, 17, 16, 15 };
+            const uint8_t wave4[] = { 24, 23, 22, 21 };
+            const uint8_t wave5[] = { 30, 29, 28, 27 };
+            const uint8_t wave6[] = { 0, 35, 34, 33, 32 };
 
-            uint8_t* circleLEDsMem = new uint8_t[sizeof(circleLEDs)];
-            memcpy(circleLEDsMem, circleLEDs, sizeof(circleLEDs));
+            //get the petal we want
+            const uint8_t *waveArrays[6] = { wave1, wave2, wave3, wave4, wave5, wave6 };
 
-            pixelCount = sizeof(circleLEDs);
-            return std::unique_ptr<uint8_t[]>(circleLEDsMem);
+            uint8_t* waveLEDMem = new uint8_t[sizeof(wave1)];
+            memcpy(waveLEDMem, waveArrays[waveIndex], sizeof(wave1));
+
+            pixelCount = sizeof(wave1);
+            return std::unique_ptr<uint8_t[]>(waveLEDMem);
         }
+
+    private:
+        uint8_t offset_;
 };
 
 

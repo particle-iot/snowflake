@@ -11,6 +11,8 @@
 const uint32_t hanukkah_blue = LEDEffect::MakeColor(0, 0, 32);
 const uint32_t hanukkah_blue_highlight = LEDEffect::MakeColor(3, 3, 105);
 
+const uint32_t purple = LEDEffect::MakeColor(0xCC, 0x0, 0xCC);
+
 const uint32_t snowflake_white = LEDEffect::ScaleColor( LEDEffect::MakeColor(192, 205, 207), 40 );
 const uint32_t snowflake_white_highlight = LEDEffect::MakeColor(230, 230, 230);
 
@@ -94,21 +96,44 @@ RgbStrip::RgbStrip()
             ChaseColorProvider chaseColorProviderCircles1 = ChaseColorProvider( snowflake_white, 3, 0, true );
             ChaseColorProvider chaseColorProviderCircles2 = ChaseColorProvider( snowflake_white, 8, 0, false );
             PetalPixelProvider petalPixelProviderTips = PetalPixelProvider( PetalPixelProvider::PETAL_JUST_TIP, PetalPixelProvider::PETAL_MOVEMENT_ALL_ON, 0 );
-            GlowColorProvider glowColorProviderWhiteCircles = GlowColorProvider( hanukkah_blue, hanukkah_blue_highlight, 5000 );
+            GlowColorProvider glowColorProviderWhiteCircles = GlowColorProvider( snowflake_white, snowflake_white_highlight, 5000 );
+            FixedColorProvider fixedColorProviderPurple = FixedColorProvider( purple );
 
             LEDEffectPixelAndColor circlesRotateEffects[] = {
+                LEDEffectPixelAndColor( allPixelsProvider, fixedColorProviderPurple ),
                 LEDEffectPixelAndColor( innerCirclePixelProvider, chaseColorProviderCircles1 ),
                 LEDEffectPixelAndColor( outerCirclePixelProvider, chaseColorProviderCircles2 ),
                 LEDEffectPixelAndColor( petalPixelProviderTips, glowColorProviderWhiteCircles ),
             };
 
-        //Global effect providers
+        //MODE - MODE_WAVE_SPINNER
+            WavePixelProvider wavePixelProvider0 = WavePixelProvider(0);
+            WavePixelProvider wavePixelProvider1 = WavePixelProvider(1);
+            WavePixelProvider wavePixelProvider2 = WavePixelProvider(2);
+            WavePixelProvider wavePixelProvider3 = WavePixelProvider(3);
+            WavePixelProvider wavePixelProvider4 = WavePixelProvider(4);
+            WavePixelProvider wavePixelProvider5 = WavePixelProvider(5);
+
+            FixedColorProvider fixedColorProviderRed = FixedColorProvider( chase_red_highlight );
+
+            LEDEffectPixelAndColor waveSpinnerEffects[] = {
+                LEDEffectPixelAndColor( wavePixelProvider0, fixedColorProviderChase ),
+                LEDEffectPixelAndColor( wavePixelProvider1, fixedColorProviderWhite ),
+                LEDEffectPixelAndColor( wavePixelProvider2, fixedColorProviderRed ),
+                LEDEffectPixelAndColor( wavePixelProvider3, fixedColorProviderChase ),
+                LEDEffectPixelAndColor( wavePixelProvider4, fixedColorProviderWhite ),
+                LEDEffectPixelAndColor( wavePixelProvider5, fixedColorProviderRed )
+            };
+
+        //Global effect providers  
         BlurSpecialEffectProvider blurSpecialEffectProvider = BlurSpecialEffectProvider( 25 );
         LEDSpecialEffect blurEffectNormal = LEDSpecialEffect( blurSpecialEffectProvider );
 
         BlurSpecialEffectProvider blurSpecialEffectProviderSlow = BlurSpecialEffectProvider( 6 );
         LEDSpecialEffect blurEffectSlow = LEDSpecialEffect( blurSpecialEffectProviderSlow );
 
+        BlurSpecialEffectProvider blurSpecialEffectProviderFast = BlurSpecialEffectProvider( 35 );
+        LEDSpecialEffect blurEffectFast = LEDSpecialEffect( blurSpecialEffectProviderFast );
 
         //calculate the framerate
         uint32_t frameCount = 0;
@@ -170,6 +195,16 @@ RgbStrip::RgbStrip()
                     }
 
                     blurEffectNormal.process( leds, 36, timeNow );
+                break;
+
+                case MODE_WAVE_SPINNER:
+                    //process all of the effects in snowFlakeEffects 1 at a time
+                    for (size_t i = 0; i < (sizeof(waveSpinnerEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        waveSpinnerEffects[i].process( leds, 36, timeNow );
+                    }
+
+                    blurEffectFast.process( leds, 36, timeNow );
                 break;
 
                 default:
