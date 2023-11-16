@@ -17,8 +17,8 @@
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3/minimp3.h"
 
-//Firmware version 102
-PRODUCT_VERSION(102);
+//Firmware version 1.0.4
+PRODUCT_VERSION(104);
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
