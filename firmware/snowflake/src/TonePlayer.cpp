@@ -175,7 +175,7 @@ void TonePlayer::doTone( const uint32_t freq, const uint32_t duractionInMS ) {
   
     const uint16_t samplesPerBucket = 512;
     const uint16_t sampleRate = 16000;
-    const uint16_t maxVolume = (32767 / 100) * 40; //70% of max volume
+    const uint16_t maxVolume = (32767 / 100) * 30; //70% of max volume
 
     //calculate how many samples in total are needed for the duraction in ms we want to play for
     const uint32_t totalSamples = (sampleRate * duractionInMS) / 1000;
@@ -197,24 +197,19 @@ void TonePlayer::doTone( const uint32_t freq, const uint32_t duractionInMS ) {
             //calculate the sample value
             const float sampleValue = sin(2 * M_PI * freq * (samplesWritten + i) / sampleRate);
 
-            //if we are in the last 24 samples, fade them to zero
-            //if we are in the first 24 samples, fade them from zero
-            //else play at max volume
-            if (i < 24)
-            {
-                //fade from zero
-                bucket[i] = (int16_t)(sampleValue * maxVolume * (i / 24.0f));
-            }
-            else if (i > (bucketSize - 24))
-            {
-                //fade to zero
-                bucket[i] = (int16_t)(sampleValue * maxVolume * ((bucketSize - i) / 24.0f));
-            }
-            else
-            {
-                //convert the sample value to a 16bit signed int
-                bucket[i] = (int16_t)(sampleValue * maxVolume);
-            }
+            //convert the sample value to a 16bit signed int
+            bucket[i] = (int16_t)(sampleValue * maxVolume);
+        }
+
+        //print out the first 24 samples and the last 24 samples
+        for (uint16_t i = 0; i < 24; i++)
+        {
+            //Log.info("sample %d: %d", i, bucket[i]);
+        }
+
+        for (uint16_t i = bucketSize - 24; i < bucketSize; i++)
+        {
+            //Log.info("sample %d: %d", i, bucket[i]);
         }
 
         //write the bucket to the audio output
