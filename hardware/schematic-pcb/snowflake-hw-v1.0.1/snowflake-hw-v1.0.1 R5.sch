@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.2.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="12" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="13" fill="3" visible="no" active="no"/>
@@ -20906,7 +20906,7 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="C8" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="CAP_" device="0603" package3d_urn="urn:adsk.eagle:package:10700446/3" technology="10UF_16V_" value="10uF, 16V"/>
 <part name="R6" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="RES_" device="0603" package3d_urn="urn:adsk.eagle:package:10700443/4" technology="10K_" value="10K"/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="CONN1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="CONN5X2" device="" package3d_urn="urn:adsk.eagle:package:10568497/4"/>
+<part name="CONN1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="CONN5X2" device="" package3d_urn="urn:adsk.eagle:package:10568497/4" value="CONN5X2 nc"/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="TP8" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="TP-1.5MM" device=""/>
@@ -20973,7 +20973,7 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND37" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND38" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C21" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="CPOL-US" device="C" package3d_urn="urn:adsk.eagle:package:23422/2" value="100uF, 6.3V"/>
+<part name="C21" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="CPOL-US" device="C" package3d_urn="urn:adsk.eagle:package:23422/2" value="NC"/>
 <part name="GND39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="+3V8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND40" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -21135,7 +21135,7 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="GND107" library="RedBear DUO" deviceset="GND" device=""/>
 <part name="P+42" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="C57" library="particle SZ" deviceset="CAP" device="0402" value="1000pF"/>
-<part name="D3" library="particle SZ" deviceset="ESD" device="" value="LXES15AAA1-133"/>
+<part name="D3" library="particle SZ" deviceset="ESD" device="" value="LXES15AAA1-153"/>
 <part name="GND108" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="VO-" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" deviceset="TP" device="1.0X1.5" package3d_urn="urn:adsk.eagle:package:23282622/2"/>
 <part name="VO+" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" deviceset="TP" device="1.0X1.5" package3d_urn="urn:adsk.eagle:package:23282622/2"/>
@@ -21150,8 +21150,8 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="P+11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="C50" library="particle SZ" deviceset="CAP" device="C0603" value="0.1uF"/>
 <part name="C51" library="particle SZ" deviceset="CAP" device="0603A" value="10uF"/>
-<part name="C52" library="particle SZ" deviceset="CAP" device="0402A" value="2.2uF"/>
-<part name="C58" library="particle SZ" deviceset="CAP" device="0402A" value="2.2uF"/>
+<part name="C52" library="particle SZ" deviceset="CAP" device="0402A" value="33nF"/>
+<part name="C58" library="particle SZ" deviceset="CAP" device="0402A" value="33nF"/>
 <part name="GND99" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C59" library="particle SZ" deviceset="CAP" device="0402" value="0.22uF"/>
 <part name="R66" library="particle SZ" deviceset="RES" device="0402S" value="1K"/>
@@ -21164,15 +21164,15 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="R20" library="particle SZ" deviceset="RES" device="0402S" value="10K"/>
 <part name="R21" library="particle SZ" deviceset="RES" device="0402S" value="10K"/>
 <part name="C60" library="particle SZ" deviceset="CAP" device="0402" value="0.1uF"/>
-<part name="C61" library="particle SZ" deviceset="CAP" device="0402" value="1000F"/>
+<part name="C61" library="particle SZ" deviceset="CAP" device="0402" value="1000pF"/>
 <part name="C62" library="particle SZ" deviceset="CAP" device="0603A" value="0.1uF"/>
 <part name="GND100" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C63" library="particle SZ" deviceset="CAP" device="0402" value="1000pF"/>
-<part name="D4" library="particle SZ" deviceset="ESD" device="" value="nc"/>
-<part name="D5" library="particle SZ" deviceset="ESD" device="" value="nc"/>
+<part name="D4" library="particle SZ" deviceset="ESD" device="" value="LXES15AAA1-153"/>
+<part name="D5" library="particle SZ" deviceset="ESD" device="" value="LXES15AAA1-153"/>
 <part name="GND101" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="U$1" library="particle SZ" deviceset="SEPAKER" device=""/>
-<part name="R41" library="particle SZ" deviceset="RES" device="R0603A" value="NCP18WF104F12RB"/>
+<part name="U$1" library="particle SZ" deviceset="SEPAKER" device="" value="NC"/>
+<part name="R41" library="particle SZ" deviceset="RES" device="R0603A" value="ERTJ1VR104FM"/>
 <part name="R22" library="particle SZ" deviceset="RES" device="0402S" value="100K"/>
 <part name="+3V9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND112" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -21186,7 +21186,7 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="R24" library="particle SZ" deviceset="RES" device="0402S" value="0R"/>
 <part name="C66" library="particle SZ" deviceset="CAP" device="0402" value="33P"/>
 <part name="GND111" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R25" library="particle SZ" deviceset="RES" device="0402S" value="10k"/>
+<part name="R25" library="particle SZ" deviceset="RES" device="0402S" value="10K"/>
 <part name="GND113" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R26" library="particle SZ" deviceset="RES" device="0402S" value="NC"/>
 <part name="C67" library="particle SZ" deviceset="CAP" device="0402" value="0.1uF"/>
@@ -21197,7 +21197,7 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="GND" library="particle SZ" deviceset="TP" device="2X5MM"/>
 <part name="GND115" library="particle SZ" deviceset="TP" device="2X5MM"/>
 <part name="DATA1" library="particle SZ" deviceset="TP" device="2X5MM"/>
-<part name="D6" library="particle SZ" deviceset="DIODE" device="SOD323" value="LRB551V-30 nc"/>
+<part name="D6" library="particle SZ" deviceset="DIODE" device="SOD323" value="nc"/>
 <part name="D1" library="particle SZ" deviceset="DIODE" device="SOD323" value="nc"/>
 <part name="Q4" library="particle SZ" deviceset="NMOS" device="SOT-23" value="nc"/>
 <part name="U4" library="particle SZ" deviceset="APX803XXX-XXSA" device="SOT-23" value="APX803L20-41SA"/>
@@ -21205,15 +21205,15 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <part name="U8" library="particle SZ" deviceset="APX803XXX-XXSA" device="SOT-23" value="NC"/>
 <part name="GND116" library="RedBear DUO" deviceset="GND" device=""/>
 <part name="+3V11" library="supply1" deviceset="+3V3" device="" value="+3V3"/>
-<part name="U$5" library="particle SZ" deviceset="SEPAKER" device="15X15MM" value="SEPAKER15X15MM"/>
+<part name="U$5" library="particle SZ" deviceset="SEPAKER" device="15X15MM" value="FS-1540"/>
 <part name="U$6" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="JMP_0603_NC" device=""/>
 <part name="U$7" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" deviceset="JMP_0603_NC" device=""/>
 <part name="USB1" library="SparkFun-Connectors" deviceset="USB_C" device="16PIN"/>
-<part name="B1" library="particle SZ" deviceset="L" device="" value="220R"/>
+<part name="B1" library="particle SZ" deviceset="L" device="" value="120R"/>
 <part name="R13" library="particle SZ" deviceset="RES" device="0402S" value="200R"/>
 <part name="R27" library="particle SZ" deviceset="RES" device="0402S" value="200R"/>
-<part name="C69" library="particle SZ" deviceset="CAP-E" device="CASE_B" value="100uF nc"/>
-<part name="D2" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" deviceset="DIODE" device="SOD123" package3d_urn="urn:adsk.eagle:package:21650836/3" value="NC"/>
+<part name="C69" library="particle SZ" deviceset="CAP-E" device="CASE_B" value="100uF"/>
+<part name="D2" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" deviceset="DIODE" device="SOD123" package3d_urn="urn:adsk.eagle:package:21650836/3" value="1N5817W"/>
 </parts>
 <sheets>
 <sheet>
@@ -21226,8 +21226,8 @@ BUTTON</text>
 BUTTON</text>
 <text x="208.28" y="81.28" size="1.778" layer="97" font="vector">QWIIC
 CONNECTOR</text>
-<text x="185.42" y="262.89" size="1.778" layer="97" font="vector">SWD
-CONNECTOR</text>
+<text x="182.118" y="262.89" size="1.778" layer="97" font="vector">SWD
+CONNECTOR NC</text>
 <text x="175.26" y="186.69" size="1.778" layer="97" font="vector">PDM
 MICROPHONE</text>
 <text x="116.84" y="135.89" size="1.778" layer="97" font="vector">RTL8721 has built-in cap touch sensing on pins A2, A5, D0, and D1. 
@@ -21273,10 +21273,10 @@ The buffer converts 3.3V logic to 5V</text>
 <text x="100.33" y="237.49" size="6.4516" layer="97" font="vector">TEMP NTC</text>
 <wire x1="0" y1="279.4" x2="139.7" y2="279.4" width="0.1524" layer="94"/>
 <text x="100.33" y="270.51" size="6.4516" layer="97" font="vector">Touch key</text>
-<text x="125.73" y="314.96" size="1.778" layer="96">FS-1340</text>
+<text x="125.73" y="314.96" size="1.778" layer="96">FS-1340 nc</text>
 <text x="124.46" y="280.67" size="1.778" layer="96">FS-1540</text>
 <text x="115.57" y="280.67" size="1.778" layer="95">U$5</text>
-<text x="125.73" y="317.5" size="1.778" layer="95">U4</text>
+<text x="125.73" y="317.5" size="1.778" layer="95">U$1</text>
 </plain>
 <instances>
 <instance part="LED2" gate="G$1" x="275.59" y="259.08" smashed="yes"/>
@@ -21435,8 +21435,8 @@ The buffer converts 3.3V logic to 5V</text>
 <attribute name="NAME" x="157.48" y="256.54" size="1.778" layer="95" font="vector" rot="MR0"/>
 </instance>
 <instance part="R7" gate="R1" x="218.44" y="259.08" smashed="yes">
-<attribute name="NAME" x="217.17" y="260.5786" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="217.17" y="255.778" size="1.778" layer="96" font="vector"/>
+<attribute name="NAME" x="214.122" y="260.5786" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="218.948" y="260.858" size="1.778" layer="96" font="vector"/>
 </instance>
 <instance part="LED3" gate="G$1" x="303.53" y="259.08" smashed="yes"/>
 <instance part="GND14" gate="1" x="303.53" y="243.84" smashed="yes" rot="MR0">
@@ -22138,11 +22138,11 @@ The buffer converts 3.3V logic to 5V</text>
 </instance>
 <instance part="C52" gate="G$1" x="38.1" y="317.5" smashed="yes" rot="R270">
 <attribute name="NAME" x="37.719" y="316.992" size="1.27" layer="95" rot="R180"/>
-<attribute name="VALUE" x="43.561" y="316.992" size="1.27" layer="96" rot="R180"/>
+<attribute name="VALUE" x="46.101" y="316.992" size="1.27" layer="96" rot="R180"/>
 </instance>
 <instance part="C58" gate="G$1" x="35.56" y="325.12" smashed="yes" rot="R270">
 <attribute name="NAME" x="34.925" y="324.612" size="1.27" layer="95" rot="R180"/>
-<attribute name="VALUE" x="41.021" y="324.612" size="1.27" layer="96" rot="R180"/>
+<attribute name="VALUE" x="43.561" y="324.612" size="1.27" layer="96" rot="R180"/>
 </instance>
 <instance part="GND99" gate="1" x="25.4" y="330.2" smashed="yes" rot="R270">
 <attribute name="VALUE" x="23.622" y="332.232" size="1.27" layer="96" rot="R270"/>
@@ -22308,7 +22308,7 @@ The buffer converts 3.3V logic to 5V</text>
 </instance>
 <instance part="D6" gate="G$1" x="204.47" y="259.08" smashed="yes" rot="R180">
 <attribute name="NAME" x="210.82" y="257.81" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="214.63" y="262.89" size="1.778" layer="96" rot="R180"/>
+<attribute name="VALUE" x="206.502" y="257.81" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="D1" gate="G$1" x="76.2" y="294.64" smashed="yes" rot="R90">
 <attribute name="NAME" x="74.93" y="288.29" size="1.778" layer="95" rot="R90"/>
@@ -22356,12 +22356,12 @@ The buffer converts 3.3V logic to 5V</text>
 <attribute name="VALUE" x="384.81" y="20.193" size="1.27" layer="96"/>
 </instance>
 <instance part="C69" gate="G$1" x="116.84" y="190.5" smashed="yes">
-<attribute name="NAME" x="119.38" y="186.69" size="1.27" layer="95" rot="R90"/>
-<attribute name="VALUE" x="114.3" y="186.69" size="1.27" layer="96" rot="R90"/>
+<attribute name="NAME" x="119.38" y="185.42" size="1.27" layer="95" rot="R90"/>
+<attribute name="VALUE" x="115.57" y="184.15" size="1.27" layer="96" rot="R90"/>
 </instance>
 <instance part="D2" gate="G$1" x="35.56" y="50.8" smashed="yes" rot="R270">
-<attribute name="NAME" x="38.1" y="55.88" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="30.48" y="55.88" size="1.778" layer="96" rot="R270"/>
+<attribute name="NAME" x="37.846" y="53.848" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="31.242" y="57.15" size="1.778" layer="96" rot="R270"/>
 </instance>
 </instances>
 <busses>

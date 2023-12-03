@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.2.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -8,8 +8,8 @@
 </settings>
 <grid distance="0.001" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="12" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="Route2" color="13" fill="3" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="12" fill="1" visible="no" active="yes"/>
+<layer number="2" name="Route2" color="13" fill="3" visible="no" active="yes"/>
 <layer number="3" name="Route3" color="17" fill="3" visible="no" active="no"/>
 <layer number="4" name="Route4" color="18" fill="4" visible="no" active="no"/>
 <layer number="5" name="Route5" color="19" fill="4" visible="no" active="no"/>
@@ -22,21 +22,21 @@
 <layer number="12" name="Route12" color="20" fill="5" visible="no" active="no"/>
 <layer number="13" name="Route13" color="21" fill="5" visible="no" active="no"/>
 <layer number="14" name="Route14" color="22" fill="6" visible="no" active="no"/>
-<layer number="15" name="Route15" color="23" fill="6" visible="yes" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="15" name="Route15" color="23" fill="6" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="no" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="no" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
 <layer number="20" name="Dimension" color="49" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="13" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="13" fill="1" visible="no" active="yes"/>
 <layer number="22" name="bPlace" color="21" fill="1" visible="yes" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="49" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="28" name="bValues" color="49" fill="1" visible="no" active="yes"/>
-<layer number="29" name="tStop" color="24" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="49" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="24" fill="1" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="16" fill="4" visible="yes" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
@@ -46,20 +46,20 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
-<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
-<layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
+<layer number="48" name="Document" color="49" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="21" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
 <layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="52" name="bDocu" color="49" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
@@ -595,12 +595,12 @@
 <text x="-51.33" y="93.07" size="0.8128" layer="22" ratio="15" rot="MR180" align="bottom-center">RX</text>
 <text x="-80.1" y="60.1" size="1.016" layer="22" ratio="15" rot="MR45" align="bottom-center">QWIIC</text>
 <text x="-72.2" y="67.9" size="1.016" layer="22" ratio="15" rot="MR0" align="bottom-center">MIC</text>
-<text x="-61.01" y="55.04" size="0.6096" layer="52" rot="MR180">U3</text>
+<text x="-61.222" y="54.512" size="0.6096" layer="52" rot="MR180">U3</text>
 <text x="-81.94" y="79.05" size="0.6096" layer="52" rot="MR180">LED1</text>
 <text x="-64.12" y="59.69" size="0.6096" layer="28" rot="MR270">XC6220B331</text>
 <text x="-79.63" y="78.46" size="0.8128" layer="28" rot="MR0">RBG</text>
 <text x="-62.93" y="88.47" size="1.016" layer="28" rot="MR0">P2</text>
-<text x="-50.99" y="79.2" size="0.8128" layer="28" rot="MR270">FS-1340</text>
+<text x="-50.99" y="79.2" size="0.8128" layer="28" rot="MR270">nc</text>
 <text x="-66.17" y="7.56" size="0.8128" layer="28" rot="MR180">TYPE-C USB</text>
 <wire x1="-116.2" y1="103.98" x2="-99.8" y2="94.52" width="0.17" layer="29"/>
 <wire x1="-112.06" y1="91.4" x2="-108.1" y2="93.7" width="0.17" layer="29"/>
@@ -2947,6 +2947,12 @@
 <circle x="-62.927" y="28.706" radius="0.15" width="0.6" layer="29"/>
 <circle x="-62.909" y="26.101" radius="0.15" width="0.6" layer="29"/>
 <circle x="-62.909" y="23.531" radius="0.15" width="0.6" layer="29"/>
+<text x="-51.848" y="79.504" size="0.6096" layer="52" rot="MR90">U$1</text>
+<text x="-53.331" y="79.289" size="0.6096" layer="52" rot="MR90">U$5</text>
+<text x="-52.632" y="79.17" size="0.8128" layer="28" rot="MR270">FS-1540</text>
+<text x="-80.636" y="85.962" size="0.8128" layer="28" rot="MR270">TS-1185A</text>
+<text x="-75.382" y="59.266" size="0.8128" layer="28" rot="MR45">CCSH-W10-04</text>
+<text x="-81.024" y="73.1" size="0.8128" layer="28" rot="MR270">TS-1185A</text>
 </plain>
 <libraries>
 <library name="particle-studios" urn="urn:adsk.eagle:library:10700396">
@@ -5442,9 +5448,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="8.48" y="163.69" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="8.48" y="163.69" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="8.48" y="163.69" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-52.0314" y="87.4907" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-53.6444" y="86.5217" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="8.48" y="163.69" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="VALUE" x="-52.4895" y="87.503" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-53.7465" y="86.267" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C10" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-57.9" y="119.46" smashed="yes" rot="MR90">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-139.18" y="146.13" size="1.778" layer="28" rot="MR90" display="off"/>
@@ -5458,9 +5464,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-31.62" y="213.12" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="-31.62" y="213.12" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="-31.62" y="213.12" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-63.0414" y="133.3907" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-60.7864" y="132.6877" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="-31.62" y="213.12" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="VALUE" x="-63.8825" y="131.007" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-64.3315" y="133.032" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C12" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-47.3" y="125.2" smashed="yes" rot="MR240">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="40.23554375" y="136.143990625" size="1.778" layer="28" rot="MR240" display="off"/>
@@ -5482,7 +5488,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="58.34554375" y="98.844878125" size="1.778" layer="28" rot="MR240" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="58.34554375" y="98.844878125" size="1.778" layer="28" rot="MR240" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="58.34554375" y="98.844878125" size="1.778" layer="28" rot="MR240" display="off"/>
-<attribute name="NAME" x="-32.069615625" y="95.927228125" size="0.6096" layer="52" rot="MR240"/>
+<attribute name="NAME" x="-32.217615625" y="96.149228125" size="0.6096" layer="52" rot="MR240"/>
 <attribute name="PPN" value="PT-200082" x="58.34554375" y="98.844878125" size="1.778" layer="28" rot="MR240" display="off"/>
 <attribute name="VALUE" x="-32.65988125" y="96.926375" size="0.6096" layer="28" rot="MR240"/>
 </element>
@@ -5490,7 +5496,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="16.22" y="196.28" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="16.22" y="196.28" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="16.22" y="196.28" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-30.4414" y="116.5507" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-30.2214" y="116.4717" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="16.22" y="196.28" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="VALUE" x="-31.3495" y="116.513" size="0.6096" layer="28" rot="MR180"/>
 </element>
@@ -5498,7 +5504,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-147.78" y="107.83" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="-147.78" y="107.83" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="-147.78" y="107.83" size="1.778" layer="28" rot="MR90" display="off"/>
-<attribute name="NAME" x="-66.8707" y="55.3886" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="NAME" x="-66.8217" y="55.4736" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="PPN" value="PT-200082" x="-147.78" y="107.83" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="VALUE" x="-66.813" y="53.9405" size="0.6096" layer="28" rot="MR90"/>
 </element>
@@ -5506,7 +5512,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-140.78" y="111.64" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="-140.78" y="111.64" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="-140.78" y="111.64" size="1.778" layer="28" rot="MR90" display="off"/>
-<attribute name="NAME" x="-59.3013" y="56.8714" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-59.2133" y="57.0984" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="PPN" value="PT-200082" x="-140.78" y="111.64" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="VALUE" x="-59.743" y="56.0005" size="0.6096" layer="28" rot="MR90"/>
 </element>
@@ -5514,12 +5520,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.01UF 16V X7R 0603" x="19.47" y="2.42" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MFG" value="YAGEO" x="19.47" y="2.42" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MPN" value="CC0603KRX7R9BB103" x="19.47" y="2.42" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="NAME" x="-57.8123" y="56.9594" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-57.7833" y="57.0554" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="PPN" value="PT-200456" x="19.47" y="2.42" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-57.677" y="59.3095" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="C19" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="22uF, 10V" x="-68.3" y="57.8" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-68.44" y="54.32" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="NAME" x="-68.652" y="54.478" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="POPULARITY" value="88" x="4.09" y="12.08" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="4.09" y="12.08" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-69.38" y="59.51" size="0.6096" layer="28" rot="MR270"/>
@@ -5530,15 +5536,15 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="0603B104K160NT" x="11.6" y="144.36" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="NAME" x="-50.7014" y="67.2407" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="11.6" y="144.36" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="VALUE" x="-53.2995" y="68.133" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-53.2265" y="67.767" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C20" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="22uF, 10V" x="-56.2" y="57.8" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-55.938" y="55.728" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-55.974" y="55.875" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="POPULARITY" value="88" x="16.19" y="22.24" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="16.19" y="22.24" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-55.91" y="59.01" size="0.6096" layer="28" rot="MR270"/>
 </element>
-<element name="C21" library="rcl" library_urn="urn:adsk.eagle:library:334" package="PANASONIC_C" package3d_urn="urn:adsk.eagle:package:23422/2" value="100uF, 6.3V" x="-63.718" y="63.668" smashed="yes" rot="MR180">
+<element name="C21" library="rcl" library_urn="urn:adsk.eagle:library:334" package="PANASONIC_C" package3d_urn="urn:adsk.eagle:package:23422/2" value="NC" x="-63.718" y="63.668" smashed="yes" rot="MR180">
 <attribute name="NAME" x="-64.258" y="65.158" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="POPULARITY" value="5" x="-34.508" y="97.958" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="-34.508" y="97.958" size="1.778" layer="28" rot="MR180" display="off"/>
@@ -5572,7 +5578,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="31.93" y="155.44" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="31.93" y="155.44" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="31.93" y="155.44" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-37.4614" y="73.1807" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-37.3734" y="73.2337" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="31.93" y="155.44" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="VALUE" x="-38.2695" y="73.313" size="0.6096" layer="28" rot="MR180"/>
 </element>
@@ -5580,7 +5586,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="1.615546875" y="-43.811578125" size="1.778" layer="28" rot="MR300" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="1.615546875" y="-43.811578125" size="1.778" layer="28" rot="MR300" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="1.615546875" y="-43.811578125" size="1.778" layer="28" rot="MR300" display="off"/>
-<attribute name="NAME" x="-30.708209375" y="59.69653125" size="0.6096" layer="52" rot="MR300"/>
+<attribute name="NAME" x="-30.753209375" y="59.87953125" size="0.6096" layer="52" rot="MR300"/>
 <attribute name="PPN" value="PT-200082" x="1.615546875" y="-43.811578125" size="1.778" layer="28" rot="MR300" display="off"/>
 <attribute name="VALUE" x="-30.44038125" y="60.343375" size="0.6096" layer="28" rot="MR300"/>
 </element>
@@ -5614,7 +5620,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="0603B104K160NT" x="1.8" y="146.01" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="NAME" x="-66.2514" y="69.7607" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="1.8" y="146.01" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="VALUE" x="-64.2305" y="67.757" size="0.4064" layer="28" rot="MR0"/>
+<attribute name="VALUE" x="-64.3275" y="67.716" size="0.4064" layer="28" rot="MR0"/>
 </element>
 <element name="C4" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-68.26" y="68.51" smashed="yes" rot="MR0">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-139.38" y="-8.96" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -5628,7 +5634,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="11.93" y="188.97" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="11.93" y="188.97" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="11.93" y="188.97" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-63.6414" y="113.0507" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-63.4684" y="112.8817" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="11.93" y="188.97" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="VALUE" x="-64.8895" y="112.853" size="0.6096" layer="28" rot="MR180"/>
 </element>
@@ -5636,7 +5642,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="21.153" y="85.755" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="21.153" y="85.755" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="21.153" y="85.755" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="NAME" x="-58.6263" y="101.6364" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-59.6753" y="99.6714" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="PPN" value="PT-200082" x="21.153" y="85.755" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-58.594" y="102.8245" size="0.6096" layer="28" rot="MR270"/>
 </element>
@@ -5646,7 +5652,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="0603B104K160NT" x="-49.85" y="145.38" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="NAME" x="-69.4614" y="63.2207" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200082" x="-49.85" y="145.38" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="VALUE" x="-69.9795" y="65.243" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-71.0325" y="64.812" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C8" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="10uF, 16V" x="-68.935" y="65.6731" smashed="yes" rot="MR180">
 <attribute name="DESP" value="CAP CER 10UF 16V X7R 0603" x="-46.075" y="150.7631" size="1.778" layer="28" rot="MR180" display="off"/>
@@ -5654,7 +5660,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="0603X106M160NT" x="-46.075" y="150.7631" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="NAME" x="-69.3164" y="67.0438" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="PPN" value="PT-200139" x="-46.075" y="150.7631" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="VALUE" x="-70.0145" y="66.8161" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-70.7895" y="66.6481" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C9" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-79" y="125.5" smashed="yes" rot="MR120">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-137.960540625" y="185.937346875" size="1.778" layer="28" rot="MR120" display="off"/>
@@ -5664,29 +5670,29 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="PPN" value="PT-200082" x="-137.960540625" y="185.937346875" size="1.778" layer="28" rot="MR120" display="off"/>
 <attribute name="VALUE" x="-81.329615625" y="124.14663125" size="0.6096" layer="28" rot="MR120"/>
 </element>
-<element name="CONN1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="CONN5X2_1.27" package3d_urn="urn:adsk.eagle:package:10568497/4" value="CONN5X2" x="-48.8274" y="63.17" smashed="yes" rot="MR135">
+<element name="CONN1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="CONN5X2_1.27" package3d_urn="urn:adsk.eagle:package:10568497/4" value="CONN5X2 nc" x="-48.8274" y="63.17" smashed="yes" rot="MR135">
 <attribute name="NAME" x="-50.098715625" y="62.4460375" size="0.6096" layer="52" rot="MR135"/>
 <attribute name="VALUE" x="-50.228471875" y="61.84579375" size="0.6096" layer="28" rot="MR135"/>
 </element>
 <element name="LED1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="PLCC4-2MM-RGB" package3d_urn="urn:adsk.eagle:package:10568429/4" value="RGB-LED-CLMVB-FKARGB" x="-81.1" y="77" smashed="yes" rot="MR90"/>
 <element name="LED10" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-25" y="99" smashed="yes" rot="R30">
-<attribute name="NAME" x="-22.241121875" y="97.466484375" size="0.6096" layer="52" ratio="10" rot="MR330"/>
-<attribute name="VALUE" x="-20.036121875" y="98.60663125" size="0.6096" layer="28" ratio="10" rot="MR330"/>
+<attribute name="NAME" x="-24.231121875" y="102.067484375" size="0.6096" layer="52" ratio="10" rot="MR330"/>
+<attribute name="VALUE" x="-23.042121875" y="102.47163125" size="0.6096" layer="28" ratio="10" rot="MR330"/>
 </element>
 <element name="LED11" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-13" y="106" smashed="yes" rot="R30">
-<attribute name="NAME" x="-10.241125" y="104.46648125" size="0.6096" layer="52" ratio="10" rot="MR330"/>
-<attribute name="VALUE" x="-8.336121875" y="105.28663125" size="0.6096" layer="28" ratio="10" rot="MR330"/>
+<attribute name="NAME" x="-12.195125" y="108.99948125" size="0.6096" layer="52" ratio="10" rot="MR330"/>
+<attribute name="VALUE" x="-11.092121875" y="109.57663125" size="0.6096" layer="28" ratio="10" rot="MR330"/>
 </element>
 <element name="LED12" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-17" y="89" smashed="yes" rot="R330">
 <attribute name="NAME" x="-16.948625" y="85.843990625" size="0.6096" layer="52" ratio="10" rot="MR30"/>
 <attribute name="VALUE" x="-15.073625" y="84.3241375" size="0.6096" layer="28" ratio="10" rot="MR30"/>
 </element>
 <element name="LED13" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-33" y="77" smashed="yes" rot="R270">
-<attribute name="NAME" x="-35.707503125" y="75.377503125" size="0.6096" layer="52" ratio="10" rot="MR90"/>
+<attribute name="NAME" x="-30.919503125" y="74.668503125" size="0.6096" layer="52" ratio="10" rot="MR90"/>
 <attribute name="VALUE" x="-30.697503125" y="73.4075" size="0.6096" layer="28" ratio="10" rot="MR90"/>
 </element>
 <element name="LED14" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-37" y="62" smashed="yes" rot="R330">
-<attribute name="NAME" x="-37.388625" y="58.933990625" size="0.6096" layer="52" ratio="10" rot="MR30"/>
+<attribute name="NAME" x="-33.707625" y="62.584990625" size="0.6096" layer="52" ratio="10" rot="MR30"/>
 <attribute name="VALUE" x="-31.643625" y="61.5441375" size="0.6096" layer="28" ratio="10" rot="MR30"/>
 </element>
 <element name="LED15" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-17" y="64.5" smashed="yes" rot="R30">
@@ -5695,14 +5701,14 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </element>
 <element name="LED16" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-25" y="55" smashed="yes" rot="R330">
 <attribute name="NAME" x="-24.948628125" y="51.843984375" size="0.6096" layer="52" ratio="10" rot="MR30"/>
-<attribute name="VALUE" x="-23.533628125" y="50.91413125" size="0.6096" layer="28" ratio="10" rot="MR30"/>
+<attribute name="VALUE" x="-20.795628125" y="55.21813125" size="0.6096" layer="28" ratio="10" rot="MR30"/>
 </element>
 <element name="LED17" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-13" y="48" smashed="yes" rot="R330">
 <attribute name="NAME" x="-12.948625" y="44.84398125" size="0.6096" layer="52" ratio="10" rot="MR30"/>
-<attribute name="VALUE" x="-11.553621875" y="43.64413125" size="0.6096" layer="28" ratio="10" rot="MR30"/>
+<attribute name="VALUE" x="-9.503621875" y="48.37613125" size="0.6096" layer="28" ratio="10" rot="MR30"/>
 </element>
 <element name="LED2" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-63" y="107" smashed="yes" rot="R90">
-<attribute name="NAME" x="-60.2925" y="108.6225" size="0.6096" layer="52" ratio="10" rot="MR270"/>
+<attribute name="NAME" x="-60.3455" y="108.3155" size="0.6096" layer="52" ratio="10" rot="MR270"/>
 <attribute name="VALUE" x="-60.4125" y="111.3525" size="0.6096" layer="28" ratio="10" rot="MR270"/>
 </element>
 <element name="LED3" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-75" y="123" smashed="yes" rot="R150">
@@ -5710,11 +5716,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-76.226371875" y="127.23586875" size="0.6096" layer="28" ratio="10" rot="MR210"/>
 </element>
 <element name="LED4" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-63" y="121" smashed="yes">
-<attribute name="NAME" x="-61.377496875" y="118.29249375" size="0.6096" layer="52" ratio="10" rot="MR0"/>
+<attribute name="NAME" x="-60.662496875" y="122.97749375" size="0.6096" layer="52" ratio="10" rot="MR0"/>
 <attribute name="VALUE" x="-58.807496875" y="123.122496875" size="0.6096" layer="28" ratio="10" rot="MR0"/>
 </element>
 <element name="LED5" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-63" y="135" smashed="yes">
-<attribute name="NAME" x="-61.377503125" y="132.292496875" size="0.6096" layer="52" ratio="10" rot="MR0"/>
+<attribute name="NAME" x="-60.363503125" y="137.033496875" size="0.6096" layer="52" ratio="10" rot="MR0"/>
 <attribute name="VALUE" x="-59.251503125" y="137.0655" size="0.6096" layer="28" ratio="10" rot="MR0"/>
 </element>
 <element name="LED6" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-51" y="123" smashed="yes" rot="R30">
@@ -5726,7 +5732,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-43.484134375" y="105.596378125" size="0.6096" layer="28" ratio="10" rot="MR300"/>
 </element>
 <element name="LED8" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-37" y="92" smashed="yes" rot="R30">
-<attribute name="NAME" x="-34.241121875" y="90.466484375" size="0.6096" layer="52" ratio="10" rot="MR330"/>
+<attribute name="NAME" x="-36.322121875" y="94.839484375" size="0.6096" layer="52" ratio="10" rot="MR330"/>
 <attribute name="VALUE" x="-32.056125" y="91.91663125" size="0.6096" layer="28" ratio="10" rot="MR330"/>
 </element>
 <element name="LED9" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-29.5" y="110.5" smashed="yes" rot="R90">
@@ -5734,20 +5740,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-26.42249375" y="114.492496875" size="0.6096" layer="28" ratio="10" rot="MR270"/>
 </element>
 <element name="LS1" library="SparkFun-Electromechanical" library_urn="urn:adsk.eagle:library:516" package="BUZZER-CCV" package3d_urn="urn:adsk.eagle:package:38552/1" value="nc" x="-45.5" y="77.08" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-41.933" y="77.24" size="0.6096" layer="52" font="vector" rot="MR270" align="bottom-center"/>
+<attribute name="NAME" x="-44.679" y="77.515" size="0.6096" layer="52" font="vector" rot="MR270" align="bottom-center"/>
 <attribute name="PROD_ID" value="COMP-08568" x="-37.88" y="7.23" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-39.405" y="78.66" size="0.8128" layer="28" font="vector" rot="MR90" align="top-center"/>
 </element>
 <element name="R1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="R0402_P" package3d_urn="urn:adsk.eagle:package:10700447/3" value="1K" x="-78.6" y="77.18" smashed="yes" rot="MR180">
 <attribute name="DESP" value="RES SMD 1K OHM 1% 1/10W 0603" x="-64.63" y="154.65" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-79.5568" y="78.4096" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-79.3068" y="78.4092" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="NAME" x="-77.5608" y="77.5336" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="VALUE" x="-77.5098" y="77.4312" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="R10" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="R0603_P" package3d_urn="urn:adsk.eagle:package:10700443/4" value="5K1" x="-59.2" y="17.2" smashed="yes" rot="MR270">
 <attribute name="DESP" value="" x="18.27" y="-31.06" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MFG" value="" x="18.27" y="-31.06" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MPN" value="" x="18.27" y="-31.06" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="NAME" x="-58.88039375" y="19.9768" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-58.84839375" y="19.8818" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="PPN" value="" x="18.27" y="-31.06" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-58.840796875" y="19.8568" size="0.6096" layer="28" rot="MR270"/>
 </element>
@@ -5755,7 +5761,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="RES SMD 100K OHM 1% 1/10W 0603" x="-115.07" y="-23.97" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MFG" value="" x="-115.07" y="-23.97" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MPN" value="" x="-115.07" y="-23.97" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="NAME" x="-64.4832" y="53.1904" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="NAME" x="-64.2632" y="53.1984" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="PPN" value="" x="-115.07" y="-23.97" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="-61.9132" y="52.1708" size="0.6096" layer="28" rot="MR0"/>
 </element>
@@ -5797,7 +5803,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="RES SMD 1K OHM 1% 1/10W 0603" x="-134.422303125" y="30.263178125" size="1.778" layer="28" rot="MR45" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="-134.422303125" y="30.263178125" size="1.778" layer="28" rot="MR45" display="off"/>
 <attribute name="MPN" value="RC-03K102FT" x="-134.422303125" y="30.263178125" size="1.778" layer="28" rot="MR45" display="off"/>
-<attribute name="NAME" x="-54.08261875" y="57.615265625" size="0.6096" layer="52" rot="MR45"/>
+<attribute name="NAME" x="-54.18861875" y="57.837265625" size="0.6096" layer="52" rot="MR45"/>
 <attribute name="PPN" value="PT-200135" x="-134.422303125" y="30.263178125" size="1.778" layer="28" rot="MR45" display="off"/>
 <attribute name="VALUE" x="-54.539478125" y="59.62840625" size="0.6096" layer="28" rot="MR45"/>
 </element>
@@ -5813,16 +5819,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DESP" value="" x="10.562915625" y="-27.25" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MFG" value="" x="10.562915625" y="-27.25" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="MPN" value="" x="10.562915625" y="-27.25" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="NAME" x="-66.617471875" y="19.606796875" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-66.591471875" y="19.465796875" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="PPN" value="" x="10.562915625" y="-27.25" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-66.587875" y="19.8668" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="S1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="TACTILE_SWITCH_SMD" package3d_urn="urn:adsk.eagle:package:10568359/2" value="" x="-81.1" y="83.1" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-81.342" y="84.411" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="NAME" x="-81.324" y="85.617" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="VALUE" x="-83.132" y="82.211" size="0.4064" layer="28" rot="MR90"/>
 </element>
 <element name="S2" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="TACTILE_SWITCH_SMD" package3d_urn="urn:adsk.eagle:package:10568359/2" value="" x="-81.1" y="70.9" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-82.992" y="68.291" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="NAME" x="-80.519" y="67.363" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="VALUE" x="-83.132" y="70.011" size="0.4064" layer="28" rot="MR90"/>
 </element>
 <element name="TP1" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="TP" value="TP-1.5MM" x="-44.08" y="65.15" smashed="yes" rot="MR90">
@@ -5847,7 +5853,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DIGIKEY_PART_NUMBER_4" value="497-17809-6-ND" x="-117.92" y="31.01" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MANUFACTURER_PART_NUMBER" value="MP34DT05TR-A" x="-117.92" y="31.01" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MFR_NAME" value="STMicroelectronics" x="-117.92" y="31.01" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="VALUE" x="-74.135" y="69.9872" size="0.6096" layer="28" ratio="6" rot="SMR270"/>
+<attribute name="VALUE" x="-74.072" y="69.5692" size="0.6096" layer="28" ratio="6" rot="SMR270"/>
 </element>
 <element name="U3" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="SOT-89-5_TOR-M" value="XC6220B331PR-G" x="-63" y="57" smashed="yes" rot="MR0">
 <attribute name="COPYRIGHT" value="Copyright (C) 2022 Ultra Librarian. All rights reserved." x="-111.26" y="41.76" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -5872,20 +5878,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-27.5905" y="37.537" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="LED19" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-48" y="51" smashed="yes" rot="R210">
-<attribute name="NAME" x="-47.918875" y="48.61351875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
+<attribute name="NAME" x="-49.186875" y="47.78951875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
 <attribute name="VALUE" x="-49.983875" y="47.39336875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
 </element>
 <element name="C31" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-52.36" y="52.99" smashed="yes" rot="MR240">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-76.94845625" y="59.57845625" size="1.778" layer="28" rot="MR240" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="-76.94845625" y="59.57845625" size="1.778" layer="28" rot="MR240" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="-76.94845625" y="59.57845625" size="1.778" layer="28" rot="MR240" display="off"/>
-<attribute name="NAME" x="-51.749615625" y="54.717228125" size="0.6096" layer="52" rot="MR240"/>
+<attribute name="NAME" x="-53.364615625" y="53.333228125" size="0.6096" layer="52" rot="MR240"/>
 <attribute name="PPN" value="PT-200082" x="-76.94845625" y="59.57845625" size="1.778" layer="28" rot="MR240" display="off"/>
 <attribute name="VALUE" x="-54.00988125" y="54.386375" size="0.6096" layer="28" rot="MR240"/>
 </element>
 <element name="LED20" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-63" y="47" smashed="yes" rot="R270">
-<attribute name="NAME" x="-65.7075" y="45.3775" size="0.6096" layer="52" ratio="10" rot="MR90"/>
-<attribute name="VALUE" x="-65.6275" y="43.1075" size="0.6096" layer="28" ratio="10" rot="MR90"/>
+<attribute name="NAME" x="-61.6835" y="50.4615" size="0.6096" layer="52" ratio="10" rot="MR0"/>
+<attribute name="VALUE" x="-65.4685" y="43.1075" size="0.6096" layer="28" ratio="10" rot="MR90"/>
 </element>
 <element name="C32" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-63" y="42.5" smashed="yes" rot="MR0">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-32" y="53.5" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -5908,20 +5914,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-45.350384375" y="29.273371875" size="0.6096" layer="28" rot="MR300"/>
 </element>
 <element name="LED22" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-63" y="33" smashed="yes" rot="R180">
-<attribute name="NAME" x="-63.9625" y="31.0475" size="0.6096" layer="52" ratio="10" rot="MR180"/>
+<attribute name="NAME" x="-65.5175" y="31.0275" size="0.6096" layer="52" ratio="10" rot="MR180"/>
 <attribute name="VALUE" x="-65.8625" y="30.9675" size="0.6096" layer="28" ratio="10" rot="MR180"/>
 </element>
 <element name="C34" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-63.21" y="35.7" smashed="yes" rot="MR0">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-6.21" y="32.7" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MFG" value="FENGHUA" x="-6.21" y="32.7" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MPN" value="0603B104K160NT" x="-6.21" y="32.7" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="NAME" x="-60.0986" y="35.4493" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="NAME" x="-60.3006" y="35.4493" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="PPN" value="PT-200082" x="-6.21" y="32.7" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="VALUE" x="-60.3805" y="36.197" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="VALUE" x="-59.8085" y="35.387" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="LED23" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-63" y="19" smashed="yes" rot="R270">
-<attribute name="NAME" x="-65.7075" y="17.3775" size="0.6096" layer="52" ratio="10" rot="MR90"/>
-<attribute name="VALUE" x="-60.9475" y="14.5475" size="0.6096" layer="28" ratio="10" rot="MR90"/>
+<attribute name="NAME" x="-65.6335" y="16.8395" size="0.6096" layer="52" ratio="10" rot="MR90"/>
+<attribute name="VALUE" x="-61.0415" y="14.8345" size="0.6096" layer="28" ratio="10" rot="MR90"/>
 </element>
 <element name="C35" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-63" y="14.9" smashed="yes" rot="MR0">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="7" y="4.9" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -5929,7 +5935,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MPN" value="0603B104K160NT" x="7" y="4.9" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="NAME" x="-60.0086" y="14.5693" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="PPN" value="PT-200082" x="7" y="4.9" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="VALUE" x="-63.5405" y="14.627" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="VALUE" x="-61.8245" y="14.654" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="LED24" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-75" y="31" smashed="yes" rot="R300">
 <attribute name="NAME" x="-77.71351875" y="30.191125" size="0.6096" layer="52" ratio="10" rot="MR60"/>
@@ -5956,8 +5962,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-79.126625" y="45.25038125" size="0.6096" layer="28" rot="MR30"/>
 </element>
 <element name="LED26" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-89" y="62" smashed="yes" rot="R210">
-<attribute name="NAME" x="-91.758875" y="63.53351875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
-<attribute name="VALUE" x="-93.813875" y="62.73336875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
+<attribute name="NAME" x="-89.915875" y="59.04351875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
+<attribute name="VALUE" x="-91.459875" y="58.02436875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
 </element>
 <element name="C38" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-93" y="59.5" smashed="yes" rot="MR60">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-59.91154375" y="38.18910625" size="1.778" layer="28" rot="MR60" display="off"/>
@@ -5980,8 +5986,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-94.8205" y="37.887" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="LED28" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-101" y="55" smashed="yes" rot="R210">
-<attribute name="NAME" x="-103.758875" y="56.53351875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
-<attribute name="VALUE" x="-106.213875" y="55.35336875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
+<attribute name="NAME" x="-102.024875" y="51.95151875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
+<attribute name="VALUE" x="-102.883875" y="51.16936875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
 </element>
 <element name="C40" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-104.8" y="52.6" smashed="yes" rot="MR60">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-79.77371875" y="31.253209375" size="1.778" layer="28" rot="MR60" display="off"/>
@@ -5992,8 +5998,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-105.00011875" y="50.233621875" size="0.6096" layer="28" rot="MR60"/>
 </element>
 <element name="LED29" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-113.5" y="48" smashed="yes" rot="R210">
-<attribute name="NAME" x="-116.258875" y="49.53351875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
-<attribute name="VALUE" x="-117.813875" y="48.95336875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
+<attribute name="NAME" x="-114.433875" y="45.07851875" size="0.6096" layer="52" ratio="10" rot="MR150"/>
+<attribute name="VALUE" x="-115.289875" y="44.32636875" size="0.6096" layer="28" ratio="10" rot="MR150"/>
 </element>
 <element name="C41" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-117.19440625" y="45.9" smashed="yes" rot="MR60">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-91.73030625" y="9.794878125" size="1.778" layer="28" rot="MR60" display="off"/>
@@ -6028,8 +6034,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-87.1505" y="80.757" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="LED32" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-89" y="92" smashed="yes" rot="R150">
-<attribute name="NAME" x="-89.051375" y="95.156015625" size="0.6096" layer="52" ratio="10" rot="MR210"/>
-<attribute name="VALUE" x="-90.566371875" y="96.39586875" size="0.6096" layer="28" ratio="10" rot="MR210"/>
+<attribute name="NAME" x="-92.259375" y="91.502015625" size="0.6096" layer="52" ratio="10" rot="MR210"/>
+<attribute name="VALUE" x="-94.431371875" y="92.63686875" size="0.6096" layer="28" ratio="10" rot="MR210"/>
 </element>
 <element name="C44" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-93" y="94.5" smashed="yes" rot="MR120">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-149.22243125" y="31.119896875" size="1.778" layer="28" rot="MR120" display="off"/>
@@ -6052,8 +6058,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-112.94011875" y="84.583621875" size="0.6096" layer="28" rot="MR60"/>
 </element>
 <element name="LED34" library="microbuilder" package="NEO3535_REVERSE" value="WS2812B_SK6812E" x="-101" y="99" smashed="yes" rot="R150">
-<attribute name="NAME" x="-101.051375" y="102.156015625" size="0.6096" layer="52" ratio="10" rot="MR210"/>
-<attribute name="VALUE" x="-102.456371875" y="103.14586875" size="0.6096" layer="28" ratio="10" rot="MR210"/>
+<attribute name="NAME" x="-104.389375" y="98.554015625" size="0.6096" layer="52" ratio="10" rot="MR210"/>
+<attribute name="VALUE" x="-106.129371875" y="99.16986875" size="0.6096" layer="28" ratio="10" rot="MR210"/>
 </element>
 <element name="C46" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="C0603_P" package3d_urn="urn:adsk.eagle:package:10700446/3" value="0.1uF, 16V" x="-104.7" y="101.1" smashed="yes" rot="MR120">
 <attribute name="DESP" value="CAP CER 0.1UF 16V X7R 0603" x="-100.11154375" y="73.04744375" size="1.778" layer="28" rot="MR120" display="off"/>
@@ -6101,48 +6107,48 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </element>
 <element name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" package="JST04_1MM_VERT" package3d_urn="urn:adsk.eagle:package:41390436/1" value="" x="-76.0707125" y="64.312134375" smashed="yes" rot="MR225">
 <attribute name="COLOR" value="BLACK" x="-76.0707125" y="64.312134375" size="1.778" layer="28" rot="MR225" display="off"/>
-<attribute name="NAME" x="-79.813803125" y="67.06904375" size="0.6096" layer="52" font="vector" rot="MR225"/>
+<attribute name="NAME" x="-78.471803125" y="63.38204375" size="0.6096" layer="52" font="vector" rot="MR225"/>
 <attribute name="PROD_ID" value="CONN-14483" x="-76.0707125" y="64.312134375" size="1.778" layer="28" rot="MR225" display="off"/>
 <attribute name="VALUE" x="-77.8667625" y="62.51608125" size="0.6096" layer="28" font="vector" rot="MR225"/>
 </element>
 <element name="TP5" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="TP" value="TP-1.5MM" x="-51.27" y="96.96" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="-53.24" y="97.62" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-54.697" y="97.472" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="TP6" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="TP" value="TP-1.5MM" x="-51.21" y="94.2376" smashed="yes" rot="MR0">
-<attribute name="VALUE" x="-50" y="93.8476" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="VALUE" x="-51.369" y="93.8476" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="IC1" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="SOT23-5L" package3d_urn="urn:adsk.eagle:package:6240724/1" value="74AHC1G125" x="-63.9431" y="101.05" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-64.0781" y="100.335" size="0.6096" layer="52" rot="MR90"/>
-<attribute name="VALUE" x="-62.275" y="98.7609" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-63.412" y="98.6169" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-62.414" y="98.6459" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="C53" library="particle SZ" package="C-0402" value="nc" x="-46.49" y="92.5" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-47.27" y="93.66" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-45.754" y="92.806" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="VALUE" x="-46.62" y="93.65" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C54" library="particle SZ" package="C-0402" value="nc" x="-47.91" y="85.41" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-48.86" y="85.14" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-47.5" y="84.44" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-48.181" y="85.067" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-48.099" y="85.173" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="C55" library="particle SZ" package="C-0603A" value="0.1uF" x="-53.69" y="56.24" smashed="yes" rot="MR90">
 <attribute name="NAME" x="-54.92" y="55.19" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="VALUE" x="-54.77" y="55.45" size="0.6096" layer="28" rot="MR90"/>
 </element>
 <element name="C57" library="particle SZ" package="C-0402" value="1000pF" x="-76.94" y="84.94" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-77.7" y="86.08" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-78.43" y="85.77" size="0.5" layer="28" rot="MR180"/>
+<attribute name="NAME" x="-76.019" y="85.165" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="VALUE" x="-76.351" y="85.199" size="0.5" layer="28" rot="MR180"/>
 </element>
-<element name="D3" library="particle SZ" package="C0402" value="LXES15AAA1-133" x="-63.5" y="68.41" smashed="yes" rot="MR90">
+<element name="D3" library="particle SZ" package="C0402" value="LXES15AAA1-153" x="-63.5" y="68.41" smashed="yes" rot="MR90">
 <attribute name="NAME" x="-63.78" y="69.11" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="VALUE" x="-63.7" y="67.7" size="0.6096" layer="28" rot="MR90"/>
 </element>
 <element name="VO-" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" package="TP-1.0X1.5" package3d_urn="urn:adsk.eagle:package:23282622/2" value="TP1.0X1.5" x="-47.76" y="87.1" smashed="yes" rot="MR0"/>
 <element name="VO+" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" package="TP-1.0X1.5" package3d_urn="urn:adsk.eagle:package:23282622/2" value="TP1.0X1.5" x="-39.9" y="87.62" smashed="yes" rot="MR180"/>
 <element name="Q3" library="particle SZ" package="SOT-23" value="IRLML6401" x="-69.46" y="33.06" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-71.89" y="32.73" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="NAME" x="-71.705" y="32.853" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="VALUE" x="-67.23" y="32.83" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="Q2" library="particle SZ" package="SOT323" value="2N7002" x="-69.6" y="36.14" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-71.53" y="36.76" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-71.257" y="36.813" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="VALUE" x="-72.04" y="36.47" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C56" library="particle SZ" package="C-0402" value="10pF" x="-66.06" y="36.15" smashed="yes" rot="MR0">
@@ -6150,60 +6156,60 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-65.45" y="36.73" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="U6" library="particle SZ" package="MSOP-8" value="TPA6211A1" x="-47.94" y="90.06" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-48.968" y="92.445" size="0.6096" layer="52" ratio="21" rot="MR180"/>
+<attribute name="NAME" x="-49.25" y="92.413" size="0.6096" layer="52" ratio="21" rot="MR180"/>
 <attribute name="VALUE" x="-50.577" y="90.6" size="0.6096" layer="28" ratio="10" rot="MR180"/>
 </element>
 <element name="C50" library="particle SZ" package="C0603" value="0.1uF" x="-43.58" y="90.5" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-42.85" y="89.79" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="NAME" x="-42.929" y="89.857" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="VALUE" x="-42.5" y="91.86" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="C51" library="particle SZ" package="C-0603A" value="10uF" x="-43.91" y="87.69" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-41.21" y="87.4" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="NAME" x="-42.88" y="86.492" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="VALUE" x="-42.93" y="86.51" size="0.6096" layer="28" rot="MR0"/>
 </element>
-<element name="C52" library="particle SZ" package="C0402" value="2.2uF" x="-48.45" y="95.82" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-47.91" y="95.16" size="0.6096" layer="52" rot="MR90"/>
-<attribute name="VALUE" x="-47.97" y="95.2" size="0.6096" layer="28" rot="MR90"/>
+<element name="C52" library="particle SZ" package="C0402" value="33nF" x="-48.45" y="95.82" smashed="yes" rot="MR90">
+<attribute name="NAME" x="-48.062" y="95.237" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="VALUE" x="-48.63" y="96.424" size="0.6096" layer="28" rot="MR90"/>
 </element>
-<element name="C58" library="particle SZ" package="C0402" value="2.2uF" x="-49.59" y="95.75" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-50.62" y="94.9" size="0.6096" layer="52" rot="MR90"/>
-<attribute name="VALUE" x="-50.54" y="95.12" size="0.6096" layer="28" rot="MR90"/>
+<element name="C58" library="particle SZ" package="C0402" value="33nF" x="-49.59" y="95.75" smashed="yes" rot="MR90">
+<attribute name="NAME" x="-50.565" y="95.208" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="VALUE" x="-49.895" y="96.366" size="0.6096" layer="28" rot="MR90"/>
 </element>
 <element name="C59" library="particle SZ" package="C-0402" value="0.22uF" x="-51.72" y="89.23" smashed="yes" rot="MR270">
 <attribute name="NAME" x="-52.23" y="89.96" size="0.6096" layer="52" rot="MR270"/>
-<attribute name="VALUE" x="-52.17" y="90.3" size="0.6096" layer="28" rot="MR270"/>
+<attribute name="VALUE" x="-52.17" y="90.559" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="R66" library="particle SZ" package="R-0402S" value="1K" x="-76.94" y="86.17" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-74.495" y="85.885" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="NAME" x="-74.459" y="85.875" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="VALUE" x="-75.195" y="85.885" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="R17" library="particle SZ" package="R-0402S" value="20k" x="-48.47" y="93.97" smashed="yes" rot="MR270">
 <attribute name="NAME" x="-47.425" y="94.795" size="0.6096" layer="52" rot="MR270"/>
-<attribute name="VALUE" x="-47.425" y="94.705" size="0.6096" layer="28" rot="MR270"/>
+<attribute name="VALUE" x="-48.091" y="93.744" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="R14" library="particle SZ" package="R-0402S" value="1K" x="-76.95" y="87.17" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-74.52" y="86.93" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-75.1" y="86.91" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-74.546" y="86.887" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-75.264" y="87.012" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="R15" library="particle SZ" package="R-0402S" value="20k" x="-49.54" y="93.95" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-49.99" y="94.73" size="0.6096" layer="52" rot="MR270"/>
-<attribute name="VALUE" x="-49.98" y="94.69" size="0.6096" layer="28" rot="MR270"/>
+<attribute name="NAME" x="-49.898" y="94.674" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="VALUE" x="-49.146" y="93.633" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="R16" library="particle SZ" package="R-0402S" value="NC" x="-83.51" y="77.03" smashed="yes" rot="MR180">
 <attribute name="NAME" x="-84.45" y="78.23" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="VALUE" x="-84.1" y="78.14" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="R18" library="particle SZ" package="R-0402S" value="0R" x="-80.74" y="74.23" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-79.76" y="74.52" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-79.83" y="74.52" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="NAME" x="-81.476" y="75.314" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="VALUE" x="-81.275" y="75.243" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="R19" library="particle SZ" package="R-0402S" value="10K" x="-76.91" y="84" smashed="yes" rot="MR180">
 <attribute name="NAME" x="-76.03" y="84.23" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-75.93" y="84.37" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-75.93" y="84.155" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="R20" library="particle SZ" package="R-0402S" value="10K" x="-76.88" y="83.07" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-76.1" y="81.96" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-76.14" y="82.02" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-74.428" y="82.646" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-74.404" y="82.489" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="R21" library="particle SZ" package="R-0402S" value="10K" x="-70.44" y="30.58" smashed="yes" rot="MR270">
 <attribute name="NAME" x="-71.04" y="31.31" size="0.6096" layer="52" rot="MR270"/>
@@ -6211,79 +6217,79 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </element>
 <element name="C60" library="particle SZ" package="C-0402" value="0.1uF" x="-68.66" y="30.09" smashed="yes" rot="MR180">
 <attribute name="NAME" x="-67.69" y="30.4" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-69.68" y="29.57" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-69.357" y="30.157" size="0.6096" layer="28" rot="MR180"/>
 </element>
-<element name="C61" library="particle SZ" package="C-0402" value="1000F" x="-68.69" y="31.04" smashed="yes" rot="MR180">
+<element name="C61" library="particle SZ" package="C-0402" value="1000pF" x="-68.69" y="31.04" smashed="yes" rot="MR180">
 <attribute name="NAME" x="-67.77" y="31.45" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="VALUE" x="-69.5" y="31.37" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="C62" library="particle SZ" package="C-0603A" value="0.1uF" x="-85.66" y="76.9" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-84.87" y="77.66" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="NAME" x="-85.157" y="77.58" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="VALUE" x="-84.69" y="77.55" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="C63" library="particle SZ" package="C-0402" value="1000pF" x="-43.68" y="88.82" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-41.23" y="88.51" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-40.51" y="88.51" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-41.615" y="88.547" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-40.959" y="88.563" size="0.6096" layer="28" rot="MR0"/>
 </element>
-<element name="D4" library="particle SZ" package="C0402" value="nc" x="-61.69" y="13.11" smashed="yes" rot="MR180">
+<element name="D4" library="particle SZ" package="C0402" value="LXES15AAA1-153" x="-61.69" y="13.11" smashed="yes" rot="MR180">
 <attribute name="NAME" x="-62.17" y="12.34" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-60.77" y="13.28" size="0.6096" layer="28" rot="MR180"/>
+<attribute name="VALUE" x="-62.587" y="14.008" size="0.6096" layer="28" rot="MR180"/>
 </element>
-<element name="D5" library="particle SZ" package="C0402" value="nc" x="-63.55" y="13.11" smashed="yes" rot="MR0">
+<element name="D5" library="particle SZ" package="C0402" value="LXES15AAA1-153" x="-63.55" y="13.11" smashed="yes" rot="MR0">
 <attribute name="NAME" x="-63.15" y="11.81" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-64.46" y="12.82" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="VALUE" x="-64.847" y="12.51" size="0.6096" layer="28" rot="MR180"/>
 </element>
-<element name="U$1" library="particle SZ" package="KJL-01304T(13X13MM)" value="SEPAKER" x="-45.5" y="77.3" smashed="yes" rot="MR270"/>
-<element name="R41" library="particle SZ" package="R-0603A" value="NCP18WF104F12RB" x="-55.206" y="68.08" smashed="yes" rot="MR90">
+<element name="U$1" library="particle SZ" package="KJL-01304T(13X13MM)" value="NC" x="-45.5" y="77.3" smashed="yes" rot="MR270"/>
+<element name="R41" library="particle SZ" package="R-0603A" value="ERTJ1VR104FM" x="-55.206" y="68.08" smashed="yes" rot="MR90">
 <attribute name="NAME" x="-55.506" y="68.45" size="0.6096" layer="52" rot="MR90"/>
 <attribute name="VALUE" x="-55.416" y="66.98" size="0.4064" layer="28" rot="MR90"/>
 </element>
 <element name="R22" library="particle SZ" package="R-0402S" value="100K" x="-54.05" y="65.37" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-54.28" y="63.51" size="0.6096" layer="52" rot="MR90"/>
-<attribute name="VALUE" x="-55.13" y="64.72" size="0.6096" layer="28" rot="MR90"/>
+<attribute name="NAME" x="-54.28" y="63.501" size="0.6096" layer="52" rot="MR90"/>
+<attribute name="VALUE" x="-53.873" y="64.128" size="0.6096" layer="28" rot="MR90"/>
 </element>
 <element name="C64" library="particle SZ" package="C-0402" value="2.2uF" x="-54.03" y="67.46" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-53.12" y="68.09" size="0.6096" layer="52" rot="MR270"/>
-<attribute name="VALUE" x="-53.88" y="68.34" size="0.4064" layer="28" rot="MR270"/>
+<attribute name="NAME" x="-53.701" y="69.85" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="VALUE" x="-53.818" y="68.34" size="0.4064" layer="28" rot="MR270"/>
 </element>
 <element name="R12" library="particle SZ" package="R-0402S" value="NC" x="-61.82" y="68.46" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-61.49" y="70.83" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-61.534" y="70.328" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="VALUE" x="-61.54" y="69.06" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="C65" library="particle SZ" package="C-0402" value="NC" x="-62.57" y="67.129" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-63.29" y="66.899" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-62.92" y="66.849" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-63.307" y="66.791" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-62.067" y="66.82" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="U7" library="particle SZ" package="SOT-23-6" value="PT2041A" x="-57.56" y="66.18" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-56.98" y="63.4" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="NAME" x="-57.118" y="65.756" size="0.6096" layer="52" rot="MR0"/>
 <attribute name="VALUE" x="-57.87" y="64.13" size="0.6096" layer="28" rot="MR90"/>
 </element>
 <element name="R23" library="particle SZ" package="R-0402S" value="2K" x="-60.26" y="66.97" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-60.71" y="67.89" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-61.447" y="67.335" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="VALUE" x="-60.77" y="67.32" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="R24" library="particle SZ" package="R-0402S" value="0R" x="-60.66" y="68.43" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-60.34" y="70.75" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="NAME" x="-60.331" y="70.389" size="0.6096" layer="52" rot="MR270"/>
 <attribute name="VALUE" x="-60.34" y="68.92" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="C66" library="particle SZ" package="C-0402" value="33P" x="-60.27" y="65.84" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-60.67" y="65.23" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-60.945" y="65.548" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="VALUE" x="-60.95" y="66.12" size="0.6096" layer="28" rot="MR180"/>
 </element>
-<element name="R25" library="particle SZ" package="R-0402S" value="10k" x="-58.74" y="68.85" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-59.41" y="68.4" size="0.6096" layer="52" rot="MR180"/>
-<attribute name="VALUE" x="-59.22" y="68.44" size="0.6096" layer="28" rot="MR180"/>
+<element name="R25" library="particle SZ" package="R-0402S" value="10K" x="-58.74" y="68.85" smashed="yes" rot="MR180">
+<attribute name="NAME" x="-59.533" y="69.9" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="VALUE" x="-59.537" y="69.919" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="R26" library="particle SZ" package="R-0402S" value="NC" x="-56.9" y="68.85" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-55.99" y="69.27" size="0.6096" layer="52" rot="MR0"/>
-<attribute name="VALUE" x="-56.14" y="69.21" size="0.6096" layer="28" rot="MR0"/>
+<attribute name="NAME" x="-56.072" y="69.331" size="0.6096" layer="52" rot="MR0"/>
+<attribute name="VALUE" x="-56.157" y="69.333" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="C67" library="particle SZ" package="C-0402" value="0.1uF" x="-55.09" y="65.37" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-54.64" y="65.02" size="0.6096" layer="52" rot="MR270"/>
-<attribute name="VALUE" x="-54.11" y="66.2" size="0.6096" layer="28" rot="MR270"/>
+<attribute name="NAME" x="-54.807" y="65.029" size="0.6096" layer="52" rot="MR270"/>
+<attribute name="VALUE" x="-54.807" y="66.212" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="C68" library="particle SZ" package="C1206" value="100uF" x="-62.611" y="39.912" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-59.821" y="40.172" size="0.6096" layer="52" rot="MR180"/>
+<attribute name="NAME" x="-59.97" y="40.19" size="0.6096" layer="52" rot="MR180"/>
 <attribute name="VALUE" x="-61.42" y="39.511" size="0.6096" layer="28" rot="MR0"/>
 </element>
 <element name="+5V_EX" library="particle SZ" package="TP_2X5MM" value="TP2X5MM" x="-66.3" y="26.9" smashed="yes" rot="MR0"/>
@@ -6291,7 +6297,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <element name="GND" library="particle SZ" package="TP_2X5MM" value="TP2X5MM" x="-59.7" y="26.98" smashed="yes" rot="MR0"/>
 <element name="GND115" library="particle SZ" package="TP_2X5MM" value="TP2X5MM" x="-65.5" y="127.13" smashed="yes" rot="MR0"/>
 <element name="DATA1" library="particle SZ" package="TP_2X5MM" value="TP2X5MM" x="-61.3" y="127.13" smashed="yes" rot="MR0"/>
-<element name="D6" library="particle SZ" package="SOD-323" value="LRB551V-30 nc" x="-52.37" y="60.24" smashed="yes" rot="MR45">
+<element name="D6" library="particle SZ" package="SOD-323" value="nc" x="-52.37" y="60.24" smashed="yes" rot="MR45">
 <attribute name="NAME" x="-53.88985625" y="61.06460625" size="0.6096" layer="52" rot="MR45"/>
 <attribute name="VALUE" x="-51.4226125" y="58.88785" size="0.6096" layer="28" rot="MR45"/>
 </element>
@@ -6308,39 +6314,39 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-89.84" y="74.93" size="0.6096" layer="28" rot="MR180"/>
 </element>
 <element name="U5" library="particle SZ" package="SOT-23" value="RT9818C-30GV" x="-50.88" y="56.95" smashed="yes" rot="MR225">
-<attribute name="NAME" x="-48.961978125" y="58.379334375" size="0.6096" layer="52" rot="MR225"/>
+<attribute name="NAME" x="-49.854978125" y="58.684334375" size="0.6096" layer="52" rot="MR225"/>
 <attribute name="VALUE" x="-52.70909375" y="54.757775" size="0.6096" layer="28" rot="MR135"/>
 </element>
 <element name="U8" library="particle SZ" package="SOT-23" value="NC" x="-48.69" y="54.58" smashed="yes" rot="MR225">
-<attribute name="NAME" x="-47.7519875" y="57.0793375" size="0.6096" layer="52" rot="MR225"/>
+<attribute name="NAME" x="-47.6059875" y="56.5363375" size="0.6096" layer="52" rot="MR225"/>
 <attribute name="VALUE" x="-48.00223125" y="55.14909375" size="0.6096" layer="28" rot="MR225"/>
 </element>
-<element name="U$5" library="particle SZ" package="KLJ-01504T" value="SEPAKER15X15MM" x="-46" y="76.88" smashed="yes" rot="MR270"/>
+<element name="U$5" library="particle SZ" package="KLJ-01504T" value="FS-1540" x="-46" y="76.88" smashed="yes" rot="MR270"/>
 <element name="U$6" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="JMP_0603_NC" value="JMP_0603_NC" x="-46.07" y="86.23" smashed="yes" rot="MR270"/>
 <element name="U$7" library="particle-studios" library_urn="urn:adsk.eagle:library:10700396" package="JMP_0603_NC" value="JMP_0603_NC" x="-41.45" y="86.7" smashed="yes" rot="MR270"/>
 <element name="USB1" library="SparkFun-Connectors" package="USB-C-16P" value="" x="-62.995" y="10.724" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-59.591" y="12.321" size="0.762" layer="26" rot="MR0" align="center"/>
+<attribute name="NAME" x="-63.044" y="5.838" size="0.762" layer="26" rot="MR0" align="center"/>
 <attribute name="PROD_ID" value="CONN-14122" x="-62.995" y="10.994" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="-62.995" y="6.914" size="0.762" layer="28" rot="MR0" align="center"/>
 </element>
-<element name="B1" library="particle SZ" package="R-0603A" value="220R" x="-67.456" y="13.482" smashed="yes" rot="MR90">
+<element name="B1" library="particle SZ" package="R-0603A" value="120R" x="-67.456" y="13.482" smashed="yes" rot="MR90">
 <attribute name="NAME" x="-66.756" y="12.696" size="1" layer="26" rot="MR90"/>
 <attribute name="VALUE" x="-66.917" y="12.251" size="0.6096" layer="28" rot="MR90"/>
 </element>
 <element name="R13" library="particle SZ" package="R-0402S" value="200R" x="-61.177" y="101.629" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-60.826" y="104.07" size="0.6096" layer="26" rot="MR270"/>
-<attribute name="VALUE" x="-60.998" y="100.918" size="0.6096" layer="28" rot="MR270"/>
+<attribute name="NAME" x="-60.925" y="100.412" size="0.6096" layer="26" rot="MR270"/>
+<attribute name="VALUE" x="-61.009" y="100.955" size="0.6096" layer="28" rot="MR270"/>
 </element>
 <element name="R27" library="particle SZ" package="R-0402S" value="200R" x="-81.905" y="104.096" smashed="yes" rot="MR150">
 <attribute name="NAME" x="-82.519215625" y="103.027596875" size="0.6096" layer="26" rot="MR150"/>
 <attribute name="VALUE" x="-82.890215625" y="102.932009375" size="0.6096" layer="28" rot="MR150"/>
 </element>
-<element name="C69" library="particle SZ" package="CASE-B" value="100uF nc" x="-56.631" y="61.629" smashed="yes" rot="MR90">
-<attribute name="NAME" x="-60.167" y="60.381" size="1" layer="26" rot="MR90"/>
+<element name="C69" library="particle SZ" package="CASE-B" value="100uF" x="-56.631" y="61.629" smashed="yes" rot="MR90">
+<attribute name="NAME" x="-59.87" y="60.507" size="0.8128" layer="26" rot="MR90"/>
 <attribute name="VALUE" x="-55.279" y="61.159" size="1" layer="28" rot="MR0"/>
 </element>
-<element name="D2" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" package="SOD-123" package3d_urn="urn:adsk.eagle:package:21650836/3" value="NC" x="-62.69" y="37.72" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-58.334" y="37.331" size="1" layer="26" rot="MR0"/>
+<element name="D2" library="particle SZ" library_urn="urn:adsk.eagle:library:21650216" package="SOD-123" package3d_urn="urn:adsk.eagle:package:21650836/3" value="1N5817W" x="-62.69" y="37.72" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-58.51" y="37.375" size="1" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="-58.088" y="37.246" size="1" layer="28" rot="MR0"/>
 </element>
 </elements>

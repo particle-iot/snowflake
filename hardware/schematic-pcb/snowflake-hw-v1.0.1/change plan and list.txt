@@ -1,0 +1,25 @@
+PCB
+done 1, all points were changed from 0.6mm to 0.9 mm 
+done 2, Add www.particle.io - size 40mil
+done 3, Add the Particle with the logo - biggest size possible
+done 4, Reduce the size of the label snowflake v0.0.2 to 40mil
+done 5. Fix music symbol 
+done 6. Adding in a hole in the PCB at the top to allow someone to put a little ornament hook (linked) through to hang on a tree?
+done 7, Chang the Version to  Snowflake 1.0.1
+done 8, Move P2 1.5 mm to the left
+9, Check USB d+d-  impedance 
+10. put the text “Hello” on one of the snowflake arms
+11. Text 1  Designed and built by our global team
+12. Text 2   Say “Sparkle” !
+13. Touch the Particle logo on the front !
+done 14. Particle Logo and Name: 
+done 15，finish artwork silk-screen and soldermask
+
+
+sch 
+done 1, Change R26 to NC
+done 2, Change R25 to  pull-up
+done 3, Delete R13
+done 4, Add 2  Jump  resistance for Speaker VO- VO+,  Default short connection in PCB,  can cut it off with a knife if you want to open the Speaker
+done 5, Add 2  FS-1540
+
