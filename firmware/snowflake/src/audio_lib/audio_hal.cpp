@@ -29,14 +29,6 @@ extern "C" {
 
 #include "check.h"
 
-/*
-
-TODO:
-1. SRAM_NOCACHE_DATA_SECTION 被使用了
-SRAM_NOCACHE_DATA_SECTION static u8 sp_rx_buf[SP_DMA_PAGE_SIZE*SP_DMA_PAGE_NUM]__attribute__((aligned(32)));
-2. tx rx buffer 需要调用 DCache API
-*/
-
 #define SP_DMA_PAGE_SIZE        512ul   // 2 ~ 4096
 #define SP_DMA_PAGE_NUM         4
 #define SP_ZERO_BUF_SIZE        128
@@ -181,7 +173,7 @@ public:
         size_t copyLength = 0;
         uint8_t* p = (uint8_t*)data;
 
-        flush();
+        // flush();
 
         while (copiedSize < size) {
             if (sp_get_ready_rx_page()) {
