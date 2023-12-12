@@ -30,7 +30,7 @@ extern "C" {
 #include "check.h"
 
 #define SP_DMA_PAGE_SIZE        512ul   // 2 ~ 4096
-#define SP_DMA_PAGE_NUM         4
+#define SP_DMA_PAGE_NUM         64      // 64x512 Byte = 32KB, around 1s for 16KHz sample rate and int16 word length
 #define SP_ZERO_BUF_SIZE        128
 #define SP_FULL_BUF_SIZE        128
 
@@ -440,8 +440,8 @@ private:
     SP_TX_INFO sp_tx_info;
     SP_RX_INFO sp_rx_info;
     u8 sp_tx_buf[SP_DMA_PAGE_SIZE*SP_DMA_PAGE_NUM] __attribute__((aligned(32)));
-    u8 sp_zero_buf[SP_ZERO_BUF_SIZE] __attribute__((aligned(32)));
     u8 sp_rx_buf[SP_DMA_PAGE_SIZE*SP_DMA_PAGE_NUM] __attribute__((aligned(32)));
+    u8 sp_zero_buf[SP_ZERO_BUF_SIZE] __attribute__((aligned(32)));
     u8 sp_full_buf[SP_FULL_BUF_SIZE] __attribute__((aligned(32)));
 };
 
