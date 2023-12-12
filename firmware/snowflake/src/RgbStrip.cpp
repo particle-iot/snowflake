@@ -42,7 +42,7 @@ FixedColorProvider fixedColorProviderBlue = FixedColorProvider( hanukkah_blue );
 GlowColorProvider glowColorProviderBlue = GlowColorProvider( hanukkah_blue, hanukkah_blue_highlight, 2500 );
 
 
-RgbStrip::RgbStrip() 
+RgbStrip::RgbStrip()
 : mode_(MODES_T::MODE_OFF) {
     strip_ = new Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
 
@@ -126,7 +126,7 @@ RgbStrip::RgbStrip()
                 LEDEffectPixelAndColor( wavePixelProvider5, fixedColorProviderRed )
             };
 
-        //Global effect providers  
+        //Global effect providers
         BlurSpecialEffectProvider blurSpecialEffectProvider = BlurSpecialEffectProvider( 25 );
         LEDSpecialEffect blurEffectNormal = LEDSpecialEffect( blurSpecialEffectProvider );
 
@@ -229,7 +229,7 @@ RgbStrip::RgbStrip()
                 frameCount = 0;
                 lastFrameTime = timeNow;
             }
-  
+
             //delay enough to round timeNow up to the next frame
             int32_t delayTime = (1000 / MAX_FRAMERATE) - (millis() - timeNow);
             if( delayTime > 0 )
@@ -237,7 +237,7 @@ RgbStrip::RgbStrip()
                 delay( delayTime );
             }
         }
-    });
+    }, OS_THREAD_PRIORITY_NETWORK, OS_THREAD_STACK_SIZE_DEFAULT_NETWORK);
 }
 
 RgbStrip::~RgbStrip() {

@@ -7,6 +7,7 @@
 #include "AudioPlayer.h"
 #include "MP3Player.h"
 #include "TonePlayer.h"
+#include "VoicePulse.h"
 
 //#define DEBUG_STARTUP_DELAY
 #define FIXED_AUDIO_TONE
@@ -50,6 +51,9 @@ MP3Player mp3Player = MP3Player(&audioPlayer);
 
 //tone player
 TonePlayer tonePlayer = TonePlayer(&audioPlayer);
+
+//voice pulse
+VoicePulse voicePulse = VoicePulse(&audioPlayer);
 
 //list of songs to play and index of the current song
 std::vector<String> songs;
