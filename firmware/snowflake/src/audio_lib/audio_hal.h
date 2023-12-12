@@ -53,6 +53,7 @@ int hal_audio_init(hal_audio_out_device_t outDevice, hal_audio_mode_t monoStereo
 int hal_audio_deinit();
 int hal_audio_read_dmic(void* data, size_t size);
 int hal_audio_write_lineout(const void* data, size_t size);
+int hal_audio_flush();
 
 #ifdef __cplusplus
 }

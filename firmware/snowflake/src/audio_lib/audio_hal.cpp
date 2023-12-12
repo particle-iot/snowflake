@@ -491,3 +491,8 @@ int hal_audio_read_dmic(void* data, size_t size) {
 int hal_audio_write_lineout(const void* data, size_t size) {
     return audioSP.write(data, size);
 }
+
+int hal_audio_flush() {
+    audioSP.flush();
+    return 0;
+}
