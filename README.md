@@ -15,9 +15,6 @@ The Particle Snowflake has the following components to provide a complete experi
 - Onboard speaker to play festive tunes
 - PDM microphone to enable additional features
 
-
-![Pole Mount](./assets/Pole_Mount.png)
-
 ## Repository Contents
 
 This repository consists of a firmware folder, a hardware folder, and an assets folder.
