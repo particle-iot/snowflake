@@ -3,7 +3,7 @@
 Welcome to the repository for the Particle Snowflake
 , a limited edition [Particle P2](https://store.particle.io/products/p2-wi-fi-module-cut-tape-x10) powered PCBA in the form of a snowflake. The Snowflake provides a seasonal light show and plays a classic holiday tune.
 
-![PCBA](./assets/Snowflake_Midnight_Web.png)
+![PCBA](./media/Snowflake_Midnight_Web.png)
 
 This repository contains all of the firmware and hardware assets required to build the Particle Snowflake.
 
@@ -40,9 +40,9 @@ The hardware folder contains detailed design files that can be used for manufact
 
 The asset folder contains images and a video illustrating various aspects of the Particle Snowflake. These include:
 
-- [Front of PCBA](./assets/Snowflake_Front_Midnight.png)
-- [Back of PCBA](./assets/Snowflake_Back_Midnight.png)
-- [Video of the various light patterns](./assets/Snowflake_Action.mp4)
+- [Front of PCBA](./media/Snowflake_Front_Midnight.png)
+- [Back of PCBA](./media/Snowflake_Back_Midnight.png)
+- [Video of the various light patterns](./media/Snowflake_Action.mp4)
 
 ## Usage
 
