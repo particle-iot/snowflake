@@ -61,8 +61,8 @@ TonePlayer tonePlayer = TonePlayer(&audioPlayer);
 static void sparkleDetectedCallback( void );
 static bool sparkleMode = false;
 
-//voice pulse
-VoicePulse voicePulse = VoicePulse(&audioPlayer, sparkleDetectedCallback, 0.5f);
+//voice pulse. threshold of .72 is somewhat arbitariily chosen from testing - it might be too high / low
+VoicePulse voicePulse = VoicePulse(&audioPlayer, sparkleDetectedCallback, 0.72f);
 
 //list of songs to play and index of the current song
 std::vector<String> songs;

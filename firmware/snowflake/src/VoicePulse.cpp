@@ -68,12 +68,10 @@ void VoicePulse::start() {
 
             if (++sliceCounter_ >= (EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW)) {
                 // print the predictions
-                VP_DBG_PRINTF("Predictions ");
-                VP_DBG_PRINTF("(DSP: %d ms., Classification: %d ms., Anomaly: %d ms.)",
+                LOG(ERROR,"TFLite: DSP: %d ms., Classification: %d ms., Anomaly: %d ms.",
                     result.timing.dsp, result.timing.classification, result.timing.anomaly);
-                VP_DBG_PRINTF(": \r\n");
                 for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
-                    VP_DBG_PRINTF("    %s: %.5f\r\n", result.classification[ix].label,
+                    LOG(ERROR,"    Classification: %s: %.5f", result.classification[ix].label,
                             result.classification[ix].value);
                 }
 
