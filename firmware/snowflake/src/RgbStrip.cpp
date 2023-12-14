@@ -210,6 +210,10 @@ RgbStrip::RgbStrip()
 
                 case MODE_SPARKLE:
                     //emulate a super star effect
+                    for (size_t i = 0; i < (sizeof(rainbowEffects) / sizeof(LEDEffectPixelAndColor)); i++)
+                    {
+                        rainbowEffects[i].process( leds, 36, timeNow * 8 );
+                    }
                 break;
 
                 default:

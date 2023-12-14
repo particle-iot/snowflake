@@ -9,7 +9,7 @@
 #include "TonePlayer.h"
 #include "VoicePulse.h"
 
-#define DEBUG_STARTUP_DELAY
+//#define DEBUG_STARTUP_DELAY
 #define SUPPORT_AUDIO_TONE
 #define SUPPORT_MP3_PLAYBACK
 #define SUPPORT_VOICE_DETECTION
@@ -32,7 +32,10 @@ SYSTEM_THREAD(ENABLED);
 //enable the reset reason feature
 STARTUP(System.enableFeature(FEATURE_RESET_INFO));
 
-SerialLogHandler logHandler(LOG_LEVEL_INFO);
+//Default to the internall antenna
+STARTUP(WiFi.selectAntenna(ANT_INTERNAL));
+
+SerialLogHandler logHandler(LOG_LEVEL_ERROR);
 
 //The particle logo on the front is a button - this is the controller for it
 static constexpr int TOUCH_PIN = D10;
@@ -196,7 +199,9 @@ void loop()
                 Log.info("SINGLE click");
                 //inc mode
                 mode = (RgbStrip::MODES_T)((mode + 1) % RgbStrip::MODE_MAX);
-                if( mode == RgbStrip::MODE_OFF ) { // don't allow off to be selected by default as its just used for bootup
+
+                // don't allow these to be selected by default as its just used for bootup or the secret..
+                if( (mode == RgbStrip::MODE_OFF) || (mode == RgbStrip::MODE_SPARKLE) ) { 
                     mode = RgbStrip::MODE_SNOWFLAKE;
                 }
                 rgbStrip->setMode(mode);

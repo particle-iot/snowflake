@@ -1,9 +1,9 @@
 #include "VoicePulse.h"
 #include "Sparkle_inferencing.h"
 
-#define VP_DBG 1
+#define VP_DBG 0
 #if VP_DBG
-#define VP_DBG_INFO(fmt, ...) LOG(INFO, fmt, ##__VA_ARGS__)
+#define VP_DBG_INFO(fmt, ...) LOG(INFO, fmt "\r\n", ##__VA_ARGS__)
 #define VP_DBG_PRINTF(fmt, ...) LOG(INFO, fmt, ##__VA_ARGS__)
 #else
 #define VP_DBG_INFO(fmt, ...)
@@ -24,12 +24,7 @@ VoicePulse::VoicePulse(AudioPlayer* audioPlayer, VoicePulseDetectedCb callback, 
 
 void VoicePulse::start() {
     // Initialize the audio player
-    if (0 == audioPlayer_->aquireLock()) {
-        //audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
-        audioPlayer_->releaseLock();
-    } else {
-        VP_DBG_INFO("VoicePusle: failed to aquire audio lock");
-    }
+    audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
 
     // Initialize the classifier
     run_classifier_init();
@@ -46,7 +41,7 @@ void VoicePulse::start() {
                                                 sizeof(ei_classifier_inferencing_categories[0]));
 
         while (1) {
-            LOG(INFO, "voicePulse thread running...");
+            //LOG(INFO, "voicePulse thread running...");
 
             // Get a slice of audio data
             audioPlayer_->recordBuffer(sampleBuffer_, sampleBufferSize);

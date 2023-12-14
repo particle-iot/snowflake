@@ -35,11 +35,12 @@ class AudioPlayer
           if (!init)
           {
               hal_audio_init(HAL_AUDIO_OUT_DEVICE_LINEOUT, mode, sampleRate, wordLen);
+
+              pinMode(SPEAKER_EN_PIN, OUTPUT);
+              digitalWrite(SPEAKER_EN_PIN, 1);
+
               init = true;
           }
-
-          pinMode(SPEAKER_EN_PIN, OUTPUT);
-          digitalWrite(SPEAKER_EN_PIN, 1);
       }
   
       void playBuffer( const uint16_t *buffer, size_t size ) {
