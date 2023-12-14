@@ -23,6 +23,7 @@ public:
         MODE_CHASE_HOLIDAY,
         MODE_CIRCLES_ROTATE,
         MODE_WAVE_SPINNER,
+        MODE_SPARKLE,
 
         MODE_MAX
     };

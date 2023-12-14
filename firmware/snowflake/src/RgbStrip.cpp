@@ -208,6 +208,10 @@ RgbStrip::RgbStrip()
                     blurEffectFast.process( leds, 36, timeNow );
                 break;
 
+                case MODE_SPARKLE:
+                    //emulate a super star effect
+                break;
+
                 default:
                 break;
             }

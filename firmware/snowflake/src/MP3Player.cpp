@@ -10,14 +10,25 @@ MP3Player::MP3Player( AudioPlayer* audioPlayer )
     thread_ = new Thread("mp3Player", [this]()->os_thread_return_t{
 
         while (1) {
-            String *songPtr = NULL;
+            MP3PlayerQueueItem *item = NULL;
 
-            if( 0 == os_queue_take(queue_, &songPtr, CONCURRENT_WAIT_FOREVER, 0) ) {
-               Log.info("MP3Player:: got song from queue: %s", songPtr->c_str());
+            if( 0 == os_queue_take(queue_, &item, CONCURRENT_WAIT_FOREVER, 0) ) {
+               Log.info("MP3Player:: got song from queue: %s", item->filename->c_str());
 
-                internalPlaySong(*songPtr);
+                //if there is a callback, call it
+                if( item->callback ) {
+                    item->callback(true);
+                }
 
-                delete songPtr;
+                internalPlaySong(*(item->filename));
+
+                //if there is a callback, call it
+                if( item->callback ) {
+                    item->callback(false);
+                }
+
+                delete item->filename;
+                delete item;
             }
         }
     }, OS_THREAD_PRIORITY_NETWORK_HIGH, OS_THREAD_STACK_SIZE_DEFAULT_NETWORK );

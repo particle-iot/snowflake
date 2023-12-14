@@ -47,6 +47,10 @@ class AudioPlayer
           hal_audio_write_lineout(buffer, size);
       }
 
+      size_t recordBuffer( int16_t *buffer, size_t maxSize ) {
+          return hal_audio_read_dmic(buffer, maxSize);
+      }
+
       void playTone( const uint32_t freq, const uint32_t duractionInMS );
 
   private:

@@ -3,8 +3,8 @@
 
 #define VP_DBG 1
 #if VP_DBG
-#define VP_DBG_INFO(fmt, ...) LOG(ERROR, fmt "\r\n", ##__VA_ARGS__)
-#define VP_DBG_PRINTF(fmt, ...) LOG_PRINTF(ERROR, fmt, ##__VA_ARGS__)
+#define VP_DBG_INFO(fmt, ...) LOG(INFO, fmt, ##__VA_ARGS__)
+#define VP_DBG_PRINTF(fmt, ...) LOG(INFO, fmt, ##__VA_ARGS__)
 #else
 #define VP_DBG_INFO(fmt, ...)
 #define VP_DBG_PRINTF(fmt, ...)
@@ -12,47 +12,46 @@
 
 static constexpr size_t sampleBufferSize = (EI_CLASSIFIER_SLICE_SIZE * 2);
 
-VoicePulse::VoicePulse(AudioPlayer* audioPlayer) :
-                        audioPlayer_(audioPlayer) {
-    // Summary of inferencing settings (from model_metadata.h)
-    VP_DBG_PRINTF("Inferencing settings:\r\n");
-    VP_DBG_PRINTF("\tInterval: %.2f ms.\r\n", (float)EI_CLASSIFIER_INTERVAL_MS);
-    VP_DBG_PRINTF("\tFrame size: %d\r\n", EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
-    VP_DBG_PRINTF("\tSample length: %d ms.\r\n", EI_CLASSIFIER_RAW_SAMPLE_COUNT / 16);
-    VP_DBG_PRINTF("\tNo. of classes: %d\r\n", sizeof(ei_classifier_inferencing_categories) /
-                                            sizeof(ei_classifier_inferencing_categories[0]));
-
+VoicePulse::VoicePulse(AudioPlayer* audioPlayer, VoicePulseDetectedCb callback, float threshold) :
+                        audioPlayer_(audioPlayer),
+                        callback_(callback),
+                        threshold_(threshold) {
     // Allocate buffer for audio samples
     sampleBuffer_ = (int16_t*)malloc(sampleBufferSize * sizeof(int16_t));
     SPARK_ASSERT(sampleBuffer_ != nullptr);
 
+}
+
+void VoicePulse::start() {
     // Initialize the audio player
     if (0 == audioPlayer_->aquireLock()) {
-        audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
+        //audioPlayer_->setOutput(HAL_AUDIO_MODE_MONO, HAL_AUDIO_SAMPLE_RATE_16K, HAL_AUDIO_WORD_LEN_16);
         audioPlayer_->releaseLock();
     } else {
         VP_DBG_INFO("VoicePusle: failed to aquire audio lock");
     }
-
-    // Control the RGB to indicate the recognition result
-    RGB.control(true);
-    RGB.color(255, 255, 255); // white
 
     // Initialize the classifier
     run_classifier_init();
 
     // Create voice thread
     thread_ = new Thread("VoicePulse", [this]()->os_thread_return_t{
+
+        // Summary of inferencing settings (from model_metadata.h)
+        VP_DBG_PRINTF("Inferencing settings:");
+        VP_DBG_PRINTF("\tInterval: %.2f ms.", (float)EI_CLASSIFIER_INTERVAL_MS);
+        VP_DBG_PRINTF("\tFrame size: %d", EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
+        VP_DBG_PRINTF("\tSample length: %d ms.", EI_CLASSIFIER_RAW_SAMPLE_COUNT / 16);
+        VP_DBG_PRINTF("\tNo. of classes: %d", sizeof(ei_classifier_inferencing_categories) /
+                                                sizeof(ei_classifier_inferencing_categories[0]));
+
         while (1) {
             LOG(INFO, "voicePulse thread running...");
-            // No need to aquire the lock here, because VoicePulse only read data
-            // if(0 == audioPlayer_->aquireLock()) {
-                // Get a slice of audio data
-                hal_audio_read_dmic(sampleBuffer_, sampleBufferSize);
-                // audioPlayer_->releaseLock();
-            // } else {
-            //     VP_DBG_INFO("VoicePusle: failed to aquire audio lock");
-            // }
+
+            // Get a slice of audio data
+            audioPlayer_->recordBuffer(sampleBuffer_, sampleBufferSize);
+
+            VP_DBG_PRINTF("recordBuffer done");
 
             // Run classifier
             signal_t signal;
@@ -61,12 +60,16 @@ VoicePulse::VoicePulse(AudioPlayer* audioPlayer) :
                 return this->microphone_audio_signal_get_data(offset, length, out_ptr);
             };
 
+            VP_DBG_PRINTF("signal.get_data done");
+
             ei_impulse_result_t result = {0};
             EI_IMPULSE_ERROR r = run_classifier_continuous(&signal, &result, false);
             if (r != EI_IMPULSE_OK) {
                 VP_DBG_PRINTF("ERR: Failed to run classifier (%d)\r\n", r);
-                continue;
+                continue; 
             }
+
+            VP_DBG_PRINTF("run_classifier_continuous done");
 
             if (++sliceCounter_ >= (EI_CLASSIFIER_SLICES_PER_MODEL_WINDOW)) {
                 // print the predictions
@@ -81,11 +84,8 @@ VoicePulse::VoicePulse(AudioPlayer* audioPlayer) :
 
                 // Indicate the recognition result
                 // classification,  0: "sparkle", 1: "unknown"
-                // FIXME: The threshold value is set to 0.5 for now.
-                if (result.classification[0].value > 0.5) {
-                    RGB.color(0, 255, 0); // green
-                } else {
-                    RGB.color(255, 255, 255); // white
+                if (result.classification[0].value > threshold_) {
+                    callback_();
                 }
 
         #if EI_CLASSIFIER_HAS_ANOMALY == 1
@@ -98,20 +98,6 @@ VoicePulse::VoicePulse(AudioPlayer* audioPlayer) :
         }
     }, OS_THREAD_PRIORITY_NETWORK, OS_THREAD_STACK_SIZE_DEFAULT);
     SPARK_ASSERT(thread_ != nullptr);
-}
-
-VoicePulse::~VoicePulse() {
-    if (sampleBuffer_) {
-        free(sampleBuffer_);
-        sampleBuffer_ = nullptr;
-    }
-
-    if (thread_) {
-        delete thread_;
-        thread_ = nullptr;
-    }
-
-    RGB.control(false);
 }
 
 int VoicePulse::microphone_audio_signal_get_data(size_t offset, size_t length, float* out_ptr) {
