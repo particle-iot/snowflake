@@ -55,7 +55,7 @@
 #define EI_CLASSIFIER_PROJECT_ID                 296245
 #define EI_CLASSIFIER_PROJECT_OWNER              "Particle"
 #define EI_CLASSIFIER_PROJECT_NAME               "Sparkle"
-#define EI_CLASSIFIER_PROJECT_DEPLOY_VERSION     5
+#define EI_CLASSIFIER_PROJECT_DEPLOY_VERSION     15
 #define EI_CLASSIFIER_NN_INPUT_FRAME_SIZE        637
 #define EI_CLASSIFIER_RAW_SAMPLE_COUNT           16000
 #define EI_CLASSIFIER_RAW_SAMPLES_PER_FRAME      1
@@ -90,15 +90,7 @@
 #define EI_CLASSIFIER_LOAD_IMAGE_SCALING         0
 
 
-#define EI_CLASSIFIER_HAS_FFT_INFO               1
-#define EI_CLASSIFIER_LOAD_FFT_32                1
-#define EI_CLASSIFIER_LOAD_FFT_64                0
-#define EI_CLASSIFIER_LOAD_FFT_128               0
-#define EI_CLASSIFIER_LOAD_FFT_256               0
-#define EI_CLASSIFIER_LOAD_FFT_512               1
-#define EI_CLASSIFIER_LOAD_FFT_1024              0
-#define EI_CLASSIFIER_LOAD_FFT_2048              0
-#define EI_CLASSIFIER_LOAD_FFT_4096              0
+#define EI_CLASSIFIER_HAS_FFT_INFO               0
 
 #define EI_DSP_PARAMS_GENERATED 1
 
