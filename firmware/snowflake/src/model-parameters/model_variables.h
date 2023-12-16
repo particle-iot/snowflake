@@ -94,8 +94,8 @@ const ei_model_performance_calibration_t ei_calibration = {
     1, /* integer version number */
     true, /* has configured performance calibration */
     2, /* average duration window ms */
-    0.5179104832044601, /* detection threshold */
-    679,  /* suppression ms */
+    0.4379104832044601, /* detection threshold */
+    2000,  /* suppression ms */
     0x1, /* suppression flags */
 };
 
