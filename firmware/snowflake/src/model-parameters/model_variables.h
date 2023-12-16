@@ -93,17 +93,17 @@ const ei_learning_block_t ei_learning_blocks[ei_learning_blocks_size] = {
 const ei_model_performance_calibration_t ei_calibration = {
     1, /* integer version number */
     true, /* has configured performance calibration */
-    425, /* average duration window ms */
-    0.5608820229064082, /* detection threshold */
-    747,  /* suppression ms */
+    2, /* average duration window ms */
+    0.5179104832044601, /* detection threshold */
+    679,  /* suppression ms */
     0x1, /* suppression flags */
 };
 
-const ei_impulse_t impulse_296245_5 = {
+const ei_impulse_t impulse_296245_15 = {
     .project_id = 296245,
     .project_owner = "Particle",
     .project_name = "Sparkle",
-    .deploy_version = 5,
+    .deploy_version = 15,
 
     .nn_input_frame_size = 637,
     .raw_sample_count = 16000,
@@ -140,6 +140,6 @@ const ei_impulse_t impulse_296245_5 = {
     .categories = ei_classifier_inferencing_categories
 };
 
-const ei_impulse_t ei_default_impulse = impulse_296245_5;
+const ei_impulse_t& ei_default_impulse = impulse_296245_15;
 
 #endif // _EI_CLASSIFIER_MODEL_METADATA_H_
