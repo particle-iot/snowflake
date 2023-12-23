@@ -338,7 +338,7 @@ int cloudMode(String command)
         return 0;
     }
 
-    if(command == "chase" || command == "chase holiday" || ){
+    if(command == "chase" || command == "chase holiday"){
         Log.info("Particle Cloud: Chase Holiday mode");
         mode = RgbStrip::MODE_CHASE_HOLIDAY; 
         rgbStrip->setMode(mode);
