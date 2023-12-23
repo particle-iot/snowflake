@@ -98,6 +98,10 @@ void setup()
     particleButton.multiclickTime = 250;  // Time limit for multi clicks
     particleButton.longClickTime  = 1000; // time until "held-down clicks" register
 
+    // Particle Function to control Mode
+    Particle.function("Mode", cloudMode);
+
+    
     // find all mp3 files in the assets system disk and create a list of them for later
     auto assets = System.assetsAvailable();
     for (auto& asset: assets)
@@ -249,4 +253,122 @@ static void sparkleDetectedCallback( void ) {
     
     //set the sparkle mode
     sparkleMode = true;
+}
+
+//Cloud Functions
+int cloudMode(String command)
+{
+    command.toLowerCase();
+    
+    if(command == "sparkle" || command == "s"){
+        Log.info("Particle Cloud: Sparkle Mode!");
+        sparkleMode = true;
+        return 0;
+    }
+    
+    if(command == "off"){
+        Log.info("Particle Cloud: LEDs Off mode");
+        mode = RgbStrip::MODE_OFF; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+    
+    #ifdef SUPPORT_AUDIO_TONE
+    //play a two-tone beep boop for all other mode changes
+    //this will fail if already playing a song
+    tonePlayer.play( TonePlayer::TONE_SEQUENCE_TWO_TONE );
+    #endif
+    
+    if(command == "next" || command == "n" ){
+        Log.info("Particle Cloud: Next mode");
+        mode = (RgbStrip::MODES_T)((mode + 1) % RgbStrip::MODE_MAX);
+
+        // don't allow these to be selected by default as its just used for bootup or the secret..
+        if( (mode == RgbStrip::MODE_OFF) || (mode == RgbStrip::MODE_SPARKLE) ) { 
+            mode = RgbStrip::MODE_SNOWFLAKE;
+        }
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "prev" || command == "p" || command == "previous" ){
+        Log.info("Particle Cloud: Prev mode");
+        if( (mode == RgbStrip::MODE_OFF) || (mode + 1 == RgbStrip::MODE_OFF) ) {
+            //skip over sparkle mode and off mode
+            mode = RgbStrip::MODE_MAX - 2;
+        }
+        else {
+            mode = (RgbStrip::MODES_T)((mode - 1));
+        }
+        
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "snowflake"){
+        Log.info("Particle Cloud: *Snowflake* mode");
+        mode = RgbStrip::MODE_SNOWFLAKE; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "hanukkah"){
+        Log.info("Particle Cloud: Hanukkah mode");
+        mode = RgbStrip::MODE_HANUKKAH; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "rainbow"){
+        Log.info("Particle Cloud: Rainbow mode");
+        mode = RgbStrip::MODE_RAINBOW; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "chase" || command == "chase holiday" || ){
+        Log.info("Particle Cloud: Chase Holiday mode");
+        mode = RgbStrip::MODE_CHASE_HOLIDAY; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+    
+    if(command == "circles" || command == "circle" || command == "circles rotate"){
+        Log.info("Particle Cloud: Circles Rotate mode");
+        mode = RgbStrip::MODE_CIRCLES_ROTATE; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "wave" || command == "wave spinner"){
+        Log.info("Particle Cloud: Wave Spinner mode");
+        mode = RgbStrip::MODE_WAVE_SPINNER; 
+        rgbStrip->setMode(mode);
+        settings.set("ledMode", String(mode));
+        settings.store();
+        return 0;
+    }
+
+    if(command == "reset"){
+        System.reset();
+        return 1;
+    }
+    
+    return -1;
 }
