@@ -299,7 +299,7 @@ int cloudMode(String command)
         Log.info("Particle Cloud: Prev mode");
         if( (mode == RgbStrip::MODE_OFF) || (mode + 1 == RgbStrip::MODE_OFF) ) {
             //skip over sparkle mode and off mode
-            mode = RgbStrip::MODE_MAX - 2;
+            mode = (RgbStrip::MODES_T)((RgbStrip::MODE_MAX) - 2);
         }
         else {
             mode = (RgbStrip::MODES_T)((mode - 1));
