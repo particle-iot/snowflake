@@ -20,8 +20,8 @@
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3/minimp3.h"
 
-//Firmware version 1.1.00
-PRODUCT_VERSION(1100);
+//Firmware version 1.2.00
+PRODUCT_VERSION(1200);
 
 // Let Device OS manage the connection to the Particle Cloud
 SYSTEM_MODE(SEMI_AUTOMATIC);
@@ -161,6 +161,7 @@ void loop()
 
     //If we are in 'sparkle' mode, run the basic sparkle animation and play the audio, detecting when it finishes and then resuming the previous animation mode
     if( sparkleMode && !localSparkleMode ) {
+
         //only start sparkle mode if we are not already playing an MP3
         if( !mp3IsPlaying ) {
             //entering sparkle mode 
@@ -246,7 +247,14 @@ void loop()
 
 static void sparkleDetectedCallback( void ) {
     Log.info("Sparkle Detected!");
-    
-    //set the sparkle mode
-    sparkleMode = true;
+    bool sparkleEnable = true;
+
+    String sparkleEnableSetting = settings.get("sparkleEnable");
+    if (sparkleEnableSetting.length() > 0) {
+        //set the sparkleEnable
+        sparkleEnable = (bool)sparkleEnableSetting.toInt();
+    }
+
+    //set the sparkle mode based on sparkleEnable
+    sparkleMode = sparkleEnable;
 }

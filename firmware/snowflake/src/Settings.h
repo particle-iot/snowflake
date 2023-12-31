@@ -20,6 +20,9 @@ class Settings {
       //a defaults setting table
       // ledMode:0
 
+      int settingsReadFunction(String extra);
+      int settingsWriteFunction(String extra);
+
       //the settings - a vector of key value pairs
       std::vector<std::pair<String, String>> settings_;
 };
