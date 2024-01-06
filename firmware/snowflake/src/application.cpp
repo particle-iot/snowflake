@@ -244,10 +244,16 @@ void loop()
     }
 }
 
-
+//Note - the sparkle voice detection is disabled by default!
+//To enable:
+// - View your device in the Particle console
+// - On the right side where there are functions listed, find 'settingsWrite'
+// - Into this box, please put sparkleEnable=1 and then press Call (making sure your device is online)
+// - It will enable this feature on your device.
+// - You can also just change bool sparkleEnable = false; to true in the code :)
 static void sparkleDetectedCallback( void ) {
     Log.info("Sparkle Detected!");
-    bool sparkleEnable = true;
+    bool sparkleEnable = false;
 
     String sparkleEnableSetting = settings.get("sparkleEnable");
     if (sparkleEnableSetting.length() > 0) {
