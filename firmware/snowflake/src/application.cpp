@@ -68,6 +68,16 @@ VoicePulse voicePulse = VoicePulse(&audioPlayer, sparkleDetectedCallback, 0.72f)
 std::vector<String> songs;
 uint32_t songIndex = 0;
 
+//forward for the function that controls the mode
+static int cloudMode(String command);
+
+static void setMode( RgbStrip::MODES_T newMode ) {
+    rgbStrip->setMode(mode);
+    settings.set("ledMode", String(mode));
+    settings.store();
+}
+
+
 void setup()
 {
     // //wait for usb  to connect
@@ -101,7 +111,6 @@ void setup()
     // Particle Function to control Mode
     Particle.function("Mode", cloudMode);
 
-    
     // find all mp3 files in the assets system disk and create a list of them for later
     auto assets = System.assetsAvailable();
     for (auto& asset: assets)
@@ -209,11 +218,7 @@ void loop()
                 if( (mode == RgbStrip::MODE_OFF) || (mode == RgbStrip::MODE_SPARKLE) ) { 
                     mode = RgbStrip::MODE_SNOWFLAKE;
                 }
-                rgbStrip->setMode(mode);
-
-                //store the updated setting
-                settings.set("ledMode", String(mode));
-                settings.store();
+                setMode( mode );
 
                 #ifdef SUPPORT_AUDIO_TONE
                     //play a two-tone beep boop when switching the display mode
@@ -270,29 +275,26 @@ static void sparkleDetectedCallback( void ) {
 }
 
 //Cloud Functions
-int cloudMode(String command)
+//Contributed by Github user: niabassey
+static int cloudMode(String command)
 {
     command.toLowerCase();
     
     if(command == "sparkle" || command == "s"){
         Log.info("Particle Cloud: Sparkle Mode!");
         sparkleMode = true;
-        return 0;
     }
     
     if(command == "off"){
         Log.info("Particle Cloud: LEDs Off mode");
         mode = RgbStrip::MODE_OFF; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
     
     #ifdef SUPPORT_AUDIO_TONE
-    //play a two-tone beep boop for all other mode changes
-    //this will fail if already playing a song
-    tonePlayer.play( TonePlayer::TONE_SEQUENCE_TWO_TONE );
+        //play a two-tone beep boop for all other mode changes
+        //this will fail if already playing a song
+        tonePlayer.play( TonePlayer::TONE_SEQUENCE_TWO_TONE );
     #endif
     
     if(command == "next" || command == "n" ){
@@ -303,10 +305,7 @@ int cloudMode(String command)
         if( (mode == RgbStrip::MODE_OFF) || (mode == RgbStrip::MODE_SPARKLE) ) { 
             mode = RgbStrip::MODE_SNOWFLAKE;
         }
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "prev" || command == "p" || command == "previous" ){
@@ -319,70 +318,48 @@ int cloudMode(String command)
             mode = (RgbStrip::MODES_T)((mode - 1));
         }
         
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "snowflake"){
         Log.info("Particle Cloud: *Snowflake* mode");
         mode = RgbStrip::MODE_SNOWFLAKE; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "hanukkah"){
         Log.info("Particle Cloud: Hanukkah mode");
-        mode = RgbStrip::MODE_HANUKKAH; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "rainbow"){
         Log.info("Particle Cloud: Rainbow mode");
         mode = RgbStrip::MODE_RAINBOW; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "chase" || command == "chase holiday"){
         Log.info("Particle Cloud: Chase Holiday mode");
         mode = RgbStrip::MODE_CHASE_HOLIDAY; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
     
     if(command == "circles" || command == "circle" || command == "circles rotate"){
         Log.info("Particle Cloud: Circles Rotate mode");
         mode = RgbStrip::MODE_CIRCLES_ROTATE; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "wave" || command == "wave spinner"){
         Log.info("Particle Cloud: Wave Spinner mode");
         mode = RgbStrip::MODE_WAVE_SPINNER; 
-        rgbStrip->setMode(mode);
-        settings.set("ledMode", String(mode));
-        settings.store();
-        return 0;
+        setMode(mode);
     }
 
     if(command == "reset"){
         System.reset();
         return 1;
     }
-    
+
     return -1;
 }
