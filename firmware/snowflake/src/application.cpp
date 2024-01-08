@@ -329,6 +329,7 @@ static int cloudMode(String command)
 
     if(command == "hanukkah"){
         Log.info("Particle Cloud: Hanukkah mode");
+        mode = RgbStrip::MODE_HANUKKAH;
         setMode(mode);
     }
 
