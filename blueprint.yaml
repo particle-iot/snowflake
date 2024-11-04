@@ -12,5 +12,6 @@ integrations: [ "edge-impulse" ]
 hardwareDependencies:
   - name: Particle Snowflake
     link: https://www.particle.io/snowflake/
+    tags: [ "Snowflake", "P2", "Photon 2" ]
 description: |
   Embrace the holiday season with the Particle Snowflake! Taking the form of a snowflake, this Particle P2 WiFi module powered PCBA twinkles its LEDs to provide a seasonal light show. Use it as a tree topper, an ornament, or a standalone decoration with the right USB-C stand.
