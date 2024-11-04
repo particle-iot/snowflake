@@ -1,0 +1,16 @@
+id: particle/snowflake
+category: application
+icon: particle.png
+gitrepo: https://github.com/particle-iot/snowflake
+name: "Snowflake Application"
+shortDescription: "Snowflake app - wake word detection, LEDs, sound effects and holiday charm!"
+version: 1.0.2
+models: []
+language: [ "Particle Wiring" ]
+cloudServices: [ ]
+integrations: [ "edge-impulse" ]
+hardwareDependencies:
+  - name: Particle Snowflake
+    link: https://www.particle.io/snowflake/
+description: |
+  Embrace the holiday season with the Particle Snowflake! Taking the form of a snowflake, this Particle P2 WiFi module powered PCBA twinkles its LEDs to provide a seasonal light show. Use it as a tree topper, an ornament, or a standalone decoration with the right USB-C stand.
