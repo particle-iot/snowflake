@@ -1,6 +1,10 @@
 id: particle/snowflake
-category: application
-icon: particle.png
+slug: particle-snowflake
+type: application
+category: "AI and machine learning"
+expertiseLevel: ""
+tags: ["AI", "ML"]
+icon: assets/particle-logo.svg
 gitrepo: https://github.com/particle-iot/snowflake
 name: "Snowflake application"
 shortDescription: Snowflake app for Particle P2 featuring wake word detection, RGB LEDs, sound effects, and holiday charm.
@@ -8,11 +12,19 @@ version: 1.0.2
 models: []
 language: [ "Particle Wiring" ]
 cloudServices: [ ]
-integrations: [ "edge-impulse" ]
+integrations: 
+  - name: edge-impulse
+    icon: assets/edgeimpulse.png
+supportedDevices:
+  - name: Photon 2
+  - name: P2
 hardwareDependencies:
   - name: Particle Snowflake
     link: https://www.particle.io/snowflake/
-    tags: [ "Snowflake", "P2", "Photon 2" ]
+introduction: |
+  Welcome to the repository for the Particle Snowflake
+, a limited edition [Particle P2](https://store.particle.io/products/p2-wi-fi-module-cut-tape-x10) powered PCBA in the form of a snowflake. The Snowflake provides a seasonal light show and plays a classic holiday tune.
+
 description: |
   The Particle Snowflake is a festive device built around the Particle P2 WiFi module, designed for holiday decoration with interactive features. It boasts:
   - 36 individually addressable RGB LEDs to create various lighting patterns and colors
@@ -20,3 +32,5 @@ description: |
   - A PDM microphone for potential voice-activated or sound-reactive functionality
 
   The Snowflake can be used as a unique decoration on a tree, hung as an ornament, or displayed on a stand with a USB-C power supply. With open-source firmware and hardware files available, this project is also a fun opportunity for custom modifications or additional features. The project includes the schematic, PCB files, and prebuilt assets for easy setup and customization.
+
+additionalResources:
