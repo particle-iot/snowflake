@@ -1,9 +1,8 @@
-id: particle/snowflake
 slug: particle-snowflake
 type: application
 category: "AI and machine learning"
-expertiseLevel: ""
-tags: ["AI", "ML"]
+expertiseLevel: "beginner"
+tags: ["demo", "audio", "AI", "ML"]
 icon: assets/particle-logo.svg
 gitrepo: https://github.com/particle-iot/snowflake
 name: "Snowflake application"
