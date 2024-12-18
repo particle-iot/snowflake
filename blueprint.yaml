@@ -1,9 +1,9 @@
 slug: particle-snowflake
-type: application
+type: Application
 category: "AI and machine learning"
-expertiseLevel: "beginner"
-tags: ["demo", "audio", "AI", "ML"]
-icon: assets/particle-logo.svg
+expertiseLevel: "Beginner"
+tags: ["Demo", "Audio", "AI", "ML"]
+icon: assets/snowflake-application.svg
 gitrepo: https://github.com/particle-iot/snowflake
 name: "Snowflake application"
 shortDescription: Snowflake app for Particle P2 featuring wake word detection, RGB LEDs, sound effects, and holiday charm.
@@ -13,7 +13,7 @@ language: [ "Particle Wiring" ]
 cloudServices: [ ]
 integrations: 
   - name: edge-impulse
-    icon: assets/edgeimpulse.png
+    icon: assets/edge-impulse.svg
 supportedDevices:
   - name: Photon 2
   - name: P2
