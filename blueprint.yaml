@@ -12,7 +12,7 @@ models: []
 language: [ "Particle Wiring" ]
 cloudServices: [ ]
 integrations: 
-  - name: edge-impulse
+  - name: Edge Impulse
     icon: assets/edge-impulse.svg
 supportedDevices:
   - name: Photon 2
