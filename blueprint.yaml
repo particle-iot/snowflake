@@ -17,6 +17,7 @@ integrations:
 supportedDevices:
   - name: Photon 2
   - name: P2
+webSetupLink: https://setup.particle.io/?app=particle-snowflake
 hardwareDependencies:
   - name: Particle Snowflake
     link: https://www.particle.io/snowflake/
