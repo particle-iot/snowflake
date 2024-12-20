@@ -22,8 +22,7 @@ hardwareDependencies:
   - name: Particle Snowflake
     link: https://www.particle.io/snowflake/
 introduction: |
-  Welcome to the repository for the Particle Snowflake
-  , a limited edition [Particle P2](https://store.particle.io/products/p2-wi-fi-module-cut-tape-x10) powered PCBA in the form of a snowflake. The Snowflake provides a seasonal light show and plays a classic holiday tune.
+  Welcome to the repository for the Particle Snowflake, a limited edition [Particle P2](https://store.particle.io/products/p2-wi-fi-module-cut-tape-x10) powered PCBA in the form of a snowflake. The Snowflake provides a seasonal light show and plays a classic holiday tune.
 
 description: |
   The Particle Snowflake is a festive device built around the Particle P2 WiFi module, designed for holiday decoration with interactive features. It boasts:
