@@ -3,7 +3,7 @@ type: Application
 category: "AI and machine learning"
 expertiseLevel: "Beginner"
 tags: ["Demo", "Audio", "AI", "ML"]
-icon: assets/snowflake-application.svg
+icon: assets/snowflake.svg
 gitrepo: https://github.com/particle-iot/snowflake
 name: "Snowflake application"
 shortDescription: Snowflake app for Particle P2 featuring wake word detection, RGB LEDs, sound effects, and holiday charm.
